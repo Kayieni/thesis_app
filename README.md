@@ -1,0 +1,1 @@
+# thesis_gisola_plugin
