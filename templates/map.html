@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Thesis | Area Sources</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/samos20.png">
+    <!-- <link rel="stylesheet" href="../sidepanel_plugin/dist/leaflet-sidepanel.css" />
+    <script src="../sidepanel_plugin/dist/leaflet-sidepanel.min.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/bootstrap-table.min.css">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+    <!-- Leaflet Draw plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css">
+    
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
+    
+    <!-- colors css -->
+    <style>
+        img.red {
+            filter: hue-rotate(0deg);
+        }
+
+        img.orange {
+            filter: hue-rotate(69deg) saturate(19);
+        }
+
+        /*img.orange { filter: hue-rotate(67deg) saturate(40);}*/
+        img.yellow {
+            filter: hue-rotate(70deg) saturate(29);
+        }
+
+        /*img.yellow { filter: hue-rotate(69deg) saturate(50);}*/
+        img.green {
+            filter: hue-rotate(130deg);
+        }
+
+        img.blue {
+            filter: hue-rotate(230deg);
+        }
+    </style>
+
+    <!-- main css -->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+    </style>
+
+    <!-- tables css -->
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 2px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+    <!-- leaflet labels -->
+    <style>
+        .my-labels {
+            position: absolute;
+            padding: 4px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 0px solid #000;
+            color: #fff;
+            font-weight: bold;
+            white-space: nowrap;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+    </style>
+
+    <!-- leaflet sidepanel -->
+    <style>
+    .sidepanel {
+        width: 400px;
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        border: 0;
+        position: absolute;
+        background-color: #ffffff;
+        box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+        z-index: 3000;
+        cursor: default;
+    }
+    .sidepanel.sidepanel-dark {
+        background-color: #191a1d;
+    }
+    @media screen and (max-width: 450px) {
+        .sidepanel {
+            width: calc(100% - 56px);
+        }
+    }
+
+    .sidepanel.sidepanel-left {
+        left: 0;
+        transform: translateX(-100%);
+        }
+        .sidepanel.sidepanel-left.opened {
+        animation: slide-right 0.5s ease 0s 1 both;
+        }
+        .sidepanel.sidepanel-left.closed {
+        animation: slide-left 0.5s ease 0s 1 both;
+        }
+
+        .sidepanel.sidepanel-right {
+        right: 0;
+        transform: translateX(100%);
+        }
+        .sidepanel.sidepanel-right.opened {
+        -webkit-animation: slide-right-two 0.5s ease 0s 1 both;
+        animation: slide-right-two 0.5s ease 0s 1 both;
+        }
+        .sidepanel.sidepanel-right.closed {
+        -webkit-animation: slide-left-two 0.5s ease 0s 1 both;
+        animation: slide-left-two 0.5s ease 0s 1 both;
+        }
+
+        .sidepanel-inner-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        z-index: 1000;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-inner-wrapper {
+        background-color: #191a1d;
+        }
+
+        .sidepanel-content-wrapper {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: #191a1d;
+        overflow-y: auto;
+        overflow-x: hidden;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-content-wrapper {
+        color: #d4d4d4;
+        }
+        .sidepanel-content-wrapper .sidepanel-content {
+        position: absolute;
+        padding: 1rem 1rem;
+        }
+        .sidepanel-content-wrapper .sidepanel-content .sidepanel-tab-content {
+        color: inherit;
+        display: none;
+        }
+        .sidepanel-content-wrapper .sidepanel-content .sidepanel-tab-content.active {
+        display: block;
+        animation: fade-in 0.36s ease-out;
+        }
+        .sidepanel-content-wrapper::-webkit-scrollbar {
+        width: 6px;
+        }
+        .sidepanel-content-wrapper::-webkit-scrollbar-track {
+        background: transparent;
+        }
+        .sidepanel-content-wrapper::-webkit-scrollbar-thumb {
+        background: #636363;
+        border-radius: 0px;
+        }
+        .sidepanel-content-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #383838;
+        }
+
+        .sidepanel.tabs-top .sidepanel-content-wrapper,
+        .sidepanel.tabs-bottom .sidepanel-content-wrapper {
+        height: calc(100% - 48px);
+        }
+
+        .sidepanel.tabs-top .sidepanel-content-wrapper {
+        top: 48px;
+        }
+
+        .sidepanel.tabs-right .sidepanel-content-wrapper,
+        .sidepanel.tabs-bottom .sidepanel-content-wrapper,
+        .sidepanel.tabs-left .sidepanel-content-wrapper {
+        top: 0;
+        }
+
+        .sidepanel.tabs-right .sidepanel-content-wrapper {
+        right: 48px;
+        }
+
+        .sidepanel.tabs-left .sidepanel-content-wrapper {
+        left: 48px;
+        }
+
+        .sidepanel.tabs-right .sidepanel-content-wrapper,
+        .sidepanel.tabs-left .sidepanel-content-wrapper {
+        height: 100%;
+        width: calc(100% - 48px);
+        }
+
+        .sidepanel-tabs-wrapper {
+        position: absolute;
+        height: 48px;
+        width: 100%;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-tabs-wrapper {
+        background-color: #191a1d;
+        }
+        .sidepanel-tabs-wrapper .sidepanel-tabs {
+        list-style-type: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        height: 100%;
+        width: 100%;
+        }
+        .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab {
+        flex-grow: 1;
+        flex-basis: 0;
+        align-self: stretch;
+        }
+        @media screen and (max-width: 230px) {
+        .sidepanel-tabs-wrapper .sidepanel-tabs {
+            overflow: scroll;
+        }
+        }
+
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper,
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper {
+        width: 48px;
+        height: 100%;
+        }
+        .sidepanel.tabs-left .sidepanel-tabs,
+        .sidepanel.tabs-right .sidepanel-tabs {
+        flex-direction: column;
+        width: 48px;
+        }
+        .sidepanel.tabs-left .sidepanel-tabs .sidepanel-tab,
+        .sidepanel.tabs-right .sidepanel-tabs .sidepanel-tab {
+        margin-bottom: 0;
+        }
+
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper {
+        left: 0;
+        }
+
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper {
+        right: 0;
+        }
+
+        .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #4b5057;
+        height: 45px;
+        line-height: 1.7;
+        padding-left: 8px;
+        padding-right: 8px;
+        border: 0;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: border-color 0.12s ease-out, color 0.12s ease-out;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        color: #6d737c;
+        }
+        .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        color: #191a1d;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        color: #e7ecf1;
+        }
+        .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        color: #199900;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.sidepanel-dark .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        color: #199900;
+        }
+
+        .sidepanel.tabs-top .sidepanel-tabs-wrapper {
+        top: 0;
+        box-shadow: inset 0 -1px 0 #d4d4d4;
+        }
+        .sidepanel.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        border-bottom: 2px solid transparent;
+        }
+        .sidepanel.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-bottom-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-bottom-color: #199900;
+        }
+
+        .sidepanel.sidepanel-dark.tabs-top .sidepanel-tabs-wrapper {
+        box-shadow: inset 0 -1px 0 #202429;
+        }
+        .sidepanel.sidepanel-dark.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-bottom-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.sidepanel-dark.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.sidepanel-dark.tabs-top .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-bottom-color: #199900;
+        }
+
+        .sidepanel.tabs-bottom .sidepanel-tabs-wrapper {
+        top: auto;
+        bottom: 0;
+        box-shadow: inset 0 1px 0 #d4d4d4;
+        }
+        .sidepanel.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        border-top: 2px solid transparent;
+        margin-top: 1px;
+        }
+        .sidepanel.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-top-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-top-color: #199900;
+        }
+
+        .sidepanel.sidepanel-dark.tabs-bottom .sidepanel-tabs-wrapper {
+        box-shadow: inset 0 1px 0 #202429;
+        }
+        .sidepanel.sidepanel-dark.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-top-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.sidepanel-dark.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.sidepanel-dark.tabs-bottom .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-top-color: #199900;
+        }
+
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper {
+        left: 0;
+        box-shadow: inset -1px 0 0 #d4d4d4;
+        }
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        border-right: 2px solid transparent;
+        margin-right: 1px;
+        }
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-right-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-right-color: #199900;
+        }
+
+        .sidepanel.sidepanel-dark.tabs-left .sidepanel-tabs-wrapper {
+        box-shadow: inset -1px 0 0 #202429;
+        }
+        .sidepanel.sidepanel-dark.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-right-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.sidepanel-dark.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.sidepanel-dark.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-right-color: #199900;
+        }
+
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper {
+        right: 0;
+        box-shadow: inset 1px 0 0 #d4d4d4;
+        }
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        border-left: 2px solid transparent;
+        margin-left: 1px;
+        }
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-left-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-left-color: #199900;
+        }
+
+        .sidepanel.sidepanel-dark.tabs-right .sidepanel-tabs-wrapper {
+        box-shadow: inset 1px 0 0 #202429;
+        }
+        .sidepanel.sidepanel-dark.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:hover {
+        border-left-color: rgba(175, 184, 193, 0.2);
+        }
+        .sidepanel.sidepanel-dark.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link:active, .sidepanel.sidepanel-dark.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link.active {
+        border-left-color: #199900;
+        }
+
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs,
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs {
+        height: auto;
+        }
+        .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link,
+        .sidepanel.tabs-right .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        }
+
+        .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link img,
+        .sidepanel-tabs-wrapper .sidepanel-tabs .sidepanel-tab .sidebar-tab-link svg {
+        vertical-align: middle;
+        }
+
+        .sidepanel .sidepanel-toggle-container {
+        display: block;
+        position: absolute;
+        top: calc(50% - 24px);
+        left: 100%;
+        right: 0;
+        width: 24px;
+        height: 48px;
+        z-index: 500;
+        }
+        .sidepanel .sidepanel-toggle-container .sidepanel-toggle-button {
+        position: absolute;
+        overflow: visible;
+        padding: 0;
+        margin: 0;
+        width: 24px;
+        height: 48px;
+        cursor: pointer;
+        background-color: #ffffff;
+        border: 0;
+        border-left: 1px solid #d4d4d4;
+        border-radius: 0 8px 8px 0;
+        box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+        }
+        .sidepanel .sidepanel-toggle-container .sidepanel-toggle-button::before {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 48px;
+        top: 0;
+        left: 0;
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234B5057%22%20class%3D%22bi%20bi-caret-right-fill%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22%2F%3E%3C%2Fsvg%3E") no-repeat 50% 50%;
+        opacity: 1;
+        }
+        .sidepanel .sidepanel-toggle-container .sidepanel-toggle-button:focus {
+        outline: none;
+        }
+
+        .sidepanel.sidepanel-dark .sidepanel-toggle-container .sidepanel-toggle-button {
+        background-color: #191a1d;
+        border-left: 1px solid #202429;
+        }
+        .sidepanel.sidepanel-dark .sidepanel-toggle-container .sidepanel-toggle-button::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%236D737C%22%20class%3D%22bi%20bi-caret-right-fill%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22%2F%3E%3C%2Fsvg%3E") no-repeat 50% 50%;
+        }
+
+        .sidepanel.sidepanel-right .sidepanel-toggle-container {
+        left: -24px;
+        right: 100%;
+        }
+
+        .sidepanel.opened .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-right .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-right.closed .sidepanel-toggle-container .sidepanel-toggle-button::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234B5057%22%20class%3D%22bi%20bi-caret-right-fill%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22%2F%3E%3C%2Fsvg%3E") no-repeat 50% 50%;
+        transform: rotate(180deg);
+        }
+
+        .sidepanel.sidepanel-dark.opened .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-dark.sidepanel-right .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-dark.sidepanel-right.closed .sidepanel-toggle-container .sidepanel-toggle-button::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%236D737C%22%20class%3D%22bi%20bi-caret-right-fill%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22%2F%3E%3C%2Fsvg%3E") no-repeat 50% 50%;
+        }
+
+        .sidepanel .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.closed .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-right.opened .sidepanel-toggle-container .sidepanel-toggle-button::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234B5057%22%20class%3D%22bi%20bi-caret-right-fill%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22%2F%3E%3C%2Fsvg%3E") no-repeat 50% 50%;
+        transform: rotate(0deg);
+        }
+
+        .sidepanel.sidepanel-dark .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-dark.closed .sidepanel-toggle-container .sidepanel-toggle-button::before,
+        .sidepanel.sidepanel-dark.sidepanel-right.opened .sidepanel-toggle-container .sidepanel-toggle-button::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%236D737C%22%20class%3D%22bi%20bi-caret-right-fill%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22%2F%3E%3C%2Fsvg%3E") no-repeat 50% 50%;
+        }
+
+        .sidepanel.sidepanel-right .sidepanel-toggle-container .sidepanel-toggle-button {
+        border-left: 0;
+        border-right: 1px solid #d4d4d4;
+        border-radius: 8px 0 0 8px;
+        }
+
+        .sidepanel.sidepanel-dark.sidepanel-right .sidepanel-toggle-container .sidepanel-toggle-button {
+        border-right: 1px solid #202429;
+        }
+
+        .leaflet-anim-control-container.left-opened .leaflet-left {
+        left: 400px;
+        transition: left 0.5s ease;
+        }
+        @media screen and (max-width: 450px) {
+        .leaflet-anim-control-container.left-opened .leaflet-left {
+            left: calc(100% - 56px);
+        }
+        }
+        .leaflet-anim-control-container.left-closed .leaflet-left {
+        left: 0;
+        transition: left 0.5s ease;
+        }
+        .leaflet-anim-control-container.right-opened .leaflet-right {
+        right: 400px;
+        transition: right 0.5s ease, right 0.5s ease;
+        }
+        @media screen and (max-width: 450px) {
+        .leaflet-anim-control-container.right-opened .leaflet-right {
+            right: calc(100% - 56px);
+        }
+        }
+        .leaflet-anim-control-container.right-closed .leaflet-right {
+        right: 0;
+        transition: right 0.5s ease, right 0.5s ease;
+        }
+
+        @keyframes slide-left {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+        }
+        @keyframes slide-right {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+        }
+        @keyframes slide-left-two {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+        }
+        @keyframes slide-right-two {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+        }
+        @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <div id="map">
+    <!-- Side Panel right -->
+        <div id="panelID" class="sidepanel sidepanel-right sidepanel-dark tabs-top opened" aria-label="side panel" aria-hidden="false">
+            <div class="sidepanel-inner-wrapper">
+                <nav class="sidepanel-tabs-wrapper" aria-label="sidepanel tab navigation">
+                    <ul class="sidepanel-tabs">
+                        <li class="sidepanel-tab">
+                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-1">
+                                List
+                            </a>
+                        </li>
+                        <li class="sidepanel-tab">
+                            <a href="#" class="sidebar-tab-link active" role="tab" data-tab-link="tab-2">
+                                Pin
+                            </a>
+                        </li>
+                        <li class="sidepanel-tab">
+                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-3">
+                                Mark
+                            </a>
+                        </li>
+                        <li class="sidepanel-tab">
+                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-4">
+                                Bookmarks
+                            </a>
+                        </li>
+                        <li class="sidepanel-tab">
+                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-5">
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidepanel-content-wrapper">
+                    <div class="sidepanel-content">
+                        <div class="sidepanel-tab-content active" data-tab-content="tab-1">
+                            <h4>Content 1</h4>
+                            <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
+                                diam.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
+                                massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
+                                scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
+                                massa,
+                                in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
+                                non
+                                turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
+                        </div>
+                        <div class="sidepanel-tab-content" data-tab-content="tab-2">
+                            <h4>Content 2</h4>
+                            <p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
+                                iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
+                                ipsum
+                                id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
+                                mauris.
+                                Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
+                        </div>
+                        <div class="sidepanel-tab-content" data-tab-content="tab-3">
+                            <h4>Content 3</h4>
+                            <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
+                                diam.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
+                                massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
+                                scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
+                                massa,
+                                in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
+                                non
+                                turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
+                        </div>
+                        <div class="sidepanel-tab-content" data-tab-content="tab-4">
+                            <h4>Content 4</h4>
+                            <p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
+                                iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
+                                ipsum
+                                id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
+                                mauris.
+                                Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
+                        </div>
+                        <div class="sidepanel-tab-content" data-tab-content="tab-5">
+                            <h4>Content 5</h4>
+                            <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
+                                diam.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
+                                massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
+                                scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
+                                massa,
+                                in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
+                                non
+                                turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
+                            <p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
+                                iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
+                                ipsum
+                                id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
+                                mauris.
+                                Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidepanel-toggle-container">
+                <button class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="questionModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Area sources selection</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <p>Upload your file with the area sources you wish to use or select the default (Vamvakaris, 2010, PhD AUTH) </p>
+                        <form method="POST" enctype="multipart/form-data" action="/csv">
+                            <p style="color:blue;">Choose csv file: </p>
+                            <input type="file" name="file" id="file" accept=".csv" class="form-control"><br>
+                            <input type="submit" class="btn btn-info" id="btn_upload" value="Add file">
+                        </form>
+                    </div>
+                        
+                    <!-- list of area sources -->
+                    <div class="modal-body">
+                        <p>Select the area sources you wish to use: </p>
+                        <!-- <input type="radio" name="selectedArea" value="Vamvakaris"/> <label for="vamvakaris">Vamvakaris (default)</label><br> -->
+                        {% if file_name %}
+                            {% for file in file_name %}
+                                <input type="radio" name="selectedArea"  value="{{ file }}"/> <label for="{{ file }}">{{ file }}</label><br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="selectedArea_file"  value=""/>
+                    <button type="button" class="btn btn-warning" data-toggle='modal' data-target="#uploadModal" data-dismiss="modal" onclick="updateMap()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- leaflet -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <!-- leaflet draw plugin js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+
+
+
+    <!-- for the map initiation -->
+    <script src="{{url_for('static', filename='map.js')}}"></script>
+    <!-- <script>
+        var map = L.map('map');
+        // center of the map to Greece
+        map.setView([39, 25], 6);
+
+        // for satelite view of map
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        }).addTo(map);
+        // for street view of map
+        var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+        });
+
+        var baseMaps = {
+            "Satellite View": Esri_WorldImagery,
+            "Street View": Esri_WorldStreetMap,
+        };
+        // add map views to controlers
+        L.control.layers(baseMaps).addTo(map);
+        L.control.scale({ position: 'bottomright' }).addTo(map);
+
+
+        // the group of points added to the map
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+        drawnItems.bindPopup('<table width=250><th>Moment Tensors in this area</th><tr><td>Quality</td><td>A3</td><tr><td colspan="2"><input type = "submit" class="btn btn-success" value = "Confirm" /></td></tr></table>', { maxWidth: 500 });
+
+        //----------------------------------------------------
+        // // find all json files existing in the static/data (the directory where all the uploads are stored)
+
+        // var files = document.getElementsByName('selectedArea');
+        // var file_selected;
+
+        //     for (i = 0; i < files.length; i++) {
+        //         if (files[i].checked) {
+        //             // document.getElementById("result").innerHTML
+        //             //     = "Gender: " + ele[i].value;
+        //             var file_selected = files[i].value;
+        //             console.log(file_selected)
+
+        //             // Close the modal
+        //             $('#questionModal').modal('hide');
+
+        //             // Use the user's answer to update the map (replace this with your own logic)
+        //             // For example, you could display the answer on the map:
+        //             // var mapElement = document.getElementById('map');
+        //             // mapElement.innerHTML = 'You answered: ' + answer;
+        //         }
+        //     }
+
+        // console.log(file_selected)
+
+        // loading GeoJSON file from vamvakaris 
+
+        // Create a variable to store the GeoJSON layer
+        var vamvakaris;
+
+        // Function to toggle the GeoJSON layer visibility
+        function toggleGeoJSONLayer() {
+            if (map.hasLayer(vamvakaris)) {
+                map.removeLayer(vamvakaris);
+            } else {
+                map.addLayer(vamvakaris);
+            }
+        }
+        
+        // JavaScript to display the modal when the page loads
+        $(document).ready(function() {
+            $('#questionModal').modal('show');
+        });
+        
+        // Additional JavaScript for the modal in order to add the selected layer
+        function updateMap() {
+            // Get the user's answer from the input field
+            
+            var files = document.getElementsByName('selectedArea');
+            
+            for (i = 0; i < files.length; i++) {
+                if (files[i].checked) {
+                    // document.getElementById("result").innerHTML
+                    //     = "Gender: " + ele[i].value;
+                    var answer = files[i].value;
+
+                    // Close the modal
+                    $('#questionModal').modal('hide');
+
+                    // Use the user's answer to update the map (replace this with your own logic)
+                    // For example, you could display the answer on the map:
+                    var selected = document.getElementById('selectedArea_file');
+                    selected.value = answer;
+                }
+            }
+
+
+
+            var selectedAreaFile = $("#selectedArea_file").val();
+            console.log("Selected Area File:", selectedAreaFile);
+
+            // Load the GeoJSON data and create the layer
+            // $.getJSON("/static/data/areas-vamv.json", function(data) {
+            $.getJSON("/static/data/"+$("#selectedArea_file").val(), function(data) {
+                // Create the GeoJSON layer with custom popup content
+                vamvakaris = L.geoJson(data, {
+                    onEachFeature: function(feature, featureLayer) {
+                        // Create the content for the popup
+                        var popupContent = '<div class="popup">';
+                        popupContent += '<h4>' + feature.properties.id + ". " + feature.properties.name + '</h4>';
+                        popupContent += '<h5>Code: ' + feature.properties.code + '</h4>';
+                        popupContent += '<p>Coordinates:</p>';
+                        popupContent += '<ul>';
+                        for (var i = 0; i < feature.geometry.coordinates[0].length-1; i++) {
+                            var coordinate = feature.geometry.coordinates[0][i];
+                            popupContent += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
+                        }
+                        popupContent += '</ul>';
+                        // Add the seismic events list
+                        popupContent += '<h5>Seismic Events:</h5>';
+                        popupContent += '<ul>';
+                        // Add your seismic events data here
+                        popupContent += '<li>Event 1</li>';
+                        popupContent += '<li>Event 2</li>';
+                        popupContent += '<li>Event 3</li>';
+                        // ...
+                        popupContent += '</ul>';
+                        popupContent += '</div>';
+
+                        // Bind the popup to the feature layer
+                        featureLayer.bindPopup(popupContent, {
+                            maxWidth: 500
+                        });
+
+                        
+                        featureLayer.on('mouseover', function () {
+                            this.setStyle({
+                                'fillColor': '#0000ff'
+                            });
+                            featureLayer.bindTooltip(feature.properties.code, {permanent: false, direction: "center", className: "my-labels"});
+                
+                        });
+
+                        featureLayer.on('mouseout', function () {
+                            this.setStyle({
+                                'fillColor': '#3388ff'
+                            });
+                        });
+                    }
+                });
+
+                // Add the layer to the map
+                map.addLayer(vamvakaris);
+                map.fitBounds(vamvakaris.getBounds());
+            });
+
+
+            
+        }
+   
+        // Create the toggle button
+        var toggleButton = L.control({ position: 'topright' });
+        toggleButton.onAdd = function(map) {
+            var buttonDiv = L.DomUtil.create('div', 'toggle-button');
+            buttonDiv.innerHTML = '<input type="checkbox" id="toggle-layer" onclick="toggleGeoJSONLayer()"><label for="toggle-layer">Toggle Layer</label>';
+            return buttonDiv;
+        };
+        toggleButton.addTo(map);
+
+        L.Control.SidePanel=L.Control.extend({includes:L.Evented.prototype,options:{panelPosition:"left",hasTabs:!0,tabsPosition:"top",darkMode:!1,pushControls:!1,startTab:1},initialize:function(t,o){this._panel=L.DomUtil.get(t),L.setOptions(this,o)},addTo:function(t){L.DomUtil.addClass(this._panel,"sidepanel-"+this.options.panelPosition),this.options.darkMode&&L.DomUtil.addClass(this._panel,"sidepanel-dark"),L.DomEvent.disableScrollPropagation(this._panel),L.DomEvent.disableClickPropagation(this._panel),this.options.hasTabs&&this.initTabs(t,this.options.tabsPosition)},initTabs:function(t,o){"string"==typeof o&&L.DomUtil.addClass(this._panel,"tabs-"+o);let s=this._panel.querySelectorAll("a.sidebar-tab-link"),e=this._panel.querySelectorAll(".sidepanel-tab-content");s.forEach(function(t,o){let i,a;"number"==typeof this.options.startTab&&this.options.startTab-1===o&&(i=t,a=e[o-1]),"string"==typeof this.options.startTab&&this.options.startTab===t.dataset.tabLink&&(i=t,a=this._panel.querySelector(`.sidepanel-tab-content[data-tab-content="${this.options.startTab}"]`)),void 0===i||L.DomUtil.hasClass(i,"active")||(L.DomUtil.addClass(i,"active"),L.DomUtil.addClass(a,"active")),L.DomEvent.on(t,"click",function(o){if(L.DomEvent.preventDefault(o),!L.DomUtil.hasClass(t,"active")){for(let t=0;t<s.length;t++){let o=s[t];L.DomUtil.hasClass(o,"active")&&L.DomUtil.removeClass(o,"active")}L.DomUtil.addClass(t,"active"),e.forEach(function(o){t.dataset.tabLink===o.dataset.tabContent?L.DomUtil.addClass(o,"active"):L.DomUtil.removeClass(o,"active")})}},t)}.bind(this)),this._toggleButton(t)},_toggleButton:function(t){const o=this._panel.querySelector(".sidepanel-toggle-container"),s=o.querySelector(".sidepanel-toggle-button");L.DomEvent.on(s,"click",function(o){let s=!0,e=L.DomUtil.hasClass(this._panel,"opened"),i=L.DomUtil.hasClass(this._panel,"closed");if(e||i?!e&&i?(L.DomUtil.addClass(this._panel,"opened"),L.DomUtil.removeClass(this._panel,"closed")):e&&!i?(s=!1,L.DomUtil.removeClass(this._panel,"opened"),L.DomUtil.addClass(this._panel,"closed")):L.DomUtil.addClass(this._panel,"opened"):L.DomUtil.addClass(this._panel,"opened"),this.options.pushControls){let o=t.getContainer().querySelector(".leaflet-control-container");L.DomUtil.addClass(o,"leaflet-anim-control-container"),s?(L.DomUtil.removeClass(o,this.options.panelPosition+"-closed"),L.DomUtil.addClass(o,this.options.panelPosition+"-opened")):(L.DomUtil.removeClass(o,this.options.panelPosition+"-opened"),L.DomUtil.addClass(o,this.options.panelPosition+"-closed"))}}.bind(this),o)}}),L.control.sidepanel=function(t,o){return new L.Control.SidePanel(t,o)};
+
+        const panelRight = L.control.sidepanel('panelID', {
+            panelPosition: 'right',
+            hasTabs: true,
+            tabsPosition: 'top',
+            pushControls: true,
+            darkMode: true,
+            startTab: 'sidepanel-tab' //class of starting tab
+        }).addTo(map);
+
+        var drawControl = new L.Control.Draw({
+            position: 'topleft',
+            draw: {
+                polygon: {
+                    shapeOptions: {
+                        color: 'purple' //polygons being drawn will be purple color
+                    },
+                    allowIntersection: true, // Will decide whether the line can intersect or not. If not an error message will be shown and drawing intersected lines will be prohibited
+                    drawError: {
+                        color: 'orange',
+                        timeout: 1000
+                    },
+                    showArea: true, //the area of the polygon will be displayed as it is drawn.
+                    metric: false,
+                    repeatMode: false //Prevents having to select the previously selected tool to draw another layer
+                },
+                polyline: false,
+                circlemarker: false, //circlemarker type has been disabled.
+                rect: {
+                    shapeOptions: {
+                        color: 'green'
+                    },
+                },
+                circle: false,
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+
+        map.addControl(drawControl);
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+            console.log(layer)
+            drawnItems.addLayer(layer); //the layer is added to the map
+            $('#polygon').val(JSON.stringify(layer.toGeoJSON())); //saving the layer to the input field using jQuery
+            var json_shape = JSON.stringify(layer.toGeoJSON());
+            // restore
+            L.geoJSON(JSON.parse(json_shape)).addTo(map);
+        });
+
+    </script> -->
+
+
+</body>
+
+</html>

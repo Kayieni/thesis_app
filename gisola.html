@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <link rel="shortcut icon" href="#">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta charset="utf-8">
+    <title> Earthquakes & Moment Tensors: Greek & Regional Area Sources</title>
+
+    <!-- google api ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- cdn daterange picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <!-- CSS -->
+
+    <style>
+        body {
+            background-image: url("static/new.png");
+            background-repeat: no-repeat;
+            background-size: 50%;
+            background-position: left;
+            height: 100vh;
+        }
+
+        .dataTables_wrapper {
+            background-color: white;
+            opacity: 0.8;
+        }
+
+        .dataTables_wrapper {
+
+            margin-right: 70px;
+            margin-left: 70px;
+        }
+
+        .daterangepicker .ranges ul {
+
+            color: #050505;
+            text-shadow: 1px 1px 1px whitesmoke;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            float: right;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: left;
+            text-align: right;
+        }
+    </style>
+    <!-- CSS -->
+</head>
+
+<body>
+    <!-- title -->
+    <h1 class="site-title" style=float:right;margin-right:20px;> Earthquakes & Moment Tensors Areas </h1>
+    <br></br>
+    <h3 class="site-description" style=float:right;margin-left:1000px;margin-right:20px;> via FDSN Web Services</h3>
+
+    <div id="map"
+        class="sidebar-map leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
+        tabindex="0" style="position: relative; outline: none;">
+        </div>
+
+
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () { });
+
+        var map = L.map('map');
+        map.setView([34, 22], 6);
+
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        }).addTo(map);
+
+        var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+        });
+
+        var baseMaps = {
+            "Esri Satellite": Esri_WorldImagery,
+            "Esri Street": Esri_WorldStreetMap,
+        };
+
+        // L.control.layers(baseMaps).addTo(map);
+        // L.control.scale({ position: 'bottomright' }).addTo(map);
+
+        var markers = [];
+
+
+
+        var beachball_1 = L.icon({
+            // iconUrl: 'map.png',
+            iconUrl: 'noa2023acgiv/2023-01-02T05:32:27.659124Z/output/beachball.revise.png',
+            iconSize: [39, 39]
+        });
+
+        var marker_1 = L.marker([36.4061, 21.7804
+        ], { title: '2023-01-02 05:28:08, Mw: 4.4', icon: beachball_1 });
+        marker_1.addTo(map);
+
+
+        marker_1._icon.classList.add("yellow");
+        marker_1.class = "yellow";
+
+        marker_1.bindPopup('<table width=250><th>Moment Tensor Solution</th><th><img src="noa2023acgiv/2023-01-02T05:32:27.659124Z/output/beachball.revise.png" alt="" border=0 height=60 width=60 class="yellow"></img></th><tr><td>Quality</td><td>A3</td><tr><td>C.Time [GMT]</td><td>2023-01-02 05:28:08</td></tr><tr><td>C.Magnitude [Mw]</td><td>4.4</td></tr><tr><td>C.Latitude [°N]</td><td>36.3162</td></tr><tr><td>C.Longitude [°E]</td><td>21.7792</td></tr><tr><td>C.Depth [km]</td><td>34</td></tr><tr><td>Mo [Nm]</td><td>4.263e+15</td></tr><tr><td>Strike\tDip\tRake</td><td>141\t82\t104</td></tr><tr><td colspan="2">Click <a href="noa2023acgiv/2023-01-02T05:32:27.659124Z/output/index.html">here</a> for more information</td></tr></table>', { maxWidth: 500 });
+
+
+        markers.push(marker_1);
+
+
+        //markers[0].openPopup(); //only for the first
+
+        map.setView(markers[markers.length - 1].getLatLng(), 6);
+
+        var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+        map.on('popupopen', function (e) {
+            var px = map.project(e.target._popup._latlng); // find the pixel location on the map where the popup anchor is
+            px.y -= e.target._popup._container.clientHeight / 2; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+            map.panTo(map.unproject(px), { animate: true }); // pan to new center
+
+            //    map.setView(e.target._popup._latlng, e.target._zoom);
+        });
+
+
+        function markerFunction(id) {
+            markers[id.split("_")[1] - 1].openPopup();
+        }
+
+        // quality
+        var qualities = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4'];
+        thres = 'B4';
+        qualities = qualities.slice(0, qualities.indexOf(thres) + 1);
+
+        const show = !!parseInt(new URLSearchParams(window.location.search).get('show'));
+
+        if (!show) {
+            document.getElementById("myList").href = "./list.html";
+
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                q = tr[i].getElementsByTagName("td")[3];
+                if (q) {
+                    txtValue = q.textContent || q.innerText;
+                    if (qualities.includes(txtValue.trim())) {
+                        tr[i].style.display = "";
+                        map.setView(markers[i - 1].getLatLng(), 6);
+                    } else {
+                        tr[i].style.display = "none";
+                        markers[i - 1].remove();
+                    }
+                }
+            } //for
+        } //ifshow
+
+    </script>
+
+
+
+</body>
+
+</html>

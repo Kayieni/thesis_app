@@ -1,0 +1,5045 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            17.9,
+                            42.5
+                        ],
+                        [
+                            19.15,
+                            41.6
+                        ],
+                        [
+                            19.8,
+                            41.75
+                        ],
+                        [
+                            19.7,
+                            42.15
+                        ],
+                        [
+                            18.5,
+                            42.8
+                        ],
+                        [
+                            17.9,
+                            42.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 1,
+                "code": "T-A1",
+                "name": "W. Montenegro",
+                "mmax_pap": "7.2",
+                "mmax_moun": "7.6",
+                "mmax_eq": "7.1",
+                "mmax": "7.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.15,
+                            41.6
+                        ],
+                        [
+                            19.0,
+                            40.5
+                        ],
+                        [
+                            20.25,
+                            40.65
+                        ],
+                        [
+                            20.25,
+                            41.0
+                        ],
+                        [
+                            19.8,
+                            41.75
+                        ],
+                        [
+                            19.15,
+                            41.6
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 2,
+                "code": "T-A2",
+                "name": "W. Albania",
+                "mmax_pap": "6.8",
+                "mmax_moun": "7.0",
+                "mmax_eq": "6.8",
+                "mmax": "6.9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.0,
+                            40.5
+                        ],
+                        [
+                            19.4,
+                            39.75
+                        ],
+                        [
+                            20.6,
+                            40.0
+                        ],
+                        [
+                            20.25,
+                            40.65
+                        ],
+                        [
+                            19.0,
+                            40.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 3,
+                "code": "T-A3",
+                "name": "SW Albania",
+                "mmax_pap": "7.1",
+                "mmax_moun": "7.2",
+                "mmax_eq": "6.6",
+                "mmax": "7.1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.4,
+                            39.75
+                        ],
+                        [
+                            19.65,
+                            39.15
+                        ],
+                        [
+                            20.18,
+                            38.78
+                        ],
+                        [
+                            20.26,
+                            38.81
+                        ],
+                        [
+                            20.9,
+                            38.93
+                        ],
+                        [
+                            21.23,
+                            38.97
+                        ],
+                        [
+                            20.64,
+                            39.95
+                        ],
+                        [
+                            20.6,
+                            40.0
+                        ],
+                        [
+                            19.4,
+                            39.75
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 4,
+                "code": "T-A4",
+                "name": "Corfu",
+                "mmax_pap": "7.0",
+                "mmax_moun": "7.0",
+                "mmax_eq": "7.1",
+                "mmax": "7.1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.0,
+                            40.5
+                        ],
+                        [
+                            18.55,
+                            39.6
+                        ],
+                        [
+                            19.3,
+                            38.5
+                        ],
+                        [
+                            20.18,
+                            38.78
+                        ],
+                        [
+                            19.65,
+                            39.15
+                        ],
+                        [
+                            19.4,
+                            39.75
+                        ],
+                        [
+                            19.0,
+                            40.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 5,
+                "code": "T-A5",
+                "name": "N. Ionian (ext.)",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "6.0",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            18.5,
+                            42.8
+                        ],
+                        [
+                            19.7,
+                            42.15
+                        ],
+                        [
+                            20.28,
+                            42.15
+                        ],
+                        [
+                            20.15,
+                            42.5
+                        ],
+                        [
+                            19.5,
+                            43.0
+                        ],
+                        [
+                            18.5,
+                            42.8
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 6,
+                "code": "N-B1",
+                "name": "SE Montenegro",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.4",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.7,
+                            42.15
+                        ],
+                        [
+                            19.8,
+                            41.75
+                        ],
+                        [
+                            20.25,
+                            41.0
+                        ],
+                        [
+                            20.85,
+                            41.25
+                        ],
+                        [
+                            20.75,
+                            41.55
+                        ],
+                        [
+                            20.28,
+                            42.15
+                        ],
+                        [
+                            19.7,
+                            42.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 7,
+                "code": "N-B2",
+                "name": "NE Albania",
+                "mmax_pap": "6.9",
+                "mmax_moun": "7.0",
+                "mmax_eq": "6.3",
+                "mmax": "6.9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.25,
+                            41.0
+                        ],
+                        [
+                            20.25,
+                            40.65
+                        ],
+                        [
+                            20.64,
+                            39.95
+                        ],
+                        [
+                            21.0,
+                            40.15
+                        ],
+                        [
+                            21.05,
+                            40.75
+                        ],
+                        [
+                            20.85,
+                            41.25
+                        ],
+                        [
+                            20.25,
+                            41.0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 8,
+                "code": "N-B3",
+                "name": "Ochrida",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.8",
+                "mmax_eq": "6.7",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.64,
+                            39.95
+                        ],
+                        [
+                            21.23,
+                            38.97
+                        ],
+                        [
+                            21.45,
+                            39.0
+                        ],
+                        [
+                            21.5,
+                            39.3
+                        ],
+                        [
+                            21.25,
+                            39.7
+                        ],
+                        [
+                            21.0,
+                            40.15
+                        ],
+                        [
+                            20.64,
+                            39.95
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 9,
+                "code": "N-B4",
+                "name": "E Epirus",
+                "mmax_pap": "6.4",
+                "mmax_moun": "-",
+                "mmax_eq": "6.4",
+                "mmax": "6.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.3,
+                            38.5
+                        ],
+                        [
+                            18.4,
+                            37.35
+                        ],
+                        [
+                            19.1,
+                            36.8
+                        ],
+                        [
+                            19.4,
+                            37.4
+                        ],
+                        [
+                            19.6,
+                            37.8
+                        ],
+                        [
+                            20.2,
+                            38.54
+                        ],
+                        [
+                            20.26,
+                            38.81
+                        ],
+                        [
+                            20.18,
+                            38.78
+                        ],
+                        [
+                            19.3,
+                            38.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 10,
+                "code": "S-C1",
+                "name": "C. Ionian (ext.)",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.7",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.26,
+                            38.81
+                        ],
+                        [
+                            20.2,
+                            38.54
+                        ],
+                        [
+                            20.74,
+                            38.54
+                        ],
+                        [
+                            20.9,
+                            38.93
+                        ],
+                        [
+                            20.26,
+                            38.81
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 11,
+                "code": "S-C2",
+                "name": "Lefkada",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.8",
+                "mmax_eq": "6.7",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.9,
+                            38.93
+                        ],
+                        [
+                            20.74,
+                            38.54
+                        ],
+                        [
+                            21.18,
+                            38.54
+                        ],
+                        [
+                            21.23,
+                            38.97
+                        ],
+                        [
+                            20.9,
+                            38.93
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 12,
+                "code": "S-C3",
+                "name": "Amfilochia",
+                "mmax_pap": "6.5",
+                "mmax_moun": "-",
+                "mmax_eq": "6.3",
+                "mmax": "6.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.2,
+                            38.54
+                        ],
+                        [
+                            19.6,
+                            37.8
+                        ],
+                        [
+                            20.05,
+                            37.55
+                        ],
+                        [
+                            20.4,
+                            37.9
+                        ],
+                        [
+                            20.74,
+                            38.54
+                        ],
+                        [
+                            20.2,
+                            38.54
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 13,
+                "code": "S-C4",
+                "name": "W. Cephalonia",
+                "mmax_pap": "7.4",
+                "mmax_moun": "7.7",
+                "mmax_eq": "7.4",
+                "mmax": "7.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.74,
+                            38.54
+                        ],
+                        [
+                            20.4,
+                            37.9
+                        ],
+                        [
+                            20.85,
+                            38.0
+                        ],
+                        [
+                            21.18,
+                            38.54
+                        ],
+                        [
+                            20.74,
+                            38.54
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 14,
+                "code": "S-C5",
+                "name": "E. Cephalonia",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "7.2",
+                "mmax": "7.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.4,
+                            37.4
+                        ],
+                        [
+                            19.1,
+                            36.8
+                        ],
+                        [
+                            20.5,
+                            35.5
+                        ],
+                        [
+                            21.0,
+                            35.9
+                        ],
+                        [
+                            19.4,
+                            37.4
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 15,
+                "code": "T-D1",
+                "name": "S. Ionian (ext 1)",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "4.9",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            19.6,
+                            37.8
+                        ],
+                        [
+                            19.4,
+                            37.4
+                        ],
+                        [
+                            21.0,
+                            35.9
+                        ],
+                        [
+                            21.15,
+                            36.0
+                        ],
+                        [
+                            21.4,
+                            36.42
+                        ],
+                        [
+                            20.75,
+                            37.1
+                        ],
+                        [
+                            20.05,
+                            37.55
+                        ],
+                        [
+                            19.6,
+                            37.8
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 16,
+                "code": "T-D2",
+                "name": "S. Ionian (ext 2)",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.9",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.05,
+                            37.55
+                        ],
+                        [
+                            20.75,
+                            37.1
+                        ],
+                        [
+                            21.12,
+                            37.32
+                        ],
+                        [
+                            21.38,
+                            37.5
+                        ],
+                        [
+                            21.22,
+                            37.63
+                        ],
+                        [
+                            20.85,
+                            38.0
+                        ],
+                        [
+                            20.4,
+                            37.9
+                        ],
+                        [
+                            20.05,
+                            37.55
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 17,
+                "code": "T-D3",
+                "name": "Zakinthos",
+                "mmax_pap": "7.0",
+                "mmax_moun": "7.2",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.75,
+                            37.1
+                        ],
+                        [
+                            21.4,
+                            36.42
+                        ],
+                        [
+                            22.0,
+                            36.75
+                        ],
+                        [
+                            21.55,
+                            37.15
+                        ],
+                        [
+                            21.4,
+                            37.05
+                        ],
+                        [
+                            21.12,
+                            37.32
+                        ],
+                        [
+                            20.75,
+                            37.1
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 18,
+                "code": "T-D4",
+                "name": "Pylos",
+                "mmax_pap": "7.5",
+                "mmax_moun": "-",
+                "mmax_eq": "7.3",
+                "mmax": "7.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.5,
+                            35.5
+                        ],
+                        [
+                            23.6,
+                            33.0
+                        ],
+                        [
+                            24.25,
+                            33.7
+                        ],
+                        [
+                            22.5,
+                            34.9
+                        ],
+                        [
+                            21.15,
+                            36.0
+                        ],
+                        [
+                            21.0,
+                            35.9
+                        ],
+                        [
+                            20.5,
+                            35.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 19,
+                "code": "T-D5",
+                "name": "W. Libyan sea",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "6.3",
+                "mmax": "6.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.15,
+                            36.0
+                        ],
+                        [
+                            22.5,
+                            34.9
+                        ],
+                        [
+                            23.25,
+                            35.6
+                        ],
+                        [
+                            22.5,
+                            36.0
+                        ],
+                        [
+                            22.0,
+                            36.75
+                        ],
+                        [
+                            21.4,
+                            36.42
+                        ],
+                        [
+                            21.15,
+                            36.0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 20,
+                "code": "T-D6",
+                "name": "S. of Messiakos gulf",
+                "mmax_pap": "6.4",
+                "mmax_moun": "-",
+                "mmax_eq": "6.7",
+                "mmax": "7.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.5,
+                            34.9
+                        ],
+                        [
+                            24.25,
+                            33.7
+                        ],
+                        [
+                            24.95,
+                            34.45
+                        ],
+                        [
+                            24.3,
+                            34.87
+                        ],
+                        [
+                            23.85,
+                            35.15
+                        ],
+                        [
+                            23.25,
+                            35.6
+                        ],
+                        [
+                            22.5,
+                            34.9
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 21,
+                "code": "T-D7",
+                "name": "Gavdos",
+                "mmax_pap": "8.1",
+                "mmax_moun": "-",
+                "mmax_eq": "8.3",
+                "mmax": "8.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.25,
+                            33.7
+                        ],
+                        [
+                            23.6,
+                            33.0
+                        ],
+                        [
+                            27.5,
+                            33.0
+                        ],
+                        [
+                            26.75,
+                            33.7
+                        ],
+                        [
+                            24.25,
+                            33.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 22,
+                "code": "T-D8",
+                "name": "C. Libyan sea 1",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.0",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.95,
+                            34.45
+                        ],
+                        [
+                            24.25,
+                            33.7
+                        ],
+                        [
+                            26.75,
+                            33.7
+                        ],
+                        [
+                            26.05,
+                            34.4
+                        ],
+                        [
+                            24.95,
+                            34.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 23,
+                "code": "T-D9",
+                "name": "C. Libyan sea 2",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "6.4",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.05,
+                            34.4
+                        ],
+                        [
+                            26.75,
+                            33.7
+                        ],
+                        [
+                            27.9,
+                            34.75
+                        ],
+                        [
+                            27.3,
+                            35.45
+                        ],
+                        [
+                            26.9,
+                            34.9
+                        ],
+                        [
+                            26.05,
+                            34.4
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 24,
+                "code": "T-D10",
+                "name": "E. Libyan sea 1",
+                "mmax_pap": "6.2",
+                "mmax_moun": "-",
+                "mmax_eq": "6.0",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.75,
+                            33.7
+                        ],
+                        [
+                            27.5,
+                            33.0
+                        ],
+                        [
+                            30.5,
+                            35.35
+                        ],
+                        [
+                            30.0,
+                            35.5
+                        ],
+                        [
+                            28.65,
+                            36.05
+                        ],
+                        [
+                            27.9,
+                            34.75
+                        ],
+                        [
+                            26.75,
+                            33.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 25,
+                "code": "T-D11",
+                "name": "E. Libyan sea 2",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.9",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.65,
+                            36.25
+                        ],
+                        [
+                            27.65,
+                            35.75
+                        ],
+                        [
+                            27.3,
+                            35.45
+                        ],
+                        [
+                            27.9,
+                            34.75
+                        ],
+                        [
+                            28.65,
+                            36.05
+                        ],
+                        [
+                            28.95,
+                            36.6
+                        ],
+                        [
+                            28.75,
+                            36.7
+                        ],
+                        [
+                            27.65,
+                            36.25
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 26,
+                "code": "T-D12",
+                "name": "Rodos",
+                "mmax_pap": "7.5",
+                "mmax_moun": "7.0",
+                "mmax_eq": "7.5",
+                "mmax": "7.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.95,
+                            36.6
+                        ],
+                        [
+                            28.65,
+                            36.05
+                        ],
+                        [
+                            30.0,
+                            35.5
+                        ],
+                        [
+                            30.5,
+                            35.35
+                        ],
+                        [
+                            31.0,
+                            36.1
+                        ],
+                        [
+                            29.5,
+                            36.4
+                        ],
+                        [
+                            28.95,
+                            36.6
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 27,
+                "code": "T-D13",
+                "name": "Kastelorizo",
+                "mmax_pap": "7.8",
+                "mmax_moun": "-",
+                "mmax_eq": "8.0",
+                "mmax": "8.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.28,
+                            42.15
+                        ],
+                        [
+                            20.75,
+                            41.55
+                        ],
+                        [
+                            21.2,
+                            41.7
+                        ],
+                        [
+                            21.6,
+                            41.8
+                        ],
+                        [
+                            22.5,
+                            42.0
+                        ],
+                        [
+                            22.0,
+                            42.7
+                        ],
+                        [
+                            20.28,
+                            42.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 28,
+                "code": "N-E1",
+                "name": "Skopje",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.4",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.0,
+                            42.7
+                        ],
+                        [
+                            22.5,
+                            42.0
+                        ],
+                        [
+                            23.6,
+                            42.25
+                        ],
+                        [
+                            23.15,
+                            43.0
+                        ],
+                        [
+                            22.0,
+                            42.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 29,
+                "code": "N-E2",
+                "name": "Sofia",
+                "mmax_pap": "7.1",
+                "mmax_moun": "-",
+                "mmax_eq": "6.7",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.75,
+                            41.55
+                        ],
+                        [
+                            20.85,
+                            41.25
+                        ],
+                        [
+                            21.05,
+                            40.75
+                        ],
+                        [
+                            21.5,
+                            40.95
+                        ],
+                        [
+                            21.2,
+                            41.7
+                        ],
+                        [
+                            20.75,
+                            41.55
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 30,
+                "code": "N-E3",
+                "name": "Bitola",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.8",
+                "mmax_eq": "6.1",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.2,
+                            41.7
+                        ],
+                        [
+                            21.5,
+                            40.95
+                        ],
+                        [
+                            22.0,
+                            41.12
+                        ],
+                        [
+                            21.85,
+                            41.45
+                        ],
+                        [
+                            21.6,
+                            41.8
+                        ],
+                        [
+                            21.2,
+                            41.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 31,
+                "code": "N-E4",
+                "name": "Prilep",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "3.8",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.6,
+                            41.8
+                        ],
+                        [
+                            21.85,
+                            41.45
+                        ],
+                        [
+                            23.6,
+                            41.5
+                        ],
+                        [
+                            23.6,
+                            42.25
+                        ],
+                        [
+                            22.5,
+                            42.0
+                        ],
+                        [
+                            21.6,
+                            41.8
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 32,
+                "code": "N-E5",
+                "name": "Cresna",
+                "mmax_pap": "7.3",
+                "mmax_moun": "7.3",
+                "mmax_eq": "7.3",
+                "mmax": "7.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.85,
+                            41.45
+                        ],
+                        [
+                            22.0,
+                            41.12
+                        ],
+                        [
+                            22.6,
+                            41.18
+                        ],
+                        [
+                            23.6,
+                            41.3
+                        ],
+                        [
+                            23.6,
+                            41.5
+                        ],
+                        [
+                            21.85,
+                            41.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 33,
+                "code": "N-E6",
+                "name": "Doirani",
+                "mmax_pap": "6.7",
+                "mmax_moun": "7.2",
+                "mmax_eq": "6.7",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.6,
+                            42.25
+                        ],
+                        [
+                            23.6,
+                            41.5
+                        ],
+                        [
+                            24.48,
+                            41.6
+                        ],
+                        [
+                            24.48,
+                            41.75
+                        ],
+                        [
+                            24.48,
+                            42.35
+                        ],
+                        [
+                            24.48,
+                            42.5
+                        ],
+                        [
+                            23.6,
+                            42.25
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 34,
+                "code": "N-E7",
+                "name": "Velingrad",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.5",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.48,
+                            42.7
+                        ],
+                        [
+                            24.48,
+                            42.5
+                        ],
+                        [
+                            24.48,
+                            42.35
+                        ],
+                        [
+                            26.75,
+                            42.35
+                        ],
+                        [
+                            26.75,
+                            42.7
+                        ],
+                        [
+                            24.48,
+                            42.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 35,
+                "code": "N-E8",
+                "name": "Gabrovo",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.9",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.48,
+                            42.35
+                        ],
+                        [
+                            24.48,
+                            41.75
+                        ],
+                        [
+                            26.75,
+                            41.75
+                        ],
+                        [
+                            26.75,
+                            42.35
+                        ],
+                        [
+                            24.48,
+                            42.35
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 36,
+                "code": "N-E9",
+                "name": "Plovdiv",
+                "mmax_pap": "7.1",
+                "mmax_moun": "7.3",
+                "mmax_eq": "7.0",
+                "mmax": "7.1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.48,
+                            41.75
+                        ],
+                        [
+                            24.48,
+                            41.6
+                        ],
+                        [
+                            24.9,
+                            41.4
+                        ],
+                        [
+                            26.0,
+                            41.48
+                        ],
+                        [
+                            26.75,
+                            41.5
+                        ],
+                        [
+                            26.75,
+                            41.75
+                        ],
+                        [
+                            24.48,
+                            41.75
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 37,
+                "code": "N-E10",
+                "name": "Ormenio",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.5",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.05,
+                            40.75
+                        ],
+                        [
+                            21.0,
+                            40.15
+                        ],
+                        [
+                            22.1,
+                            40.65
+                        ],
+                        [
+                            22.65,
+                            40.85
+                        ],
+                        [
+                            22.6,
+                            41.18
+                        ],
+                        [
+                            22.0,
+                            41.12
+                        ],
+                        [
+                            21.5,
+                            40.95
+                        ],
+                        [
+                            21.05,
+                            40.75
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 38,
+                "code": "N-E11",
+                "name": "W. Macedonia",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.5",
+                "mmax_eq": "6.7",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.6,
+                            41.18
+                        ],
+                        [
+                            22.65,
+                            40.85
+                        ],
+                        [
+                            23.6,
+                            40.9
+                        ],
+                        [
+                            23.6,
+                            41.3
+                        ],
+                        [
+                            22.6,
+                            41.18
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 39,
+                "code": "N-E12",
+                "name": "Serres",
+                "mmax_pap": "-",
+                "mmax_moun": "6.8",
+                "mmax_eq": "6.2",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.6,
+                            41.5
+                        ],
+                        [
+                            23.6,
+                            41.3
+                        ],
+                        [
+                            23.6,
+                            40.9
+                        ],
+                        [
+                            24.9,
+                            41.15
+                        ],
+                        [
+                            24.9,
+                            41.4
+                        ],
+                        [
+                            24.48,
+                            41.6
+                        ],
+                        [
+                            23.6,
+                            41.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 40,
+                "code": "N-E13",
+                "name": "Drama",
+                "mmax_pap": "7.3",
+                "mmax_moun": "5.7",
+                "mmax_eq": "7.3",
+                "mmax": "7.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.0,
+                            40.15
+                        ],
+                        [
+                            21.25,
+                            39.7
+                        ],
+                        [
+                            22.4,
+                            40.35
+                        ],
+                        [
+                            22.1,
+                            40.65
+                        ],
+                        [
+                            21.0,
+                            40.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 41,
+                "code": "N-E14",
+                "name": "Kozani",
+                "mmax_pap": "6.6",
+                "mmax_moun": "6.2",
+                "mmax_eq": "6.5",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.1,
+                            40.65
+                        ],
+                        [
+                            22.4,
+                            40.35
+                        ],
+                        [
+                            23.3,
+                            40.35
+                        ],
+                        [
+                            23.3,
+                            40.55
+                        ],
+                        [
+                            23.0,
+                            40.55
+                        ],
+                        [
+                            22.65,
+                            40.85
+                        ],
+                        [
+                            22.1,
+                            40.65
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 42,
+                "code": "N-E15",
+                "name": "Anthemountas",
+                "mmax_pap": "6.3",
+                "mmax_moun": "6.6",
+                "mmax_eq": "6.5",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.65,
+                            40.85
+                        ],
+                        [
+                            23.0,
+                            40.55
+                        ],
+                        [
+                            23.3,
+                            40.55
+                        ],
+                        [
+                            23.7,
+                            40.65
+                        ],
+                        [
+                            23.6,
+                            40.9
+                        ],
+                        [
+                            22.65,
+                            40.85
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 43,
+                "code": "N-E16",
+                "name": "Mygdonia",
+                "mmax_pap": "6.5",
+                "mmax_moun": "6.5",
+                "mmax_eq": "6.5",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.3,
+                            40.55
+                        ],
+                        [
+                            23.3,
+                            40.35
+                        ],
+                        [
+                            23.5,
+                            40.32
+                        ],
+                        [
+                            23.8,
+                            40.25
+                        ],
+                        [
+                            24.45,
+                            40.25
+                        ],
+                        [
+                            24.55,
+                            40.5
+                        ],
+                        [
+                            23.7,
+                            40.65
+                        ],
+                        [
+                            23.3,
+                            40.55
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 44,
+                "code": "N-E17",
+                "name": "Ierissos",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.4",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.4,
+                            40.35
+                        ],
+                        [
+                            22.85,
+                            39.7
+                        ],
+                        [
+                            23.1,
+                            39.85
+                        ],
+                        [
+                            23.5,
+                            40.32
+                        ],
+                        [
+                            23.3,
+                            40.35
+                        ],
+                        [
+                            22.4,
+                            40.35
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 45,
+                "code": "N-E18",
+                "name": "Thermaikos",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.3",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.1,
+                            39.85
+                        ],
+                        [
+                            23.6,
+                            39.65
+                        ],
+                        [
+                            23.98,
+                            39.82
+                        ],
+                        [
+                            24.65,
+                            40.25
+                        ],
+                        [
+                            24.45,
+                            40.25
+                        ],
+                        [
+                            23.8,
+                            40.25
+                        ],
+                        [
+                            23.5,
+                            40.32
+                        ],
+                        [
+                            23.1,
+                            39.85
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 46,
+                "code": "N-E19",
+                "name": "Kassandra-Sithonia",
+                "mmax_pap": "6.5",
+                "mmax_moun": "6.6",
+                "mmax_eq": "6.4",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.85,
+                            39.7
+                        ],
+                        [
+                            23.35,
+                            39.12
+                        ],
+                        [
+                            23.8,
+                            39.1
+                        ],
+                        [
+                            23.6,
+                            39.65
+                        ],
+                        [
+                            23.1,
+                            39.85
+                        ],
+                        [
+                            22.85,
+                            39.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 47,
+                "code": "N-E20",
+                "name": "Skiathos",
+                "mmax_pap": "6.4",
+                "mmax_moun": "6.7",
+                "mmax_eq": "6.4",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.6,
+                            40.9
+                        ],
+                        [
+                            23.7,
+                            40.65
+                        ],
+                        [
+                            24.55,
+                            40.5
+                        ],
+                        [
+                            24.9,
+                            40.95
+                        ],
+                        [
+                            24.9,
+                            41.15
+                        ],
+                        [
+                            23.6,
+                            40.9
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 48,
+                "code": "N-E21",
+                "name": "Kavala",
+                "mmax_pap": "6.8",
+                "mmax_moun": "6.3",
+                "mmax_eq": "6.7",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.9,
+                            40.95
+                        ],
+                        [
+                            24.55,
+                            40.5
+                        ],
+                        [
+                            24.45,
+                            40.25
+                        ],
+                        [
+                            24.65,
+                            40.25
+                        ],
+                        [
+                            25.2,
+                            40.6
+                        ],
+                        [
+                            24.9,
+                            40.95
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 49,
+                "code": "N-E22",
+                "name": "Thassos",
+                "mmax_pap": "-",
+                "mmax_moun": "6.2",
+                "mmax_eq": "4.6",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.9,
+                            41.4
+                        ],
+                        [
+                            24.9,
+                            41.15
+                        ],
+                        [
+                            24.9,
+                            40.95
+                        ],
+                        [
+                            25.75,
+                            40.9
+                        ],
+                        [
+                            26.0,
+                            41.48
+                        ],
+                        [
+                            24.9,
+                            41.4
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 50,
+                "code": "N-E23",
+                "name": "Rodopi",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.5",
+                "mmax_eq": "6.7",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.9,
+                            40.95
+                        ],
+                        [
+                            25.2,
+                            40.6
+                        ],
+                        [
+                            26.1,
+                            40.62
+                        ],
+                        [
+                            25.75,
+                            40.9
+                        ],
+                        [
+                            24.9,
+                            40.95
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 51,
+                "code": "N-E24",
+                "name": "Thrakiko",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "4.6",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.0,
+                            41.48
+                        ],
+                        [
+                            25.75,
+                            40.9
+                        ],
+                        [
+                            26.1,
+                            40.62
+                        ],
+                        [
+                            27.45,
+                            41.05
+                        ],
+                        [
+                            27.45,
+                            41.52
+                        ],
+                        [
+                            26.75,
+                            41.5
+                        ],
+                        [
+                            26.0,
+                            41.48
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 52,
+                "code": "N-E25",
+                "name": "Evros",
+                "mmax_pap": "7.4",
+                "mmax_moun": "7.1",
+                "mmax_eq": "7.4",
+                "mmax": "7.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.45,
+                            41.52
+                        ],
+                        [
+                            27.45,
+                            41.05
+                        ],
+                        [
+                            29.5,
+                            41.05
+                        ],
+                        [
+                            31.05,
+                            41.1
+                        ],
+                        [
+                            31.05,
+                            41.52
+                        ],
+                        [
+                            27.45,
+                            41.52
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 53,
+                "code": "N-E26",
+                "name": "Vosporos",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.5",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.25,
+                            39.7
+                        ],
+                        [
+                            21.5,
+                            39.3
+                        ],
+                        [
+                            22.1,
+                            39.35
+                        ],
+                        [
+                            22.85,
+                            39.7
+                        ],
+                        [
+                            22.4,
+                            40.35
+                        ],
+                        [
+                            21.25,
+                            39.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 54,
+                "code": "N-F1",
+                "name": "N. Thessalia",
+                "mmax_pap": "6.4",
+                "mmax_moun": "6.5",
+                "mmax_eq": "6.4",
+                "mmax": "6.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.5,
+                            39.3
+                        ],
+                        [
+                            21.45,
+                            39.0
+                        ],
+                        [
+                            21.8,
+                            38.98
+                        ],
+                        [
+                            22.28,
+                            38.97
+                        ],
+                        [
+                            23.0,
+                            38.95
+                        ],
+                        [
+                            23.35,
+                            39.12
+                        ],
+                        [
+                            22.85,
+                            39.7
+                        ],
+                        [
+                            22.1,
+                            39.35
+                        ],
+                        [
+                            21.5,
+                            39.3
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 55,
+                "code": "N-F2",
+                "name": "S. Thessalia",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.3",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.23,
+                            38.97
+                        ],
+                        [
+                            21.18,
+                            38.54
+                        ],
+                        [
+                            21.65,
+                            38.53
+                        ],
+                        [
+                            22.2,
+                            38.5
+                        ],
+                        [
+                            21.8,
+                            38.98
+                        ],
+                        [
+                            21.45,
+                            39.0
+                        ],
+                        [
+                            21.23,
+                            38.97
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 56,
+                "code": "N-F3",
+                "name": "Aitoloakarnania",
+                "mmax_pap": "-",
+                "mmax_moun": "6.4",
+                "mmax_eq": "5.2",
+                "mmax": "6.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.8,
+                            38.98
+                        ],
+                        [
+                            22.2,
+                            38.5
+                        ],
+                        [
+                            22.38,
+                            38.46
+                        ],
+                        [
+                            22.82,
+                            38.42
+                        ],
+                        [
+                            22.28,
+                            38.97
+                        ],
+                        [
+                            21.8,
+                            38.98
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 57,
+                "code": "N-F4",
+                "name": "Gravia",
+                "mmax_pap": "6.8",
+                "mmax_moun": "7.2",
+                "mmax_eq": "6.8",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.28,
+                            38.97
+                        ],
+                        [
+                            22.82,
+                            38.42
+                        ],
+                        [
+                            23.1,
+                            38.44
+                        ],
+                        [
+                            23.5,
+                            38.45
+                        ],
+                        [
+                            23.35,
+                            38.78
+                        ],
+                        [
+                            23.0,
+                            38.95
+                        ],
+                        [
+                            22.28,
+                            38.97
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 58,
+                "code": "N-F5",
+                "name": "Maliakos",
+                "mmax_pap": "7.0",
+                "mmax_moun": "7.0",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.35,
+                            38.78
+                        ],
+                        [
+                            23.5,
+                            38.45
+                        ],
+                        [
+                            23.57,
+                            38.25
+                        ],
+                        [
+                            23.83,
+                            38.32
+                        ],
+                        [
+                            24.15,
+                            38.2
+                        ],
+                        [
+                            24.5,
+                            38.32
+                        ],
+                        [
+                            24.75,
+                            38.45
+                        ],
+                        [
+                            24.5,
+                            38.6
+                        ],
+                        [
+                            24.15,
+                            38.85
+                        ],
+                        [
+                            23.35,
+                            38.78
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 59,
+                "code": "N-F6",
+                "name": "C. Evoia",
+                "mmax_pap": "6.4",
+                "mmax_moun": "7.1",
+                "mmax_eq": "6.4",
+                "mmax": "6.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.18,
+                            38.54
+                        ],
+                        [
+                            20.85,
+                            38.0
+                        ],
+                        [
+                            21.65,
+                            38.35
+                        ],
+                        [
+                            21.65,
+                            38.53
+                        ],
+                        [
+                            21.18,
+                            38.54
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 60,
+                "code": "N-F7",
+                "name": "Messologi",
+                "mmax_pap": "-",
+                "mmax_moun": "6.3",
+                "mmax_eq": "5.7",
+                "mmax": "6.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.65,
+                            38.53
+                        ],
+                        [
+                            21.65,
+                            38.35
+                        ],
+                        [
+                            22.0,
+                            38.1
+                        ],
+                        [
+                            22.4,
+                            38.0
+                        ],
+                        [
+                            22.38,
+                            38.46
+                        ],
+                        [
+                            22.2,
+                            38.5
+                        ],
+                        [
+                            21.65,
+                            38.53
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 61,
+                "code": "N-F8",
+                "name": "Aigio",
+                "mmax_pap": "6.9",
+                "mmax_moun": "6.5",
+                "mmax_eq": "6.8",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.38,
+                            38.46
+                        ],
+                        [
+                            22.4,
+                            38.0
+                        ],
+                        [
+                            22.7,
+                            37.82
+                        ],
+                        [
+                            23.1,
+                            38.44
+                        ],
+                        [
+                            22.82,
+                            38.42
+                        ],
+                        [
+                            22.38,
+                            38.46
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 62,
+                "code": "N-F9",
+                "name": "Corinthiakos",
+                "mmax_pap": "6.8",
+                "mmax_moun": "6.9",
+                "mmax_eq": "6.8",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.1,
+                            38.44
+                        ],
+                        [
+                            22.7,
+                            37.82
+                        ],
+                        [
+                            23.23,
+                            37.67
+                        ],
+                        [
+                            23.25,
+                            37.8
+                        ],
+                        [
+                            23.5,
+                            38.2
+                        ],
+                        [
+                            23.57,
+                            38.25
+                        ],
+                        [
+                            23.5,
+                            38.45
+                        ],
+                        [
+                            23.1,
+                            38.44
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 63,
+                "code": "N-F10",
+                "name": "Alkyonides",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.7",
+                "mmax_eq": "6.6",
+                "mmax": "6.7"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.5,
+                            38.2
+                        ],
+                        [
+                            23.25,
+                            37.8
+                        ],
+                        [
+                            24.15,
+                            38.2
+                        ],
+                        [
+                            23.83,
+                            38.32
+                        ],
+                        [
+                            23.57,
+                            38.25
+                        ],
+                        [
+                            23.5,
+                            38.2
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 64,
+                "code": "N-F11",
+                "name": "N. Attica",
+                "mmax_pap": "6.5",
+                "mmax_moun": "6.4",
+                "mmax_eq": "6.3",
+                "mmax": "6.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.25,
+                            37.8
+                        ],
+                        [
+                            23.23,
+                            37.67
+                        ],
+                        [
+                            23.7,
+                            37.5
+                        ],
+                        [
+                            24.7,
+                            37.95
+                        ],
+                        [
+                            24.5,
+                            38.32
+                        ],
+                        [
+                            24.15,
+                            38.2
+                        ],
+                        [
+                            23.25,
+                            37.8
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 65,
+                "code": "N-F12",
+                "name": "S. Attica",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "6.0",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.0,
+                            38.1
+                        ],
+                        [
+                            22.5,
+                            37.45
+                        ],
+                        [
+                            22.7,
+                            37.45
+                        ],
+                        [
+                            23.45,
+                            37.15
+                        ],
+                        [
+                            23.7,
+                            37.5
+                        ],
+                        [
+                            23.23,
+                            37.67
+                        ],
+                        [
+                            22.7,
+                            37.82
+                        ],
+                        [
+                            22.4,
+                            38.0
+                        ],
+                        [
+                            22.0,
+                            38.1
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 66,
+                "code": "N-F13",
+                "name": "Argolida",
+                "mmax_pap": "6.3",
+                "mmax_moun": "6.9",
+                "mmax_eq": "6.4",
+                "mmax": "6.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            20.85,
+                            38.0
+                        ],
+                        [
+                            21.22,
+                            37.63
+                        ],
+                        [
+                            22.0,
+                            38.1
+                        ],
+                        [
+                            21.65,
+                            38.35
+                        ],
+                        [
+                            20.85,
+                            38.0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 67,
+                "code": "N-H1",
+                "name": "Andravida",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.9",
+                "mmax_eq": "6.9",
+                "mmax": "6.9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.22,
+                            37.63
+                        ],
+                        [
+                            21.38,
+                            37.5
+                        ],
+                        [
+                            21.12,
+                            37.32
+                        ],
+                        [
+                            21.4,
+                            37.05
+                        ],
+                        [
+                            21.55,
+                            37.15
+                        ],
+                        [
+                            22.0,
+                            37.35
+                        ],
+                        [
+                            22.5,
+                            37.45
+                        ],
+                        [
+                            22.0,
+                            38.1
+                        ],
+                        [
+                            21.22,
+                            37.63
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 68,
+                "code": "N-H2",
+                "name": "Kiparissiakos",
+                "mmax_pap": "6.5",
+                "mmax_moun": "6.4",
+                "mmax_eq": "6.5",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            21.55,
+                            37.15
+                        ],
+                        [
+                            22.0,
+                            36.75
+                        ],
+                        [
+                            22.5,
+                            36.0
+                        ],
+                        [
+                            22.78,
+                            36.65
+                        ],
+                        [
+                            22.5,
+                            37.45
+                        ],
+                        [
+                            22.0,
+                            37.35
+                        ],
+                        [
+                            21.55,
+                            37.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 69,
+                "code": "N-L1",
+                "name": "Kalamata-Sparti",
+                "mmax_pap": "7.1",
+                "mmax_moun": "6.7",
+                "mmax_eq": "7.1",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.5,
+                            37.45
+                        ],
+                        [
+                            22.78,
+                            36.65
+                        ],
+                        [
+                            23.5,
+                            36.65
+                        ],
+                        [
+                            23.45,
+                            37.15
+                        ],
+                        [
+                            22.7,
+                            37.45
+                        ],
+                        [
+                            22.5,
+                            37.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 70,
+                "code": "N-L2",
+                "name": "Leonidio",
+                "mmax_pap": "-",
+                "mmax_moun": "6.2",
+                "mmax_eq": "5.0",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            22.78,
+                            36.65
+                        ],
+                        [
+                            22.5,
+                            36.0
+                        ],
+                        [
+                            23.25,
+                            35.6
+                        ],
+                        [
+                            23.5,
+                            35.85
+                        ],
+                        [
+                            23.5,
+                            36.25
+                        ],
+                        [
+                            23.5,
+                            36.65
+                        ],
+                        [
+                            22.78,
+                            36.65
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 71,
+                "code": "N-L3",
+                "name": "Kythira",
+                "mmax_pap": "7.2",
+                "mmax_moun": "6.9",
+                "mmax_eq": "7.2",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.25,
+                            35.6
+                        ],
+                        [
+                            23.85,
+                            35.15
+                        ],
+                        [
+                            24.1,
+                            35.35
+                        ],
+                        [
+                            23.5,
+                            35.85
+                        ],
+                        [
+                            23.25,
+                            35.6
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 72,
+                "code": "N-L4",
+                "name": "Chania",
+                "mmax_pap": "-",
+                "mmax_moun": "6.7",
+                "mmax_eq": "5.7",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.85,
+                            35.15
+                        ],
+                        [
+                            24.3,
+                            34.87
+                        ],
+                        [
+                            24.7,
+                            35.13
+                        ],
+                        [
+                            24.1,
+                            35.35
+                        ],
+                        [
+                            23.85,
+                            35.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 73,
+                "code": "N-L5",
+                "name": "Sfakia",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "6.1",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.7,
+                            35.13
+                        ],
+                        [
+                            24.3,
+                            34.87
+                        ],
+                        [
+                            24.95,
+                            34.45
+                        ],
+                        [
+                            26.05,
+                            34.4
+                        ],
+                        [
+                            26.9,
+                            34.9
+                        ],
+                        [
+                            25.4,
+                            35.12
+                        ],
+                        [
+                            24.7,
+                            35.13
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 74,
+                "code": "N-L6",
+                "name": "S. Crete",
+                "mmax_pap": "6.3",
+                "mmax_moun": "7.7",
+                "mmax_eq": "6.8",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.5,
+                            36.25
+                        ],
+                        [
+                            23.5,
+                            35.85
+                        ],
+                        [
+                            24.1,
+                            35.35
+                        ],
+                        [
+                            24.7,
+                            35.13
+                        ],
+                        [
+                            25.4,
+                            35.12
+                        ],
+                        [
+                            25.4,
+                            35.8
+                        ],
+                        [
+                            23.5,
+                            36.25
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 75,
+                "code": "N-L7",
+                "name": "Kritiko",
+                "mmax_pap": "6.4",
+                "mmax_moun": "6.2",
+                "mmax_eq": "6.4",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            25.4,
+                            35.8
+                        ],
+                        [
+                            25.4,
+                            35.12
+                        ],
+                        [
+                            26.9,
+                            34.9
+                        ],
+                        [
+                            26.7,
+                            35.85
+                        ],
+                        [
+                            25.4,
+                            35.8
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 76,
+                "code": "N-L8",
+                "name": "Lasithi",
+                "mmax_pap": "7.2",
+                "mmax_moun": "6.8",
+                "mmax_eq": "7.2",
+                "mmax": "7.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.85,
+                            36.45
+                        ],
+                        [
+                            26.7,
+                            35.85
+                        ],
+                        [
+                            26.9,
+                            34.9
+                        ],
+                        [
+                            27.3,
+                            35.45
+                        ],
+                        [
+                            27.65,
+                            35.75
+                        ],
+                        [
+                            27.65,
+                            36.25
+                        ],
+                        [
+                            27.2,
+                            36.5
+                        ],
+                        [
+                            26.85,
+                            36.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 77,
+                "code": "N-L9",
+                "name": "Karpathos",
+                "mmax_pap": "7.1",
+                "mmax_moun": "7.0",
+                "mmax_eq": "7.1",
+                "mmax": "7.1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.6,
+                            39.65
+                        ],
+                        [
+                            23.8,
+                            39.1
+                        ],
+                        [
+                            24.25,
+                            39.25
+                        ],
+                        [
+                            24.9,
+                            39.8
+                        ],
+                        [
+                            24.65,
+                            40.25
+                        ],
+                        [
+                            23.98,
+                            39.82
+                        ],
+                        [
+                            23.6,
+                            39.65
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 78,
+                "code": "S-I1",
+                "name": "Alonissos",
+                "mmax_pap": "7.5",
+                "mmax_moun": "7.1",
+                "mmax_eq": "7.5",
+                "mmax": "7.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.0,
+                            38.95
+                        ],
+                        [
+                            23.35,
+                            38.78
+                        ],
+                        [
+                            24.15,
+                            38.85
+                        ],
+                        [
+                            23.8,
+                            39.1
+                        ],
+                        [
+                            23.35,
+                            39.12
+                        ],
+                        [
+                            23.0,
+                            38.95
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 79,
+                "code": "S-I2",
+                "name": "N. Evoia",
+                "mmax_pap": "-",
+                "mmax_moun": "6.4",
+                "mmax_eq": "5.8",
+                "mmax": "6.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.8,
+                            39.1
+                        ],
+                        [
+                            24.5,
+                            38.6
+                        ],
+                        [
+                            24.75,
+                            38.85
+                        ],
+                        [
+                            24.25,
+                            39.25
+                        ],
+                        [
+                            23.8,
+                            39.1
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 80,
+                "code": "S-I3",
+                "name": "Skyros",
+                "mmax_pap": "6.3",
+                "mmax_moun": "6.7",
+                "mmax_eq": "6.5",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.25,
+                            39.25
+                        ],
+                        [
+                            24.75,
+                            38.85
+                        ],
+                        [
+                            25.65,
+                            39.6
+                        ],
+                        [
+                            24.9,
+                            39.8
+                        ],
+                        [
+                            24.25,
+                            39.25
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 81,
+                "code": "S-I4",
+                "name": "Ag Efstratios",
+                "mmax_pap": "7.1",
+                "mmax_moun": "6.8",
+                "mmax_eq": "7.1",
+                "mmax": "7.1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.5,
+                            38.6
+                        ],
+                        [
+                            24.75,
+                            38.45
+                        ],
+                        [
+                            25.65,
+                            39.2
+                        ],
+                        [
+                            26.1,
+                            39.64
+                        ],
+                        [
+                            25.65,
+                            39.6
+                        ],
+                        [
+                            24.75,
+                            38.85
+                        ],
+                        [
+                            24.5,
+                            38.6
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 82,
+                "code": "S-I5",
+                "name": "N. Aegean",
+                "mmax_pap": "7.2",
+                "mmax_moun": "7.4",
+                "mmax_eq": "6.8",
+                "mmax": "7.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.75,
+                            38.45
+                        ],
+                        [
+                            25.25,
+                            38.15
+                        ],
+                        [
+                            26.15,
+                            38.75
+                        ],
+                        [
+                            26.4,
+                            38.7
+                        ],
+                        [
+                            26.53,
+                            38.92
+                        ],
+                        [
+                            25.9,
+                            38.95
+                        ],
+                        [
+                            25.65,
+                            39.2
+                        ],
+                        [
+                            24.75,
+                            38.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 83,
+                "code": "S-I6",
+                "name": "Psara",
+                "mmax_pap": "6.3",
+                "mmax_moun": "6.4",
+                "mmax_eq": "6.2",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.1,
+                            39.64
+                        ],
+                        [
+                            25.65,
+                            39.2
+                        ],
+                        [
+                            27.0,
+                            39.5
+                        ],
+                        [
+                            26.3,
+                            39.68
+                        ],
+                        [
+                            26.1,
+                            39.64
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 84,
+                "code": "S-I7",
+                "name": "Molyvos",
+                "mmax_pap": "6.9",
+                "mmax_moun": "7.2",
+                "mmax_eq": "6.9",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            25.65,
+                            39.2
+                        ],
+                        [
+                            25.9,
+                            38.95
+                        ],
+                        [
+                            26.53,
+                            38.92
+                        ],
+                        [
+                            27.0,
+                            39.5
+                        ],
+                        [
+                            25.65,
+                            39.2
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 85,
+                "code": "S-I8",
+                "name": "Lesvos",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.9",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.65,
+                            40.25
+                        ],
+                        [
+                            24.9,
+                            39.8
+                        ],
+                        [
+                            26.3,
+                            40.0
+                        ],
+                        [
+                            26.1,
+                            40.62
+                        ],
+                        [
+                            25.2,
+                            40.6
+                        ],
+                        [
+                            24.65,
+                            40.25
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 86,
+                "code": "S-I9",
+                "name": "Lemnos-Imvros",
+                "mmax_pap": "7.4",
+                "mmax_moun": "7.1",
+                "mmax_eq": "7.3",
+                "mmax": "7.3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.9,
+                            39.8
+                        ],
+                        [
+                            25.65,
+                            39.6
+                        ],
+                        [
+                            26.1,
+                            39.64
+                        ],
+                        [
+                            26.3,
+                            39.68
+                        ],
+                        [
+                            26.3,
+                            40.0
+                        ],
+                        [
+                            24.9,
+                            39.8
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 87,
+                "code": "S-I10",
+                "name": "Tenedos",
+                "mmax_pap": "7.0",
+                "mmax_moun": "7.1",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.1,
+                            40.62
+                        ],
+                        [
+                            26.3,
+                            40.0
+                        ],
+                        [
+                            28.0,
+                            40.7
+                        ],
+                        [
+                            27.45,
+                            41.05
+                        ],
+                        [
+                            26.1,
+                            40.62
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 88,
+                "code": "S-I11",
+                "name": "Canakkale",
+                "mmax_pap": "7.6",
+                "mmax_moun": "7.6",
+                "mmax_eq": "7.6",
+                "mmax": "7.6"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.3,
+                            40.0
+                        ],
+                        [
+                            26.3,
+                            39.68
+                        ],
+                        [
+                            27.0,
+                            39.5
+                        ],
+                        [
+                            28.35,
+                            39.88
+                        ],
+                        [
+                            28.2,
+                            40.25
+                        ],
+                        [
+                            28.0,
+                            40.7
+                        ],
+                        [
+                            26.3,
+                            40.0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 89,
+                "code": "S-I12",
+                "name": "NW. Turkey",
+                "mmax_pap": "7.4",
+                "mmax_moun": "7.2",
+                "mmax_eq": "7.4",
+                "mmax": "7.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.45,
+                            41.05
+                        ],
+                        [
+                            28.0,
+                            40.7
+                        ],
+                        [
+                            29.5,
+                            40.7
+                        ],
+                        [
+                            29.5,
+                            41.05
+                        ],
+                        [
+                            27.45,
+                            41.05
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 90,
+                "code": "S-I13",
+                "name": "Istanbul",
+                "mmax_pap": "7.5",
+                "mmax_moun": "7.7",
+                "mmax_eq": "7.5",
+                "mmax": "7.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.0,
+                            40.7
+                        ],
+                        [
+                            28.2,
+                            40.25
+                        ],
+                        [
+                            30.0,
+                            40.25
+                        ],
+                        [
+                            31.05,
+                            40.5
+                        ],
+                        [
+                            31.05,
+                            41.1
+                        ],
+                        [
+                            29.5,
+                            41.05
+                        ],
+                        [
+                            29.5,
+                            40.7
+                        ],
+                        [
+                            28.0,
+                            40.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 91,
+                "code": "S-I14",
+                "name": "Duzce",
+                "mmax_pap": "7.5",
+                "mmax_moun": "7.8",
+                "mmax_eq": "7.5",
+                "mmax": "7.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.2,
+                            40.25
+                        ],
+                        [
+                            28.35,
+                            39.88
+                        ],
+                        [
+                            30.2,
+                            39.7
+                        ],
+                        [
+                            31.1,
+                            39.7
+                        ],
+                        [
+                            31.1,
+                            40.5
+                        ],
+                        [
+                            30.0,
+                            40.25
+                        ],
+                        [
+                            28.2,
+                            40.25
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 92,
+                "code": "S-I15",
+                "name": "Bursa",
+                "mmax_pap": "7.1",
+                "mmax_moun": "6.9",
+                "mmax_eq": "7.4",
+                "mmax": "7.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.75,
+                            38.45
+                        ],
+                        [
+                            24.5,
+                            38.32
+                        ],
+                        [
+                            24.7,
+                            37.95
+                        ],
+                        [
+                            23.7,
+                            37.5
+                        ],
+                        [
+                            23.45,
+                            37.15
+                        ],
+                        [
+                            24.0,
+                            36.65
+                        ],
+                        [
+                            24.4,
+                            36.95
+                        ],
+                        [
+                            24.8,
+                            36.75
+                        ],
+                        [
+                            25.1,
+                            36.45
+                        ],
+                        [
+                            25.5,
+                            36.65
+                        ],
+                        [
+                            26.5,
+                            37.3
+                        ],
+                        [
+                            26.5,
+                            37.75
+                        ],
+                        [
+                            25.25,
+                            38.15
+                        ],
+                        [
+                            24.75,
+                            38.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 93,
+                "code": "N-J1",
+                "name": "Cyclades",
+                "mmax_pap": "6.8",
+                "mmax_moun": "7.3",
+                "mmax_eq": "6.8",
+                "mmax": "6.4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            23.45,
+                            37.15
+                        ],
+                        [
+                            23.5,
+                            36.65
+                        ],
+                        [
+                            23.5,
+                            36.25
+                        ],
+                        [
+                            25.4,
+                            35.8
+                        ],
+                        [
+                            25.4,
+                            36.22
+                        ],
+                        [
+                            25.1,
+                            36.45
+                        ],
+                        [
+                            24.8,
+                            36.75
+                        ],
+                        [
+                            24.4,
+                            36.45
+                        ],
+                        [
+                            24.0,
+                            36.65
+                        ],
+                        [
+                            23.45,
+                            37.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 94,
+                "code": "N-J2",
+                "name": "S. Aegean 1",
+                "mmax_pap": "-",
+                "mmax_moun": "6.6",
+                "mmax_eq": "5.0",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            24.0,
+                            36.65
+                        ],
+                        [
+                            24.4,
+                            36.45
+                        ],
+                        [
+                            24.8,
+                            36.75
+                        ],
+                        [
+                            24.4,
+                            36.95
+                        ],
+                        [
+                            24.0,
+                            36.65
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 95,
+                "code": "N-J3",
+                "name": "Milos",
+                "mmax_pap": "-",
+                "mmax_moun": "6.6",
+                "mmax_eq": "6.5",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            25.65,
+                            36.45
+                        ],
+                        [
+                            25.4,
+                            36.22
+                        ],
+                        [
+                            25.4,
+                            35.8
+                        ],
+                        [
+                            26.7,
+                            35.85
+                        ],
+                        [
+                            26.85,
+                            36.45
+                        ],
+                        [
+                            25.65,
+                            36.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 96,
+                "code": "N-J4",
+                "name": "S. Aegean 2",
+                "mmax_pap": "-",
+                "mmax_moun": "-",
+                "mmax_eq": "5.6",
+                "mmax": "6.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            25.25,
+                            38.15
+                        ],
+                        [
+                            26.5,
+                            37.75
+                        ],
+                        [
+                            27.1,
+                            38.05
+                        ],
+                        [
+                            26.4,
+                            38.7
+                        ],
+                        [
+                            26.15,
+                            38.75
+                        ],
+                        [
+                            25.25,
+                            38.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 97,
+                "code": "N-K1",
+                "name": "Chios",
+                "mmax_pap": "6.8",
+                "mmax_moun": "6.9",
+                "mmax_eq": "6.8",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.4,
+                            38.7
+                        ],
+                        [
+                            27.1,
+                            38.05
+                        ],
+                        [
+                            27.3,
+                            38.07
+                        ],
+                        [
+                            28.6,
+                            38.15
+                        ],
+                        [
+                            27.65,
+                            38.9
+                        ],
+                        [
+                            26.53,
+                            38.92
+                        ],
+                        [
+                            26.4,
+                            38.7
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 98,
+                "code": "N-K2",
+                "name": "Izmir",
+                "mmax_pap": "7.0",
+                "mmax_moun": "7.7",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.0,
+                            39.5
+                        ],
+                        [
+                            26.53,
+                            38.92
+                        ],
+                        [
+                            27.65,
+                            38.9
+                        ],
+                        [
+                            28.15,
+                            39.5
+                        ],
+                        [
+                            28.35,
+                            39.88
+                        ],
+                        [
+                            27.0,
+                            39.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 99,
+                "code": "N-K3",
+                "name": "Pergamos",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.9",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.35,
+                            39.88
+                        ],
+                        [
+                            28.15,
+                            39.5
+                        ],
+                        [
+                            31.1,
+                            39.45
+                        ],
+                        [
+                            31.1,
+                            39.7
+                        ],
+                        [
+                            30.2,
+                            39.7
+                        ],
+                        [
+                            28.35,
+                            39.88
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 100,
+                "code": "N-K4",
+                "name": "Durcunbey",
+                "mmax_pap": "6.2",
+                "mmax_moun": "-",
+                "mmax_eq": "6.2",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.15,
+                            39.5
+                        ],
+                        [
+                            27.65,
+                            38.9
+                        ],
+                        [
+                            31.1,
+                            38.35
+                        ],
+                        [
+                            31.1,
+                            39.45
+                        ],
+                        [
+                            28.15,
+                            39.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 101,
+                "code": "N-K5",
+                "name": "Kutahya",
+                "mmax_pap": "6.8",
+                "mmax_moun": "7.1",
+                "mmax_eq": "7.1",
+                "mmax": "7.1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.65,
+                            38.9
+                        ],
+                        [
+                            28.6,
+                            38.15
+                        ],
+                        [
+                            28.9,
+                            37.95
+                        ],
+                        [
+                            30.2,
+                            37.95
+                        ],
+                        [
+                            31.1,
+                            37.95
+                        ],
+                        [
+                            31.1,
+                            38.35
+                        ],
+                        [
+                            30.3,
+                            38.47
+                        ],
+                        [
+                            27.65,
+                            38.9
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 102,
+                "code": "N-K6",
+                "name": "Kula",
+                "mmax_pap": "6.9",
+                "mmax_moun": "7.5",
+                "mmax_eq": "6.6",
+                "mmax": "6.9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.5,
+                            37.75
+                        ],
+                        [
+                            26.5,
+                            37.3
+                        ],
+                        [
+                            27.4,
+                            37.28
+                        ],
+                        [
+                            27.3,
+                            38.07
+                        ],
+                        [
+                            27.1,
+                            38.05
+                        ],
+                        [
+                            26.5,
+                            37.75
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 103,
+                "code": "N-K7",
+                "name": "Samos",
+                "mmax_pap": "6.9",
+                "mmax_moun": "6.5",
+                "mmax_eq": "6.9",
+                "mmax": "6.9"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.3,
+                            38.07
+                        ],
+                        [
+                            27.4,
+                            37.28
+                        ],
+                        [
+                            28.75,
+                            37.2
+                        ],
+                        [
+                            28.6,
+                            38.15
+                        ],
+                        [
+                            27.3,
+                            38.07
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 104,
+                "code": "N-K8",
+                "name": "Aydin",
+                "mmax_pap": "7.2",
+                "mmax_moun": "7.9",
+                "mmax_eq": "7.2",
+                "mmax": "7.2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.6,
+                            38.15
+                        ],
+                        [
+                            28.75,
+                            37.2
+                        ],
+                        [
+                            29.4,
+                            37.15
+                        ],
+                        [
+                            30.2,
+                            37.95
+                        ],
+                        [
+                            28.9,
+                            37.95
+                        ],
+                        [
+                            28.6,
+                            38.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 105,
+                "code": "N-K9",
+                "name": "Denizli",
+                "mmax_pap": "6.9",
+                "mmax_moun": "7.0",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            29.4,
+                            37.15
+                        ],
+                        [
+                            29.9,
+                            36.9
+                        ],
+                        [
+                            30.5,
+                            36.7
+                        ],
+                        [
+                            31.1,
+                            36.7
+                        ],
+                        [
+                            31.1,
+                            37.95
+                        ],
+                        [
+                            30.2,
+                            37.95
+                        ],
+                        [
+                            29.4,
+                            37.15
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 106,
+                "code": "N-K10",
+                "name": "Antalya",
+                "mmax_pap": "7.0",
+                "mmax_moun": "6.9",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            25.1,
+                            36.45
+                        ],
+                        [
+                            25.4,
+                            36.22
+                        ],
+                        [
+                            25.65,
+                            36.45
+                        ],
+                        [
+                            25.5,
+                            36.65
+                        ],
+                        [
+                            25.1,
+                            36.45
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 107,
+                "code": "N-K11",
+                "name": "Santorini",
+                "mmax_pap": "6.1",
+                "mmax_moun": "6.6",
+                "mmax_eq": "6.1",
+                "mmax": "6.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            25.5,
+                            36.65
+                        ],
+                        [
+                            25.65,
+                            36.45
+                        ],
+                        [
+                            26.85,
+                            36.45
+                        ],
+                        [
+                            26.5,
+                            37.3
+                        ],
+                        [
+                            25.5,
+                            36.65
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 108,
+                "code": "N-K12",
+                "name": "Amorgos",
+                "mmax_pap": "7.3",
+                "mmax_moun": "7.1",
+                "mmax_eq": "7.5",
+                "mmax": "7.5"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.5,
+                            37.3
+                        ],
+                        [
+                            26.85,
+                            36.45
+                        ],
+                        [
+                            27.2,
+                            36.5
+                        ],
+                        [
+                            27.5,
+                            36.6
+                        ],
+                        [
+                            27.4,
+                            37.28
+                        ],
+                        [
+                            26.5,
+                            37.3
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 109,
+                "code": "N-K13",
+                "name": "Kos",
+                "mmax_pap": "7.1",
+                "mmax_moun": "7.2",
+                "mmax_eq": "7.0",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.4,
+                            37.28
+                        ],
+                        [
+                            27.5,
+                            36.6
+                        ],
+                        [
+                            28.75,
+                            37.0
+                        ],
+                        [
+                            28.75,
+                            37.2
+                        ],
+                        [
+                            27.4,
+                            37.28
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 110,
+                "code": "N-K14",
+                "name": "Bodrum",
+                "mmax_pap": "7.1",
+                "mmax_moun": "7.3",
+                "mmax_eq": "6.8",
+                "mmax": "7.0"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            27.2,
+                            36.5
+                        ],
+                        [
+                            27.65,
+                            36.25
+                        ],
+                        [
+                            28.75,
+                            36.7
+                        ],
+                        [
+                            28.75,
+                            37.0
+                        ],
+                        [
+                            27.5,
+                            36.6
+                        ],
+                        [
+                            27.2,
+                            36.5
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 111,
+                "code": "N-K15",
+                "name": "Symi",
+                "mmax_pap": "6.7",
+                "mmax_moun": "6.9",
+                "mmax_eq": "6.8",
+                "mmax": "6.8"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            28.75,
+                            37.2
+                        ],
+                        [
+                            28.75,
+                            37.0
+                        ],
+                        [
+                            28.75,
+                            36.7
+                        ],
+                        [
+                            28.95,
+                            36.6
+                        ],
+                        [
+                            29.5,
+                            36.4
+                        ],
+                        [
+                            29.9,
+                            36.9
+                        ],
+                        [
+                            29.4,
+                            37.15
+                        ],
+                        [
+                            28.75,
+                            37.2
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "id": 112,
+                "code": "N-K16",
+                "name": "Fethiye",
+                "mmax_pap": "-",
+                "mmax_moun": "6.3",
+                "mmax_eq": "5.7",
+                "mmax": "6.8"
+            }
+        }
+    ]
+}

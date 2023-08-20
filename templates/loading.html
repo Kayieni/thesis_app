@@ -1,0 +1,34 @@
+<!-- loading.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loading...</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Loading...</h1>
+        <img src="../static/images/loading.gif" alt="Loading Icon">
+    </div>
+
+    <script>
+        // Function to check if the process is finished
+        function checkProcessStatus() {
+            // Send an AJAX request to the server to check the status of the process
+            fetch('/check_process_status')
+            .then(response => response.json())
+            .then(data => {
+                // If the process is finished, redirect to the index page
+                if (data.completed) {
+                    window.location.href = '/index';
+                } else {
+                    // If the process is not finished, wait for a short interval and check again
+                    setTimeout(checkProcessStatus, 1000);
+                }
+            });
+        }
+
+        // Start checking the process status when the page is loaded
+        window.onload = checkProcessStatus;
+    </script>
+</body>
+</html>

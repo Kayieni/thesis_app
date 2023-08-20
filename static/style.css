@@ -1,0 +1,53 @@
+body,h1,h3 {font-family: "Raleway", sans-serif}
+html, body {
+  height:100%;
+} 
+
+
+.arrow-1 {
+width:80px;
+height:50px;
+display: flex;
+color:#808080;
+}
+.arrow-1:before {
+content: "";
+background: currentColor;
+width:15px;
+clip-path: polygon(0 10px,calc(100% - 15px) 10px,calc(100% - 15px) 0,100% 50%,calc(100% - 15px) 100%,calc(100% - 15px) calc(100% - 10px),0 calc(100% - 10px));
+animation: a1 1.5s infinite linear;
+}
+@keyframes a1 {
+90%,100%{flex-grow: 1}
+}
+.daterangepicker .ranges ul {
+
+color: #808080;
+text-shadow: 1px 1px 1px black;
+}
+.daterangepicker td.active, 
+.daterangepicker td.active:hover {
+background-color: #808080;
+
+}
+.daterangepicker .ranges li.active {
+background-color: #808080;
+
+}
+.btn-primary {
+
+background-color: #808080;
+border-color: #808080;
+}
+
+
+a {
+color: #A9A9A9;
+text-shadow: 1px 1px 1px black;
+}
+table.dataTable.no-footer {
+    border-bottom: 1px solid transparent;
+    box-shadow: 1px 3px lightgray;
+    
+  }
+  
