@@ -263,53 +263,77 @@ def createGeojson():
     return redirect(url_for('views.get_geojson_files'))
 
 # mia dokimi
-@views.route('/exists', methods=['GET','POST'])
-def exists():
-    # selected_json = request.geojson
+# @views.route('/exists', methods=['GET','POST'])
+# def exists():
+#     # selected_json = request.geojson
 
-    with open('static/data/areas-vamv.json') as f:
-        data = json.load(f)
+#     with open('static/data/areas-vamv.json') as f:
+#         data = json.load(f)
     
+#     # Define the event coordinates
+#     point_coords = (25,37)
+#     point = Point(point_coords)
+
+#     # Iterate over the features in the GeoJSON file
+#     for feature in data['features']:
+#         polygon = shape(feature['geometry'])
+#         if polygon.contains(point):
+#             print("The point is contained within the polygon:", feature['properties']['name'], " with code: ", feature['properties']['code'])
+#         else:
+#             continue
+#     return redirect("/")
+
+@views.route('/drawnshape', methods=['POST'])
+def drawn_contain():
+    # drawn_polygon = request.get_json()
     # Define the event coordinates
-    point_coords = (25,37)
-    point = Point(point_coords)
-
-    # Iterate over the features in the GeoJSON file
-    for feature in data['features']:
-        polygon = shape(feature['geometry'])
-        if polygon.contains(point):
-            print("The point is contained within the polygon:", feature['properties']['name'], " with code: ", feature['properties']['code'])
-        else:
-            continue
-
-
-    return redirect("/")
-
-@views.route("/selected_area", methods=['GET'])
-def selected_area():
     from app import mysql
     cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT * FROM events WHERE of_area=%d''',[])
-    areas = cursor.fetchall()
-    # get the selected area code
-    # connect the database
-    # select the events WHERE of_area = the selected area code
-    # return a json of all the data of those events from events table
-    return jsonify("wow something is going on")
+    cursor.execute('''SELECT * FROM events''')
 
-# @views.route("/<areacode>")
-# def area_selected(areacode):
-#     code = format(areacode)
-#     print(code)
+    events_contained = []
+    for row in cursor.fetchall():
+        print(row)
+        # point = Point(row.lat,row.long)
+        # if drawn_polygon.contains(point):
+        #     event_dict = dict(row)  # Create a dictionary for each row
+        #     events_contained.append(event_dict)
+        #     print("This polygon contains the following events:", events_contained)
+
+        # else:
+        #     continue
+    
+    return jsonify(events_contained)
+    
+    # point_coords = (25,37)
+    # point = Point(point_coords)
+    # events_contained = []
+    # # Iterate over the features in the GeoJSON file
+    # for feature in data['features']:
+    #     polygon = shape(feature['geometry'])
+    #     if polygon.contains(point):
+    #         event_dict = dict(row)  # Create a dictionary for each row
+    #         events_contained.append(event_dict)
+    #         print("The point is contained within the polygon:", feature['properties']['name'], " with code: ", feature['properties']['code'])
+    #     else:
+    #         continue
+    # return redirect("/")
+
+
+# @views.route("/selected_area", methods=['GET'])
+# def selected_area():
 #     from app import mysql
 #     cursor = mysql.connection.cursor()
-#     cursor.execute('''SELECT * FROM events WHERE of_area=%s''',(code,))
+#     cursor.execute('''SELECT * FROM events WHERE of_area=%d''',[])
 #     areas = cursor.fetchall()
-    
-#     return jsonify(areas)
-#     # or:
-#     # return "Hello {}".format(areacode)
+#     # get the selected area code
+#     # connect the database
+#     # select the events WHERE of_area = the selected area code
+#     # return a json of all the data of those events from events table
+#     return jsonify("wow something is going on")
 
+
+# when an area is selected, this route calls the database and fetches the events included in this area
 @views.route("/<areacode>")
 def area_selected(areacode):
     code = format(areacode)
