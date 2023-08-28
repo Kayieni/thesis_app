@@ -125,7 +125,7 @@ function updateMap() {
                             popup += '<ol id="eventlist">';
                             if (response.length>0) {
                                 response.forEach((event, index) => {
-                                    const eventNumber = index + 1;
+                                    // const eventNumber = index + 1;
                                     popup += '<li><a href="#">' + String(event.mt).split("geofon/")[1] + '</a></li>';
                                 });
                             } else {
@@ -228,38 +228,6 @@ map.on('draw:created', function (e) {
     console.log(layer.toGeoJSON())
     var json_shape = JSON.stringify(layer.toGeoJSON());
 
-    async function drawn_polygon(data) {
-        try {
-            console.log(data)
-            const response = await fetch("/drawnshape/", {
-                method: "POST",
-                // headers: {
-                // "Content-Type": "application/json",
-                // },
-                body: JSON.stringify(data),
-            });
-
-            console.log(response)
-        
-            const result = await response.json();
-            console.log("Success:", result);
-            return result;
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-      
-    //   const data = { username: "example" };
-    //   drawn_polygon(data);
-    
-    // async function drawn_polygon(feature) {
-    //     const response = await fetch('/drawn_contain/' + feature);
-    //     // + new URLSearchParams({ postId: 1 }).toString());
-    //     const json = await response.json();
-    //     console.log(json);
-    //     return json;
-    // }
-
     // Create a new layer from the GeoJSON shape for displaying coordinates
     drawnShape = L.geoJSON(JSON.parse(json_shape), {
         style: {
@@ -267,20 +235,82 @@ map.on('draw:created', function (e) {
         },
         onEachFeature: function (feature, featureLayer) {
             if (feature.geometry.type === 'Polygon') {
-                console.log(feature.geometry)
-                drawn_polygon(feature.geometry)
-                var popupContent = '<ul>';
-                for (var i = 0; i < feature.geometry.coordinates[0].length; i++) {
-                    var coordinate = feature.geometry.coordinates[0][i];
-                    var coordinate_prev = feature.geometry.coordinates[0][i-1];
-                    // console.log(coordinate)
-                    // console.log(coordinate_prev)
-                    if( i==0 || coordinate[1]!== coordinate_prev[1] || coordinate[0]!== coordinate_prev[0]) {
-                        popupContent += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
+                // drawn_polygon(feature.geometry)
+                // data = 
+                // console.log(data)
+                data_2sent = JSON.stringify(feature.geometry) 
+                console.log(data_2sent)
+                $.ajax({
+                    type: "POST",
+                    url: "drawnshape",
+                    contentType: "application/json",
+                    data: data_2sent,
+
+                    success: function (result) {
+                        console.log("Success:", result);
+
+                        var popupContent = '<ul>';
+                            for (var i = 0; i < feature.geometry.coordinates[0].length; i++) {
+                                var coordinate = feature.geometry.coordinates[0][i];
+                                var coordinate_prev = feature.geometry.coordinates[0][i-1];
+                                // console.log(coordinate)
+                                // console.log(coordinate_prev)
+                                if( i==0 || coordinate[1]!== coordinate_prev[1] || coordinate[0]!== coordinate_prev[0]) {
+                                    popupContent += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
+                                }
+                            }
+                            popupContent += '</ul>';
+                        featureLayer.bindPopup(popupContent);
+
+                        console.log("yay---2");
+                        // Create the content for the popup
+                        var popup = '<div class="popup">';
+                        // popup += '<h4>' + feature.properties.id + ". " + feature.properties.name + '</h4>';
+                        // popup += '<h5>Code: ' + feature.properties.code + '</h4>';
+                        popup += '<p>Coordinates:</p>';
+                        popup += '<ul>';
+                        for (var i = 0; i < feature.geometry.coordinates[0].length - 1; i++) {
+                            var coordinate = feature.geometry.coordinates[0][i];
+                            popup += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
+                        }
+                        popup += '</ul>';
+                        // Add the seismic events list
+                        popup += '<h5>Seismic Events:</h5>';
+                        popup += '<ol id="eventlist">';
+                        if (result.length>0) {
+                            result.forEach((event, index) => {
+                                // const eventNumber = index + 1;
+                                popup += '<li><a href="#">' + String(event.mt).split("geofon/")[1] + '</a></li>';
+                            });
+                        } else {
+                            popup += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
+                        }
+                        popup += '</ol>';
+                        popup += '</div>';
+                        // featureLayer.bindPopup(popup, {
+                        //     minWidth: 300,
+                        //     maxWidth: 1000
+                        // }).openPopup();;
+
+
+                        // this.setStyle({
+                        //     'fillColor': '#0000ff'
+                        // });
+                        // featureLayer.bindTooltip(feature.properties.code, { permanent: false, direction: "center", className: "my-labels" });
+
+
+                        $('#tab-1').html(popup);
+                        // Open the side panel
+                        $("#panelID").addClass("opened");
+                            // Change 'tab-1' to the appropriate tab ID
+    
+
+                    },
+                    error: function(error) {
+                        console.error("Error:", error);
                     }
-                }
-                popupContent += '</ul>';
-                featureLayer.bindPopup(popupContent);
+                })
+                
             }
         },
     });
