@@ -126,7 +126,7 @@ function updateMap() {
                             if (response.length>0) {
                                 response.forEach((event, index) => {
                                     // const eventNumber = index + 1;
-                                    popup += '<li><a href="#">' + String(event.mt).split("geofon/")[1] + '</a></li>';
+                                    popup += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.try) + " | Dip: "  + String(event.mt) + " | Rake: "  + String(event.mwa) + '<img src="./static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
                                 });
                             } else {
                                 popup += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
@@ -280,7 +280,8 @@ map.on('draw:created', function (e) {
                         if (result.length>0) {
                             result.forEach((event, index) => {
                                 // const eventNumber = index + 1;
-                                popup += '<li><a href="#">' + String(event.mt).split("geofon/")[1] + '</a></li>';
+                                popup += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.try) + " | Dip: "  + String(event.mt) + " | Rake: "  + String(event.mwa) + '<img src="static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
+
                             });
                         } else {
                             popup += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';

@@ -15,7 +15,70 @@ from obspy.core.event import read_events
 import requests
 from geojson import Point, Polygon, Feature
 import mysql.connector as mysql
+import matplotlib.pyplot as plt
+import os
+from obspy.imaging.beachball import beach, beachball
 from mysql.connector import Error
+
+def beachball(fm, id,mw, d):
+    
+    if(d<10):
+        facecolor = "b"
+    elif(d<30):
+        facecolor = "g"
+    elif(d<60):
+        facecolor = "yellow"
+    elif(d<100):
+        facecolor = "orange"
+    else:
+        facecolor = "r"
+
+
+
+    
+    """
+    Plotting the focal mechanism
+    """
+    filepath=os.path.join("./static/beachballs", ('beachball_'+ id +'.png'))
+
+    # radius of the ball
+    radius = 100
+
+    fig = plt.figure(figsize=(mw/10,mw/10))
+    ax = fig.add_subplot(111)
+
+    # Moment Tensor
+    try:
+        nofill=True
+        focal1 = beach([fm.moment_tensor.tensor.m_rr,fm.moment_tensor.tensor.m_tt,\
+        fm.moment_tensor.tensor.m_pp,fm.moment_tensor.tensor.m_rt,\
+        fm.moment_tensor.tensor.m_rp,fm.moment_tensor.tensor.m_tp], xy=(0.0,0.0), \
+        width=2*radius,axes=None,alpha=1, facecolor=facecolor, zorder=1)
+
+        ax.add_collection(focal1)
+
+    except:
+        # fall back to dc only with color
+        nofill=False
+    # Planes
+    focal2 = beach([fm.nodal_planes.nodal_plane_1.strike,\
+    fm.nodal_planes.nodal_plane_1.dip,fm.nodal_planes.nodal_plane_1.rake], \
+    nofill=nofill, facecolor=facecolor, xy=(0.0,0.0),axes=None,width=2*radius,zorder=2)
+
+    ax.add_collection(focal2)
+
+    ax.autoscale_view(tight=False, scalex=True, scaley=True)
+    
+    # plot the axis
+    ax.axison=False
+    plt.axis('scaled')
+    ax.set_aspect(1)
+
+    fig.savefig(filepath, transparent=True)
+    # plt.show()
+
+
+
 
 # το obspy με client == ΝΟΑ δεν τρεχει, και βγαζει συνεχεια στατους 413: Request would result in too much data. Denied by the datacenter. Split the request in smaller parts
 # Άρα θα κάνω ξεχωριστό request όπως στη διπλωματική της Δήμητρας
@@ -26,7 +89,7 @@ from obspy.clients.fdsn.header import URL_MAPPINGS
 for key in sorted(URL_MAPPINGS.keys()):
     print("{0:<11} {1}".format(key,  URL_MAPPINGS[key]))  
 
-# NOA is the catalog service we want for Greece
+# NOA is the catalog service we want for Greece FDSN Service
 client = Client("NOA")
 
     # r = client.get_events(maxlatitude = 43,minlatitude=33,minlongitude=18, maxlongitude=31)
@@ -68,6 +131,7 @@ try:
     
         # for new events
         r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?'+starttime+'includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&nodata=404')
+        # r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&nodata=404')
 
         # for older events
         # r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?'+endtime+'includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&nodata=404')
@@ -77,64 +141,103 @@ try:
 
         counter = 0
         data={'data':[]}
+        print("data ok")
         try:
             for evt in read_events(filename):
                 counter+=1
                 print(counter)
-                try:
-                    org=evt.preferred_origin()
-                    if not org: raise
-                except:
-                    try:
-                        org=sorted(evt.origins, key=lambda o: o.creation_info.creation_time)[-1]
-                    except:
-                        org=evt.origins[-1]
+                
+                org = evt.preferred_origin() or evt.origins[0]
+                print("org ok")
+                # try:
+                #     org=evt.preferred_origin()
+                #     if not org: raise
+                # except:
+                #     try:
+                #         org=sorted(evt.origins, key=lambda o: o.creation_info.creation_time)[-1]
+                #     except:
+                #         org=evt.origins[-1]
 
                 try:
-                    # get moment tensor
-                    fm=evt.preferred_focal_mechanism()
-                    # print(fm.moment_tensor)
-                    print(org)
-                    print(org.latitude)
-                    print(org.longitude)
+                    # fm = evt.preferred_focal_mechanism() or evt.focal_mechanisms[0]
+                    fm = list(filter(lambda x: x.resource_id == evt.preferred_focal_mechanism_id,evt.focal_mechanisms))[0] or evt.focal_mechanisms[0]
+                except:
+                    continue
+                print("fm ok")
+
+                # try:
+                #     # get moment tensor
+                #     fm=evt.preferred_focal_mechanism()
+                #     if not fm: raise
+                # except:
+                #     try: 
+                #         fm = sorted(evt.focal_mechanisms, key=lambda o: o.creation_info.creation_time)[-1]
+                #     # print(fm.moment_tensor)
+                #     except:
+                #         fm = evt.focal_mechanisms[-1]
+                    # print(org)
+                    # print(org.latitude)
+                    # print(org.longitude)
 
                     # get origin of moment tensor (mt)
                     # cent_org_id=fm.moment_tensor.derived_origin_id
 
-                    # get magnitude associated with the mt's origin
-                    cent_mag=[m for m in evt.magnitudes if m.origin_id==org.resource_id][0]
-                    # cent_mag = [m for m in evt.magnitudes if m.origin_id == org.resource_id]
-                    # if cent_mag:
-                    #     cent_mag = cent_mag[0]
-                    # else:
-                    #     continue  # Skip the iteration if cent_mag is empty
-
+                # get magnitude associated with the mt's origin
+                # cent_mag=[m for m in evt.magnitudes if m.origin_id==org.resource_id][0]
+                cent_mag = [m for m in evt.magnitudes if m.origin_id == org.resource_id]
+                if cent_mag:
+                    cent_mag = cent_mag[0]
+                else:
+                    continue  # Skip the iteration if cent_mag is empty
                 
-                except:
-                    continue
+                print("cent mag ok")
+                
+                tensor = fm.moment_tensor.tensor
+                print("tensor ok")
+
+                moment_list = [tensor.m_rr, tensor.m_tt, tensor.m_pp,
+                tensor.m_rt, tensor.m_rp, tensor.m_tp]
+                print("list ok")
+
+                mt_list_db = "/".join([str(elem) for elem in moment_list])
+                print("db list ok")
+
+                event_id = str(evt.resource_id).split('/')[-1]
+                mw = round(cent_mag.mag,1)
+                depth = round(org.depth/1000,1)
+                # create the beachball to the ./static/beachballs/beachball_[event_id].png
+                beachball(fm, event_id, mw ,depth)
+                print(event_id)
+                # , mw, depth)
+                # except:
+                #     continue
 
                 d = {
                     "time" : str(org.time),
-                    "Mw" : round(cent_mag.mag,1),
+                    "Mw" : mw,
                     "longitude": round(org.longitude,4),
                     "latitude": round(org.latitude,4),
-                    "depth": round(org.depth/1000,0),
-                    # "id": str("{:.2e}".format(fm.moment_tensor.scalar_moment)),
-                    "id": str(org.resource_id),
-                    # "try": str(evt.resource_id).split("geofon/")[1],
-                    "try": str(evt.resource_id),
-                    "mt" : str(org.time).split('.')[0]+"_"+str(evt.resource_id),
-                    "mwa" : str(org.time).split('-')[0]+'_'+str(org.time)+"_"+str(evt.resource_id)+"_"+str(round(cent_mag.mag,1)),
-                    "link" : "N/A"
-                    }
-                if org.depth > 1000000:
-                    continue
-                if org.depth_errors.uncertainty :
-                    if org.depth_errors.uncertainty > 100000 :
-                        continue
+                    "depth": depth,
+                    "id": event_id,
+                    "strike": fm.nodal_planes.nodal_plane_1.strike,
+                    "dip": fm.nodal_planes.nodal_plane_1.dip,
+                    "rake": fm.nodal_planes.nodal_plane_1.rake,
+                    "mtlist": mt_list_db
+                    # "try": str(evt.resource_id),
+                    # "mt" : str(org.time).split('.')[0]+"_"+str(evt.resource_id),
+                    # "mwa" : str(org.time).split('-')[0]+'_'+str(org.time)+"_"+str(evt.resource_id)+"_"+str(round(cent_mag.mag,1)),
+                    # "link" : "N/A"
+                }
+                print("d ok")
+
+                # if org.depth > 1000000:
+                #     continue
+                # if org.depth_errors.uncertainty :
+                #     if org.depth_errors.uncertainty > 100000 :
+                #         continue
                     
                 data["data"].append(d)
-                print(org.depth_errors.uncertainty)
+                # print(org.depth_errors.uncertainty)
                 # print("--------")
                 # print(data["data"][0]["time"])
                 print(d)
@@ -154,10 +257,15 @@ try:
                                 d["latitude"],
                                 d["depth"],
                                 d["id"],
-                                d["try"],
-                                d["mt"],
-                                d["mwa"],
-                                d["link"],
+                                d["strike"],
+                                d["dip"],
+                                d["rake"],
+                                d["mtlist"],
+                                
+                                # d["try"],
+                                # d["mt"],
+                                # d["mwa"],
+                                # d["link"],
                                 "TBA"
                                 )
                             )
@@ -169,7 +277,7 @@ try:
                     print("Error while inserting into MySQL. \n", e)
 
         except Exception as e:
-            print("Error while reading events:")
+            print("Error while reading events:",e)
             traceback.print_exc()
 
 except Error as e:
