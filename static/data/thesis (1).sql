@@ -62,10 +62,11 @@ CREATE TABLE `events` (
   `latitude` float NOT NULL,
   `depth` float NOT NULL,
   `id` varchar(50) NOT NULL,
-  `try` varchar(50) NOT NULL,
-  `mt` varchar(100) NOT NULL,
-  `mwa` varchar(100) NOT NULL,
-  `link` varchar(250) NOT NULL
+  `strike` varchar(50) NOT NULL,
+  `dip` varchar(100) NOT NULL,
+  `rake` varchar(100) NOT NULL,
+  `mtlist` varchar(250) NOT NULL,
+  `of_area` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

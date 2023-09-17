@@ -1,6 +1,8 @@
-# we get the real time seismic data from fdsn server
+# we get the real time seismic data from fdsn server ORFEUS
 # every time it only reads the new events (from the last one available in the database) and updates the database
 # it can also work for the search of older events
+# 
+# Here the beachballs are created too
 
 
 import traceback
@@ -20,6 +22,7 @@ import os
 from obspy.imaging.beachball import beach, beachball
 from mysql.connector import Error
 
+# to draw the beachball for each
 def beachball(fm, id,mw, d):
     
     if(d<10):
@@ -130,11 +133,11 @@ try:
         filename = "obspy.xml"
     
         # for new events
-        r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?'+starttime+'includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&nodata=404')
-        # r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&nodata=404')
+        r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?'+starttime+'includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&includeallfocalmechanisms=true&nodata=404')
+        # r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&includeallfocalmechanisms=true&nodata=404')
 
         # for older events
-        # r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?'+endtime+'includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&nodata=404')
+        # r = requests.get('http://orfeus.gein.noa.gr:8085/fdsnws/event/1/query?'+endtime+'includeallorigins=true&includeallmagnitudes=false&includefocalmechanism=true&includeallfocalmechanisms=true&nodata=404')
         
         with open(filename,'wb') as f:
             f.write(r.content)
@@ -142,140 +145,112 @@ try:
         counter = 0
         data={'data':[]}
         print("data ok")
+
         try:
+            prev_time = 0
             for evt in read_events(filename):
-                counter+=1
-                print(counter)
-                
-                org = evt.preferred_origin() or evt.origins[0]
-                print("org ok")
-                # try:
-                #     org=evt.preferred_origin()
-                #     if not org: raise
-                # except:
-                #     try:
-                #         org=sorted(evt.origins, key=lambda o: o.creation_info.creation_time)[-1]
-                #     except:
-                #         org=evt.origins[-1]
-
-                try:
-                    # fm = evt.preferred_focal_mechanism() or evt.focal_mechanisms[0]
-                    fm = list(filter(lambda x: x.resource_id == evt.preferred_focal_mechanism_id,evt.focal_mechanisms))[0] or evt.focal_mechanisms[0]
-                except:
-                    continue
-                print("fm ok")
-
-                # try:
-                #     # get moment tensor
-                #     fm=evt.preferred_focal_mechanism()
-                #     if not fm: raise
-                # except:
-                #     try: 
-                #         fm = sorted(evt.focal_mechanisms, key=lambda o: o.creation_info.creation_time)[-1]
-                #     # print(fm.moment_tensor)
-                #     except:
-                #         fm = evt.focal_mechanisms[-1]
-                    # print(org)
-                    # print(org.latitude)
-                    # print(org.longitude)
-
-                    # get origin of moment tensor (mt)
-                    # cent_org_id=fm.moment_tensor.derived_origin_id
-
-                # get magnitude associated with the mt's origin
-                # cent_mag=[m for m in evt.magnitudes if m.origin_id==org.resource_id][0]
-                cent_mag = [m for m in evt.magnitudes if m.origin_id == org.resource_id]
-                if cent_mag:
-                    cent_mag = cent_mag[0]
-                else:
-                    continue  # Skip the iteration if cent_mag is empty
-                
-                print("cent mag ok")
-                
-                tensor = fm.moment_tensor.tensor
-                print("tensor ok")
-
-                moment_list = [tensor.m_rr, tensor.m_tt, tensor.m_pp,
-                tensor.m_rt, tensor.m_rp, tensor.m_tp]
-                print("list ok")
-
-                mt_list_db = "/".join([str(elem) for elem in moment_list])
-                print("db list ok")
-
-                event_id = str(evt.resource_id).split('/')[-1]
-                mw = round(cent_mag.mag,1)
-                depth = round(org.depth/1000,1)
-                # create the beachball to the ./static/beachballs/beachball_[event_id].png
-                beachball(fm, event_id, mw ,depth)
-                print(event_id)
-                # , mw, depth)
-                # except:
-                #     continue
-
-                d = {
-                    "time" : str(org.time),
-                    "Mw" : mw,
-                    "longitude": round(org.longitude,4),
-                    "latitude": round(org.latitude,4),
-                    "depth": depth,
-                    "id": event_id,
-                    "strike": fm.nodal_planes.nodal_plane_1.strike,
-                    "dip": fm.nodal_planes.nodal_plane_1.dip,
-                    "rake": fm.nodal_planes.nodal_plane_1.rake,
-                    "mtlist": mt_list_db
-                    # "try": str(evt.resource_id),
-                    # "mt" : str(org.time).split('.')[0]+"_"+str(evt.resource_id),
-                    # "mwa" : str(org.time).split('-')[0]+'_'+str(org.time)+"_"+str(evt.resource_id)+"_"+str(round(cent_mag.mag,1)),
-                    # "link" : "N/A"
-                }
-                print("d ok")
-
-                # if org.depth > 1000000:
-                #     continue
-                # if org.depth_errors.uncertainty :
-                #     if org.depth_errors.uncertainty > 100000 :
-                #         continue
+                if(evt.focal_mechanisms):
                     
-                data["data"].append(d)
-                # print(org.depth_errors.uncertainty)
-                # print("--------")
-                # print(data["data"][0]["time"])
-                print(d)
-                # connect database
-                # cursor = db.cursor(buffered=True) #like a little robot that will do commands for you
-                print("--------")
+                    org = evt.preferred_origin() or evt.origins[0]
+                    print("org ok")
+                    if(str(org.time).rsplit(":",1)[0]  == str(prev_time).rsplit(":",1)[0] ):
+                        continue
+                    else:
+                        print("---------\nEvent id: " + str(evt.resource_id).split('/')[-1] + "\nTime: " +  str(org.time) )
+                        if (evt.preferred_focal_mechanism_id):
+                            fm = list(filter(lambda x: x.resource_id == evt.preferred_focal_mechanism_id,evt.focal_mechanisms))[0]
+                        else:
+                            fm = evt.focal_mechanisms[0]
+                        
+                    # try:
+                    #     # fm = evt.preferred_focal_mechanism() or evt.focal_mechanisms[0]
+                    #     fm = list(filter(lambda x: x.resource_id == evt.preferred_focal_mechanism_id,evt.focal_mechanisms))[0] or evt.focal_mechanisms[0]
+                    # except:
+                    #     continue
+                        print("fm ok")
 
-                # connect database
+                        # get magnitude associated with the mt's origin
+                        cent_mag = [m for m in evt.magnitudes if m.origin_id == org.resource_id]
+                        if cent_mag:
+                            cent_mag = cent_mag[0]
+                        else:
+                            continue  # Skip the iteration if cent_mag is empty
+                        
+                        print("cent mag ok")
+                        
+                        tensor = fm.moment_tensor.tensor
+                        print("tensor ok")
+
+                        moment_list = [tensor.m_rr, tensor.m_tt, tensor.m_pp,
+                        tensor.m_rt, tensor.m_rp, tensor.m_tp]
+                        print("list ok")
+
+                        mt_list_db = "/".join([str(elem) for elem in moment_list])
+                        print("db list ok")
+
+                        event_id = str(evt.resource_id).split('/')[-1]
+                        mw = round(cent_mag.mag,1)
+                        depth = round(org.depth/1000,1)
+                        # create the beachball to the ./static/beachballs/beachball_[event_id].png
+                        beachball(fm, event_id, mw ,depth)
+                        print(event_id)
+
+                        d = {
+                            "time" : str(org.time),
+                            "Mw" : mw,
+                            "longitude": round(org.longitude,4),
+                            "latitude": round(org.latitude,4),
+                            "depth": depth,
+                            "id": event_id,
+                            "strike": fm.nodal_planes.nodal_plane_1.strike,
+                            "dip": fm.nodal_planes.nodal_plane_1.dip,
+                            "rake": fm.nodal_planes.nodal_plane_1.rake,
+                            "mtlist": mt_list_db
+
+                        }
+                        print("d ok")
+                            
+                        data["data"].append(d)
+
+                        print(d)
+                        
+                        print("--------")
+
+                        # connect database
+                        
+                    
+                        # Insert data into the database
+                        try:
+                            cursor.execute('''INSERT IGNORE INTO events VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
+                                    (   d["time"],
+                                        d["Mw"],
+                                        d["longitude"],
+                                        d["latitude"],
+                                        d["depth"],
+                                        d["id"],
+                                        d["strike"],
+                                        d["dip"],
+                                        d["rake"],
+                                        d["mtlist"],
+                                        "TBA"
+                                        )
+                                    )
+
+                            db.commit()
+                            print("\n ------------------------------------------------- \n")       
+
+                        except Error as e:
+                            print("Error while inserting into MySQL. \n", e)
+
+                        counter+=1
+                        # beachball(focmec)
+                        prev_time = org.time
+
+                else:
+                    print("======================================\nEvent doesnt have Focal Mechanisms\nEvent id: " + str(evt.resource_id).split('/')[-1] + "\nTime: " + str(org.time)+"\n========================================")
+                    continue 
                 
-            
-                # Insert data into the database
-                try:
-                    cursor.execute('''INSERT IGNORE INTO events VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
-                            (   d["time"],
-                                d["Mw"],
-                                d["longitude"],
-                                d["latitude"],
-                                d["depth"],
-                                d["id"],
-                                d["strike"],
-                                d["dip"],
-                                d["rake"],
-                                d["mtlist"],
-                                
-                                # d["try"],
-                                # d["mt"],
-                                # d["mwa"],
-                                # d["link"],
-                                "TBA"
-                                )
-                            )
-
-                    db.commit()
-                    print("\n ------------------------------------------------- \n")       
-
-                except Error as e:
-                    print("Error while inserting into MySQL. \n", e)
-
+            print(counter)
         except Exception as e:
             print("Error while reading events:",e)
             traceback.print_exc()

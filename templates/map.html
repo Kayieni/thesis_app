@@ -18,9 +18,22 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
     <!-- Leaflet Draw plugin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css">
-    
+    <!-- Leaflet MarkerCluster -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.1/dist/MarkerCluster.css"
+        integrity="sha512-mQ77VzAakzdpWdgfL/lM1ksNy89uFgibRQANsNneSTMD/bj0Y/8+94XMwYhnbzx8eki2hrbPpDm0vD0CiT2lcg=="
+        crossorigin="" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.1/dist/MarkerCluster.Default.css"
+        integrity="sha512-6ZCLMiYwTeli2rVh3XAPxy3YoR5fVxGdH/pz+KMCzRY2M65Emgkw00Yqmhh8qLGeYQ3LbVZGdmOX9KUjSKr0TA=="
+        crossorigin="" />
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+  
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
-    
+
+
     <!-- colors css -->
     <style>
         img.red {
@@ -63,6 +76,10 @@
         .lorem {
             font-style: italic;
             color: #AAA;
+        }
+
+        a {
+            text-decoration: none;
         }
     </style>
 
@@ -593,108 +610,6 @@
 
 <body>
     <div id="map">
-    <!-- Side Panel right -->
-        <!-- <div id="panelID" class="sidepanel sidepanel-left sidepanel-dark tabs-side opened" aria-label="side panel" aria-hidden="false">
-            <div class="sidepanel-inner-wrapper">
-                <nav class="sidepanel-tabs-wrapper" aria-label="sidepanel tab navigation">
-                    <ul class="sidepanel-tabs">
-                        <li class="sidepanel-tab">
-                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-1">
-                                List
-                            </a>
-                        </li>
-                        <li class="sidepanel-tab">
-                            <a href="#" class="sidebar-tab-link active" role="tab" data-tab-link="tab-2">
-                                Pin
-                            </a>
-                        </li>
-                        <li class="sidepanel-tab">
-                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-3">
-                                Mark
-                            </a>
-                        </li>
-                        <li class="sidepanel-tab">
-                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-4">
-                                Bookmarks
-                            </a>
-                        </li>
-                        <li class="sidepanel-tab">
-                            <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-5">
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="sidepanel-content-wrapper">
-                    <div class="sidepanel-content">
-                        <div class="sidepanel-tab-content active" data-tab-content="tab-1">
-                            <h4>Content 1</h4>
-                            <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
-                                diam.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
-                                massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
-                                scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
-                                massa,
-                                in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
-                                non
-                                turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
-                        </div>
-                        <div class="sidepanel-tab-content" data-tab-content="tab-2">
-                            <h4>Content 2</h4>
-                            <p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
-                                iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
-                                ipsum
-                                id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
-                                mauris.
-                                Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
-                        </div>
-                        <div class="sidepanel-tab-content" data-tab-content="tab-3">
-                            <h4>Content 3</h4>
-                            <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
-                                diam.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
-                                massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
-                                scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
-                                massa,
-                                in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
-                                non
-                                turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
-                        </div>
-                        <div class="sidepanel-tab-content" data-tab-content="tab-4">
-                            <h4>Content 4</h4>
-                            <p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
-                                iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
-                                ipsum
-                                id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
-                                mauris.
-                                Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
-                        </div>
-                        <div class="sidepanel-tab-content" data-tab-content="tab-5">
-                            <h4>Content 5</h4>
-                            <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
-                                diam.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
-                                massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
-                                scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
-                                massa,
-                                in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
-                                non
-                                turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
-                            <p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
-                                iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
-                                ipsum
-                                id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
-                                mauris.
-                                Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sidepanel-toggle-container">
-                <button class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>
-            </div>
-        </div> -->
-
        <!-- Side Panel left -->
 		<div id="panelID" class="sidepanel" aria-label="side panel" aria-hidden="false">
 			<div class="sidepanel-inner-wrapper">
@@ -759,14 +674,55 @@
                                     non
                                     turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
                             </div>
-						<div class="sidepanel-tab-content" data-tab-content="tab-2">
-							<h4>Content 2</h4>
-							<p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
-								iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
-								ipsum
-								id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
-								mauris.
-								Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
+						<div id="tab-2" class="sidepanel-tab-content" data-tab-content="tab-2">
+                            <div class="show_events">
+                                <button type="button" class="btn btn-warning" value="showall" onclick="showallevents()">Show all Events</button>
+                            </div>
+                            <form id="filter"  method="POST">
+                                <!-- action="/filter_events" -->
+                                <!-- start date -->
+                                <label for="time">Filter by start time:</label><br />
+                                <input type="date" name="starttime" id="starttime"><br>
+                                <!-- end date -->
+                                <label for="time">Filter by end time:</label><br />
+                                <input type="date" name="endtime" id="endtime"><br>
+                                <!-- magnitude -->
+                                <label for="magnitude">Filter by max Magnitude:</label><br />
+                                <input type="range" class="slider" name="magnitude" id="magnitude" min="0" max="10" value="">
+                                <span class="slider_label"></span><br>
+                                <!-- depth -->
+                                <label for="depth">Filter by max Depth:</label><br />
+                                <input type="range" class="slider" name="depth" id="depth"min="0" max="100" value="">
+                                <span class="slider_label"></span><br>
+                                <!-- rake -->
+                                <label for="rake">Filter by max Rake:</label><br />
+                                <input type="range" class="slider" name="rake" id="rake" min="-200" max="200" value="">
+                                <span class="slider_label"></span><br>
+                                <!-- buttons -->
+                                <!-- <button type="reset" class="btn btn-outline-info" onclick=if(map.hasLayer(filter_markers)){map.removeLayer(filter_markers)}>Clear</button> -->
+                                <button type="reset" class="btn btn-outline-info" >Clear</button>
+                                <button type="submit" class="btn btn-info">Filter Events</button>
+                            </form>
+                            <!-- if no events found -->
+                            <div id="filter_errors">
+                                <hr/>
+                            </div>
+                            <div id="filter-wrap" hidden>
+                                <h5>Filtered Events:</h5>
+                                <form id="filterlistform">
+                                    <div id="filterlist">
+                                        <br/>
+                                    </div>
+                                    <div>
+                                        <br/>
+                                        <button type="submit">Calculate average MT</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="averageMT">
+                                <hr/>
+                            </div>
+
 						</div>
 						<div class="sidepanel-tab-content" data-tab-content="tab-3">
 							<h4>Content 3</h4>
@@ -862,6 +818,10 @@
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     <!-- leaflet draw plugin js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.1/dist/leaflet.markercluster.js"
+        integrity="sha512-+Zr0llcuE/Ho6wXRYtlWypMyWSEMxrWJxrYgeAMDRSf1FF46gQ3PAVOVp5RHdxdzikZXuHZ0soHpqRkkPkI3KA=="
+        crossorigin="">
+    </script>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

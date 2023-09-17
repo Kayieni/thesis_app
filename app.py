@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_mysqldb import MySQL
+from flask_cors import CORS
 from views import views
 
 app = Flask(__name__) #init the flask server
 app.register_blueprint(views, url_prefix = "/") #to link the views file
-
+CORS(app)
 #Add database configurations
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'

@@ -15,7 +15,7 @@ from mysql.connector import Error
 import pandas as pd
 # from shapely.geometry import Polygon
 # import shapely.wkt
-
+# global id,counter
 # read the csv with the coordinates created
 areas = pd.read_csv('./cords.csv',index_col=False)
 # create a pandas dataframe in order to print the result and search the rows one by one
@@ -55,15 +55,16 @@ try:
             # each row has some data. There are some rows with only coordinates that specify the area of the last code seen.
             # So if the code is not the same, that means we changes area. 
             # If its the same that means we still look at the area's coordinates.
+            print(id)
             if (row.code != code_tmp):
                 # to start from area 1, cause there is no area 0
                 if(counter>0):
                     # counter -1 bc counter starts from 1 but the first table element we want is in possition 0
                     latlong[counter-1] = latlong[counter-1] + "," + first
-
+                    # print(first)
                     poly = "POLYGON((" + str(latlong[counter-1]) + "))"
                     polygons.append(poly)
-
+                    print(poly)
                     # insert to database
                     cursor.execute("INSERT IGNORE INTO areas(id, code, name, mmax_PAP, mmax_MOUN, mmax_EQ, mmax) VALUES (%s,%s,%s,%s,%s,%s,%s)",
                         (id[0], code_tmp, name[0], pap[0], moun[0], eq[0], mmax)
@@ -90,8 +91,9 @@ try:
 
                     # to save the first coords and close the polygon
                     first = str(row.lat) + " " + str(row.long)
-
+                    print(first)
                     latlong.append(str(row.lat) + " " + str(row.long))
+                    print(latlong)
                     # print(latlong)
                     cursor.execute('''INSERT INTO coordinates(area_code, latitude, longitude) VALUES (%s,%s,%s)''',
                         (row.code, row.lat, row.long)                         
