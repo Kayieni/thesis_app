@@ -49,15 +49,15 @@ const panelRight = L.control.sidepanel('panelID', {
 }).addTo(map);
 
 // Add an event listener to the document to close the panel when clicking outside
-document.addEventListener('click', function(event) {
-    var panel = document.getElementById('panelID');
-    var tabContent = document.getElementById('tab-1');
+// document.addEventListener('click', function(event) {
+//     var panel = document.getElementById('panelID');
+//     var tabContent = document.getElementById('tab-1');
 
-    if (!panel.contains(event.target)) {
-        panel.classList.remove('opened');
-        tabContent.innerHTML = '<h4><em>Select an area to view the details</em></h4>'; // Clear the contents of tab-1
-    }
-});
+//     if (!panel.contains(event.target)) {
+//         panel.classList.remove('opened');
+//         tabContent.innerHTML = '<h4><em>Select an area to view the details</em></h4>'; // Clear the contents of tab-1
+//     }
+// });
 
 // create a variable to hold the geojson layer
 var selected_geojson;
@@ -143,11 +143,6 @@ function showallevents() {
         allevents_markers.addTo(map);
     }
 }
-
-// function to update the events list
-// function update_events_list(){
-
-// }
 
 // When we want to select a geojson with polygons
 // Additional JavaScript for the modal in order to add the selected layer
@@ -274,16 +269,23 @@ function updateMap() {
                     return json;
                 }
 
+                var areaheader = document.getElementById("areaheader");
+                var arealist = document.getElementById("arealist");
+
                 // to create the content of the selected areas sidepanel
                 featureLayer.on('click', function () {
                     console.log(feature.properties.code);
+
                     eventsperarea(feature.properties.code)
                         .then(response => {
                             console.log("yay");
                             // Create the content for the sidepanel
+                            areaheader = '<h2>'+feature.properties.id + '. ' + feature.properties.name+'</h2><br>';
+                            areaheader += '<h6>Area code: '+feature.properties.code+'</h6><hr>';
+                            // areaheader.innerHTML = feature.properties.code;
                             var popup = '<div class="popup">';
-                            popup += '<h4>' + feature.properties.id + ". " + feature.properties.name + '</h4>';
-                            popup += '<h5>Code: ' + feature.properties.code + '</h4>';
+                            // popup += '<h4>' + feature.properties.id + ". " + feature.properties.name + '</h4>';
+                            // popup += '<h5>Code: ' + feature.properties.code + '</h4>';
                             // popup += '<p>Coordinates:</p>';
                             // popup += '<ul>';
                             // for (var i = 0; i < feature.geometry.coordinates[0].length - 1; i++) {
@@ -292,18 +294,19 @@ function updateMap() {
                             // }
                             // popup += '</ul>';
                             // Add the seismic events list
-                            popup += '<h5>Seismic Events:</h5>';
-                            popup += '<ol id="eventlist">';
+                            // popup += '<h5>Seismic Events:</h5>';
+                            // popup += '<ol id="eventlist">';
                             if (response.length>0) {
                                 response.forEach((event, index) => {
                                     // const eventNumber = index + 1;
-                                    popup += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.strike) + " | Dip: "  + String(event.dip) + " | Rake: "  + String(event.rake) + '<img src="./static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
+                                    // arealist += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.strike) + " | Dip: "  + String(event.dip) + " | Rake: "  + String(event.rake) + '<img src="./static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
+                                    arealist += '<div><input type="checkbox" value="' + String(event.mtlist) + '" id="'+ String(event.id) + '" name="moment-tensors" checked/><label for="'+ String(event.id) + '"><a href="#"> Event ID: ' + String(event.id) + " <br/> Time: " + String(event.time) + " <br/> Mw: "  + String(event.Mw) + " <br/> D(km): "  + String(event.depth) + " <br/> Rake: "  + String(event.rake) + '<img src="./static/beachballs/beachball_'+ String(event.id) +'.png"/><br/></a></label></div>';
                                 });
                             } else {
-                                popup += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
+                                arealist += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
                             }
-                            popup += '</ol>';
-                            popup += '</div>';
+                            // popup += '</ol>';
+                            // popup += '</div>';
 
                             this.setStyle({
                                 'fillColor': '#0000ff'
@@ -312,7 +315,10 @@ function updateMap() {
 
 
                             // Change 'tab-1' to the appropriate tab ID
-                            $('#tab-1').html(popup);
+                            // $('#tab-1').html(popup);
+                            $('#areaheader').html(areaheader);
+                            $('#arealist').html(arealist);
+
                             // Open the side panel
                             $("#panelID").addClass("opened");
         
@@ -443,12 +449,14 @@ $(document).on('submit','#filter',function(e) {
 
                         // create the sidepanel content
                         // var side = document.getElementById("filterlist");
-                        side += '<div><input type="checkbox" value="'+ String(data[i].mtlist) + '" id="'+ String(data[i].id) + '" name="moment-tensors" checked/><label for="'+ String(data[i].id) + '"><a href="#"> Event ID: ' + String(data[i].id) + " <br/> Time: " + String(data[i].time) + " <br/> Mw: "  + String(data[i].Mw) + " <br/> D(km): "  + String(data[i].depth) + " <br/> Rake: "  + String(data[i].rake) + '<img src="./static/beachballs/beachball_'+ String(data[i].id) +'.png"/><br/></a></label></div>';
+                        side = '<div><input type="checkbox" value="'+ String(data[i].mtlist) + '" id="'+ String(data[i].id) + '" name="moment-tensors" checked/><label for="'+ String(data[i].id) + '"><a href="#"> Event ID: ' + String(data[i].id) + " <br/> Time: " + String(data[i].time) + " <br/> Mw: "  + String(data[i].Mw) + " <br/> D(km): "  + String(data[i].depth) + " <br/> Rake: "  + String(data[i].rake) + '<img src="./static/beachballs/beachball_'+ String(data[i].id) +'.png"/><br/></a></label></div>';
+                        
                     }
+                    $('#filterlist').append(side);
                 }
             
                 // Change 'tab-1' to the appropriate tab ID
-                $('#filterlist').html(side);
+                // $('#filterlist').append(side);
                 // Open the side panel
                 $("#panelID").addClass("opened");
 
@@ -512,7 +520,64 @@ $(document).on('submit','#filterlistform',function(e) {
             console.log(result)
             console.log(String(result))
             var avMT = document.getElementById("averageMT")
-            avMT.innerHTML+='<img style="width:50%" src="'+String(result)+'">'
+            avMT.innerHTML='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
+            '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png"></a>' +
+            '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png"></a>' +
+            '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png"></a>'+
+            '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png"></a>'
+            console.log(result)
+        },
+        error: function(error) {
+            console.error("Error:", error);
+        }
+    })
+})
+
+
+// send data to backend to calculate the average MT
+// if filter has been applied
+$(document).on('submit','#arealistform',function(e) {
+    e.preventDefault();
+
+    var inputs = document.getElementsByName("moment-tensors");
+    var areacode = document.getElementById( "areaheader" ).getElementsByTagName( 'h6' )[0];
+    console.log(areacode)
+    
+    ids = []
+    for(var i = 0; i < inputs.length; i++) {
+        if(inputs[i].checked) {
+            var values = inputs[i].value;
+            list = values.split("/")
+            // data.push(list)
+            ids.push(inputs[i].id)
+        }  
+    }
+
+    console.log(ids)
+    // filter = {
+    //     starttime: $("#starttime").val(),
+    //     endtime: $("#endtime").val(),
+    //     magnitude: $("#magnitude").val(),
+    //     depth: $("#depth").val(),
+    //     rake: $("#rake").val()
+    // }
+
+    $.ajax({
+        type: 'POST',
+        url: "http://localhost:8000/averageMT",
+        contentType: "application/json",
+        data: JSON.stringify({"data": ids, "code": String(areacode)}),
+        // data: JSON.stringify({"data": ids, "filter": filter}),
+
+        success: function (result) {
+            console.log(result)
+            console.log(String(result))
+            var avMT = document.getElementById("areasaverageMT")
+            avMT.innerHTML='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
+            '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png"></a>' +
+            '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png"></a>' +
+            '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png"></a>'+
+            '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png"></a>'
             console.log(result)
         },
         error: function(error) {

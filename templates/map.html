@@ -27,9 +27,9 @@
         integrity="sha512-6ZCLMiYwTeli2rVh3XAPxy3YoR5fVxGdH/pz+KMCzRY2M65Emgkw00Yqmhh8qLGeYQ3LbVZGdmOX9KUjSKr0TA=="
         crossorigin="" />
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
+    <!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
   
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
 
@@ -663,16 +663,23 @@
                     <div class="sidepanel-content-wrapper">
                         <div class="sidepanel-content">
                             <div id="tab-1" class="sidepanel-tab-content" data-tab-content="tab-1">
-                                <h4>Content 1</h4>
-                                <p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
-                                    diam.
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
-                                    massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
-                                    scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
-                                    massa,
-                                    in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
-                                    non
-                                    turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
+                                <div id="areaheader">
+                                </div>
+                                <div id="area-wrap">
+                                    <h5>Area's Moment Tensors:</h5>
+                                    <form id="arealistform">
+                                        <div id="arealist">
+                                            <br/>
+                                        </div>
+                                        <div>
+                                            <br/>
+                                            <button type="submit">Calculate average MT</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="areasaverageMT">
+                                    <hr/>
+                                </div>
                             </div>
 						<div id="tab-2" class="sidepanel-tab-content" data-tab-content="tab-2">
                             <div class="show_events">

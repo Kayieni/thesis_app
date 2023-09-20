@@ -19,6 +19,7 @@ from collections import OrderedDict
 from shapely.geometry import Polygon, Point, shape
 import threading
 import subprocess
+# from obs import beachball
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -34,7 +35,7 @@ def update_events():
     global script_thread_completed
     try:
         result = subprocess.run(['python', 'obs.py'], capture_output=True, text=True)
-        print("Output1: ", result.stdout)
+        # print("Output1: ", result.stdout)
 
     except subprocess.CalledProcessError as e:
         print("Error1: ", e)
@@ -76,7 +77,7 @@ def check_process_status():
 @views.route('/index')
 def home():
     files_list = session.get('files_list', None)
-
+    import obs
     # Render a different template as a response
     return render_template("map.html", file_name=files_list) 
 
@@ -348,27 +349,32 @@ def geojson_selected():
 
     from app import mysql
     cursor = mysql.connection.cursor()
-
-    cursor.execute('''SELECT longitude,latitude,id,of_area FROM events''')
-    coordinates = cursor.fetchall()
-
-    area_belong = ""
-    for row in coordinates:
-        if row[3] == "TBA":
-            point = Point(row[0],row[1])
-            for feature in json_selected['features']:
-                polygon = shape(feature['geometry'])
-                if polygon.contains(point):
-                    area_belong = feature['properties']['code']
-                    print(area_belong)
-                    cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", (area_belong,row[2]))
-
-                else:
-                    cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", ("None",row[2]))
-                    continue
-            print("This event ("+ row[2] +") belongs to the :", area_belong)
-            
+    try:
+        cursor.execute('''SELECT longitude,latitude,id,of_area FROM events''')
+        coordinates = cursor.fetchall()
+        
+        area_belong = ""
+        for row in coordinates:
+            if row[3] == "TBA" or row[3] == "None":
+                point = Point(row[0],row[1])
+                # print(point)
+                for feature in json_selected['features']:
+                    polygon = shape(feature['geometry'])
+                    # print(polygon)
+                    if polygon.contains(point):
+                        area_belong = feature['properties']['code']
+                        print(area_belong)
+                        cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", (str(area_belong),row[2]))
+                        print("The event ("+ row[2] +") belongs to the :", area_belong)
+                        # mysql.connection.commit()
+                    # else:
+                    #     cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", ("None",row[2]))
+                        # continue
         mysql.connection.commit()
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
 
     return jsonify(str(selected_file))
 
@@ -440,12 +446,6 @@ def filter_events():
 # to calculate the average MT
 @views.route("/averageMT",methods=["GET", "POST"])
 def averageMT():
-
-
-
-
-
-
 
     # function to find the moment(Nm) from gisola
     def gisolaNm(id,year):
@@ -538,26 +538,26 @@ def averageMT():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     if request.method == "POST":
+
         print("post ok ")
         data = request.get_json()
 
         # Print the updated data
         print(data["data"])
-        print(data["filter"])
 
-        filter_vals = data["filter"]
+        # if filtered hasn't been applied (only in areas selection)
+        if "filter" in data:
+            print(data["filter"])
+
+            filter_vals = data["filter"]
+
+            # initiate filename 
+            filename = str(filter_vals["starttime"])+"_"+str(filter_vals["endtime"])+"_"+str(filter_vals["magnitude"])+"_"+str(filter_vals["depth"])+"_"+str(filter_vals["rake"])
+            filepath=os.path.join("./static/beachballs/", (str(filename) +'.png'))
+        elif "code" in data:
+            filename = str(data["code"])
+            filepath=os.path.join("./static/beachballs/", (str(filename) +'.png'))
 
         from app import mysql
 
@@ -587,6 +587,7 @@ def averageMT():
         # data["data"] = [[float(x) for x in lst] for lst in data["data"]]
         np = []
         tens6 = []
+
         for eventlist in events_filt:
             # get year of event
             print(eventlist["time"])
@@ -599,7 +600,8 @@ def averageMT():
             # get moment Nm from 
             momentNm = gisolaNm(eventlist["id"],str(year))
             if momentNm == "Error":
-                continue
+                # continue 
+                momentNm = 1
             # convert strings to floats and create list of lists for all to calculate average (mean)
             np_temp = [float(x) for x in [eventlist["strike"],eventlist["dip"],eventlist["rake"]]]
             mtlist = eventlist["mtlist"].split("/")
@@ -612,6 +614,31 @@ def averageMT():
             np.append(np_temp)
             tens6.append(tens6_norm)
             # tens6.append(tens6_temp)
+
+        # Define the header lines
+        header_lines = [
+            "% West Bohemia mechanisms",
+            "%  strike          dip             rake",
+        ]
+
+        # Nodal planes (strike, dip, rake) list will be the data for each column
+        # Specify the file path where you want to save the content
+        stressinv_input_file = "./Stressinverse/Data/Input.dat"
+
+        # Open the file in write mode and write the header lines and data
+        with open(stressinv_input_file, "w") as file:
+            for line in header_lines:
+                file.write(line + "\n")
+            
+            for row in np:
+                file.write("   " + "   ".join(f"{x:.7e}" for x in row) + "\n")
+
+        print(f"File '{stressinv_input_file}' has been created.")
+
+            
+
+
+
 
         # print(np)
         # print(tens6)
@@ -649,13 +676,83 @@ def averageMT():
 
         # plt.show()
 
-        filename = str(filter_vals["starttime"])+"_"+str(filter_vals["endtime"])+"_"+str(filter_vals["magnitude"])+"_"+str(filter_vals["depth"])+"_"+str(filter_vals["rake"])
-
-        filepath=os.path.join("./static/beachballs/", (str(filename) +'.png'))
+        
         fig.savefig(filepath, transparent=True)
 
 
 
-    return filepath.lstrip('./')
+
+
+    # return filepath.lstrip('./')
+    return redirect(url_for('views.stressinverse'))
     
-    
+
+# to get stress inversion from Stressinverse 
+@views.route("/stressinverse",methods=["GET", "POST"])
+def stressinverse():
+    if request.method == "GET":
+        with open("./Stressinverse/Programs_PYTHON/StressInverse.py") as infile:
+            print("---exec file now")
+            exec(infile.read())
+            
+    return redirect(url_for('views.str_beachball'))
+
+
+# to get stress inversion from Stressinverse and create its beachball 
+@views.route("/str_beachball",methods=["GET", "POST"])
+def str_beachball():
+    if request.method == "GET":
+        print("in")
+        # Initialize empty lists to store the values from each row
+        out1 = []
+        out2 = []
+        data = []
+        
+        # Open the .dat file for reading
+        with open("./Stressinverse/Output/principal_mechanisms.dat", "r") as file:
+            # Read the entire content of the file as a single string
+            content = file.read()
+            
+            # Split the content into individual values based on whitespace
+            elements = content.split()
+            
+            # Convert the values to floats and add them to the list
+            for element in elements:
+                data.append(float(element))
+
+            print(data)
+
+            def beachball(out,color):
+                # radius of the ball
+                radius = 100
+
+                fig = plt.figure(figsize=(5,5))
+                ax = fig.add_subplot(111)
+
+                # Moment Tensor
+                try:
+                    nofill=True
+                    focal = beach(data, xy=(0.0,0.0), width=2*radius,axes=None,alpha=1, facecolor=color, zorder=1)
+                    ax.add_collection(focal)
+                    ax.autoscale_view(tight=False, scalex=True, scaley=True)
+
+                except:
+                    # fall back to dc only with color
+                    nofill=False
+
+                # plot the axis
+                ax.axison=False
+                plt.axis('scaled')
+                ax.set_aspect(1)
+
+                fig.savefig("./static/Figures/"+color+".png", transparent=True)
+                print("created")
+                plt.show()
+
+            beachball(data,"red")
+            
+            # beachball(out2,"blue")
+
+            
+        
+    return r'./static/Figures/P_T_axes.png'
