@@ -791,9 +791,9 @@
                 <div class="modal-body">
                     <div class="modal-body">
                         <p>Upload your file with the area sources you wish to use or select the default (Vamvakaris, 2010, PhD AUTH) </p>
-                        <form method="POST" enctype="multipart/form-data" action="/csv">
-                            <p style="color:blue;">Choose csv file: </p>
-                            <input type="file" name="file" id="file" accept=".csv" class="form-control"><br>
+                        <form method="POST" enctype="multipart/form-data" action="/import_file">
+                            <p style="color:blue;">Choose file: </p>
+                            <input type="file" name="file" id="file" accept=".csv, .json, .geojson, .xml" class="form-control"><br>
                             <input type="submit" class="btn btn-info" id="btn_upload" value="Add file">
                         </form>
                     </div>

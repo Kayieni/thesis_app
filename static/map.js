@@ -255,7 +255,7 @@ function updateMap() {
     $.getJSON("/static/data/" + $("#selectedArea_file").val(), function (data) {
         // Create the GeoJSON layer with custom popup content
         // for street view of map
-
+        console.log($("#selectedArea_file").val())
         // when an area gets selected
         selected_geojson = L.geoJson(data, {
             onEachFeature: function (feature, featureLayer) {
@@ -370,10 +370,14 @@ $(document).on('reset','#filter',function(e) {
     e.preventDefault();
     if(map.hasLayer(filter_markers)) {
         map.removeLayer(filter_markers)
-        var wrap = document.getElementById("filter-wrap");
-        wrap.setAttribute("hidden","hidden");
-        var mt = document.getElementById("averageMT");
-        mt.setAttribute("hidden","hidden");
+        var filter_values = document.getElementById("filterlist")
+        filter_values.innerHTML="";
+        var avMT_values = document.getElementById("averageMT")
+        avMT_values.innerHTML="";
+        // var wrap = document.getElementById("filter-wrap");
+        // wrap.setAttribute("hidden","hidden");
+        // var mt = document.getElementById("averageMT");
+        // mt.setAttribute("hidden","hidden");
     }
 
 })
@@ -468,7 +472,7 @@ $(document).on('submit','#filter',function(e) {
 
             }else {
                 console.log("no events found")
-                if(wrap.getAttribute(hidden)){
+                if(wrap.hasAttribute(hidden)){
                     filter_errors_div.classList.add("btn-outline-warning")
                     filter_errors_div.innerHTML+=`<hr/><h3>no events found</h3>`
                 }
@@ -485,7 +489,7 @@ $(document).on('submit','#filter',function(e) {
 // if filter has been applied
 $(document).on('submit','#filterlistform',function(e) {
     e.preventDefault();
-
+    document.getElementById("averageMT").innerHTML="";
     var inputs = document.getElementsByName("moment-tensors");
 
     // data = {}
@@ -520,7 +524,7 @@ $(document).on('submit','#filterlistform',function(e) {
             console.log(result)
             console.log(String(result))
             var avMT = document.getElementById("averageMT")
-            avMT.innerHTML='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
+            avMT.innerHTML+='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
             '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png"></a>' +
             '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png"></a>' +
             '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png"></a>'+
@@ -538,6 +542,7 @@ $(document).on('submit','#filterlistform',function(e) {
 // if filter has been applied
 $(document).on('submit','#arealistform',function(e) {
     e.preventDefault();
+    document.getElementById("areasaverageMT").innerHTML="";
 
     var inputs = document.getElementsByName("moment-tensors");
     var areacode = document.getElementById( "areaheader" ).getElementsByTagName( 'h6' )[0];
@@ -571,14 +576,13 @@ $(document).on('submit','#arealistform',function(e) {
 
         success: function (result) {
             console.log(result)
-            console.log(String(result))
             var avMT = document.getElementById("areasaverageMT")
-            avMT.innerHTML='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
+            avMT.innerHTML+='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
             '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png"></a>' +
             '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png"></a>' +
             '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png"></a>'+
             '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png"></a>'
-            console.log(result)
+
         },
         error: function(error) {
             console.error("Error:", error);

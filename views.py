@@ -1,13 +1,15 @@
 # template for flask in jinja
+import csv
 from datetime import datetime
 import re
+import shutil
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 from obspy.imaging.beachball import beach
 from flask import *
 from flask_mysqldb import MySQL
-import requests, json, os, csv
+import requests, json, os, xmltodict
 from obspy import read_events, Catalog, UTCDateTime
 from obspy.core.event import read_events
 # from app import app
@@ -26,7 +28,7 @@ warnings.filterwarnings("ignore")
 
 views = Blueprint(__name__, "views")
 
-ALLOWED_EXTENTIONS = {'csv'}
+ALLOWED_EXTENTIONS = {'csv','json','geojson','xml'}
 
 # Global variable to track the status of the script thread
 script_thread_completed = False
@@ -77,7 +79,7 @@ def check_process_status():
 @views.route('/index')
 def home():
     files_list = session.get('files_list', None)
-    import obs
+    # import obs
     # Render a different template as a response
     return render_template("map.html", file_name=files_list) 
 
@@ -152,8 +154,8 @@ def get_geojson():
     return f'okk!'
 
 # when uploading a file (csv)
-@views.route("/csv", methods=['GET','POST'])
-def import_csv():
+@views.route("/import_file", methods=['GET','POST'])
+def import_file():
     if request.method == 'POST':
         # upload file flask
         f = request.files.get('file')
@@ -161,6 +163,7 @@ def import_csv():
         # extracting uploaded file name
         data_filename = secure_filename(f.filename)
 
+        # save uploaded file to the uploads folder
         f.save(os.path.join('static/uploads/',data_filename))
 
         session['uploaded_data_file_path'] = os.path.join('static/uploads/', data_filename)
@@ -169,96 +172,166 @@ def import_csv():
         return redirect (url_for('views.showData'))
     return render_template('map.html')
 
-# to create csv file data in correct geojson format
+# to create file data in correct geojson format
 @views.route('/show_data')
 def showData():
     # upload file path
     data_file_path = session.get('uploaded_data_file_path', None)
     session_file_name = session.get('uploaded_data_file_name', None)
     data_file_name = session_file_name.split('.')[0]
+    data_file_type = session_file_name.split('.')[1]
+    
+    # if the uploaded file is a csv
+    if data_file_type == "csv":
     # read csv
-    uploaded_df = pd.read_csv(data_file_path, encoding="unicode_escape")
-    print(uploaded_df)
-    # coverting to html table
-    # uploaded_df_html = uploaded_df.to_html()
-    uploaded_df_html = uploaded_df.to_html()
+        uploaded_df = pd.read_csv(data_file_path, encoding="unicode_escape")
+        print(uploaded_df)
+        # coverting to html table
+        # uploaded_df_html = uploaded_df.to_html()
+        uploaded_df_html = uploaded_df.to_html()
 
-    li = []
-    with open(data_file_path, 'r') as csvfile:
-        # get the final line
+        li = []
+        with open(data_file_path, 'r') as csvfile:
+            # get the final line
 
-        reader = csv.reader(csvfile, delimiter=',')
+            reader = csv.reader(csvfile, delimiter=',')
 
-        # This skips the first row of the CSV file which is the header
-        next(reader)
+            # This skips the first row of the CSV file which is the header
+            next(reader)
 
-        coords = []
-        first = []
-        poly = []
-        id_temp = ''
-        code = "" 
-        name = ""
-        pap = ""
-        moun = ""
-        eq = ""
-        mmax = ""
+            coords = []
+            first = []
+            poly = []
+            id_temp = ''
+            code = "" 
+            name = ""
+            pap = ""
+            moun = ""
+            eq = ""
+            mmax = ""
 
-        for row in reader:
-            print(row)
-            coords = [float(row[4]), float(row[3])]
-            
-            if row[0] == id_temp:
-                # anikei sto idio polygono me to teleftaio id
-                poly.append(coords)
-            elif row[0] == "":
-                # anikei sto idio polygono me to teleftaio id
-                poly.append(coords)
-            else:
-            # paei se neo polygono
-                # exiting
-                if len(poly) > 0 :
-                    # otan bgainei apo to polygono
+            for row in reader:
+                print(row)
+                coords = [float(row[4]), float(row[3])]
+                
+                if row[0] == id_temp:
+                    # anikei sto idio polygono me to teleftaio id
+                    poly.append(coords)
+                elif row[0] == "":
+                    # anikei sto idio polygono me to teleftaio id
+                    poly.append(coords)
+                else:
+                # paei se neo polygono
+                    # exiting
+                    if len(poly) > 0 :
+                        # otan bgainei apo to polygono
+                        poly.append(first)
+                        print(poly)
+                        d = OrderedDict()
+                        d['type'] = 'Feature'
+                        d['geometry'] = {
+                            'type': 'Polygon',
+                            'coordinates': [poly]
+                        }
+                        d['properties'] = {
+                            'id': id_temp,
+                            'code': code,
+                            'name': name,
+                            'mmax_pap': pap,
+                            'mmax_moun': moun,
+                            'mmax_eq': eq,
+                            'mmax': mmax
+
+                        }
+                        li.append(d)
+
+                        poly = []
+
+                    # entering
+                    id_temp = int(row[0])
+                    code = row[1] 
+                    name = row[2]
+                    pap = row[5]
+                    moun = row[6]
+                    eq = row[7]
+                    mmax = row[8]
+                    first = coords
                     poly.append(first)
-                    print(poly)
-                    d = OrderedDict()
-                    d['type'] = 'Feature'
-                    d['geometry'] = {
-                        'type': 'Polygon',
-                        'coordinates': [poly]
+
+        d = OrderedDict()
+        d['type'] = 'FeatureCollection'
+        d['features'] = li
+        with open('static/data/' + data_file_name + '.json', 'w') as f:
+            f.write(json.dumps(d, sort_keys=False, indent=4))
+
+        return redirect(url_for('views.createGeojson'))
+    
+    # if the uploaded file is an xml
+    elif data_file_type=="xml":
+
+        # Open the input XML file and read data in the form of a Python dictionary using xmltodict module
+        with open(data_file_path) as xml_file:
+            data_dict = xmltodict.parse(xml_file.read())
+
+            # Manipulate the data if needed
+            area_sources = data_dict["nrml"]["sourceModel"]["areaSource"]
+
+            # Filter the objects based on "@id" that includes "GRAS"
+            # filtered_sources = [source for source in area_sources if "GRAS" in source["@id"]]
+
+            # Create a new dictionary with the filtered data
+            filtered_area_source_data = {"Sources": area_sources}
+
+            # Initialize the GeoJSON structure
+            geojson_data = {
+                "type": "FeatureCollection",
+                "features": []
+            }
+            counter = 0
+            # Iterate through the "Sources" array and convert each object to a GeoJSON feature
+            for source in filtered_area_source_data["Sources"]:
+                counter +=1
+                # Extract relevant information from the source object
+                feature = {
+                    "type": "Feature",
+                    "properties": {
+                        "id": counter,
+                        "code": str(source["@id"])[-7:],
+                        "name": source["@name"],
+                        "tectonicRegion": source["@tectonicRegion"]
+                    },
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [[]]  # Initialize an empty list for coordinates
                     }
-                    d['properties'] = {
-                        'id': id_temp,
-                        'code': code,
-                        'name': name,
-                        'mmax_pap': pap,
-                        'mmax_moun': moun,
-                        'mmax_eq': eq,
-                        'mmax': mmax
+                }
 
-                    }
-                    li.append(d)
+                # Extract and add coordinates to the "coordinates" property
+                pos_list = source["areaGeometry"]["gml:Polygon"]["gml:exterior"]["gml:LinearRing"]["gml:posList"]
+                coordinates = list(map(float, pos_list.split()))
+                coordinates = [coordinates[i:i + 2] for i in range(0, len(coordinates), 2)]  # Split coordinates into pairs
+                feature["geometry"]["coordinates"][0] = coordinates  # Set the coordinates list
 
-                    poly = []
+                # Add the feature to the GeoJSON features list
+                geojson_data["features"].append(feature)
 
-                # entering
-                id_temp = int(row[0])
-                code = row[1] 
-                name = row[2]
-                pap = row[5]
-                moun = row[6]
-                eq = row[7]
-                mmax = row[8]
-                first = coords
-                poly.append(first)
+            # Convert the GeoJSON data to a JSON string
+            geojson_string = json.dumps(geojson_data, indent=4)
 
-    d = OrderedDict()
-    d['type'] = 'FeatureCollection'
-    d['features'] = li
-    with open('static/data/' + data_file_name + '.json', 'w') as f:
-        f.write(json.dumps(d, sort_keys=False, indent=4))
+            # Write the GeoJSON data to the output file
+            with open("static/data/"+ data_file_name +".json", "w") as geojson_file:
+                geojson_file.write(geojson_string)
 
-    return redirect(url_for('views.createGeojson'))
+        
 
+    # if the uploaded file is a json/geojson
+    elif data_file_type=="json" or data_file_type == "geojson":
+        # Copy the file to the data directory
+        shutil.copy(data_file_path, "static/data/"+ session_file_name)
+
+    return redirect(url_for('views.get_geojson_files'))
+
+# possible NOT NEEDED anymore
 # to create the geojson from the csv uploaded, goes to the get_geojson_files to render the list in frontend modal
 @views.route('/create_geojson')
 def createGeojson():
@@ -355,21 +428,21 @@ def geojson_selected():
         
         area_belong = ""
         for row in coordinates:
-            if row[3] == "TBA" or row[3] == "None":
-                point = Point(row[0],row[1])
-                # print(point)
-                for feature in json_selected['features']:
-                    polygon = shape(feature['geometry'])
-                    # print(polygon)
-                    if polygon.contains(point):
-                        area_belong = feature['properties']['code']
-                        print(area_belong)
-                        cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", (str(area_belong),row[2]))
-                        print("The event ("+ row[2] +") belongs to the :", area_belong)
-                        # mysql.connection.commit()
-                    # else:
-                    #     cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", ("None",row[2]))
-                        # continue
+            # if row[3] == "TBA" or row[3] == "None":
+            point = Point(row[0],row[1])
+            # print(point)
+            for feature in json_selected['features']:
+                polygon = shape(feature['geometry'])
+                # print(polygon)
+                if polygon.contains(point):
+                    area_belong = feature['properties']['code']
+                    print(area_belong)
+                    cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", (str(area_belong),row[2]))
+                    print("The event ("+ row[2] +") belongs to the :", area_belong)
+                    # mysql.connection.commit()
+                # else:
+                #     cursor.execute("UPDATE events SET of_area = %s WHERE id = %s", ("None",row[2]))
+                    # continue
         mysql.connection.commit()
     except Exception as e:
         print(e)
@@ -597,22 +670,22 @@ def averageMT():
             year = int(formatted_time.split("-")[0])
             print(year)
 
-            # get moment Nm from 
-            momentNm = gisolaNm(eventlist["id"],str(year))
-            if momentNm == "Error":
-                # continue 
-                momentNm = 1
-            # convert strings to floats and create list of lists for all to calculate average (mean)
             np_temp = [float(x) for x in [eventlist["strike"],eventlist["dip"],eventlist["rake"]]]
-            mtlist = eventlist["mtlist"].split("/")
-            
-            # print(mtlist)
-            tens6_temp = [float(x) for x in mtlist]
-            # print(tens6_temp)
-            tens6_norm = [x / float(momentNm) for x in tens6_temp]
-            # print(tens6_norm)
             np.append(np_temp)
-            tens6.append(tens6_norm)
+            # get moment Nm from 
+            # momentNm = gisolaNm(eventlist["id"],str(year))
+            # if momentNm == "Error":
+            #     # continue 
+            #     momentNm = 1
+            # # convert strings to floats and create list of lists for all to calculate average (mean)
+            # mtlist = eventlist["mtlist"].split("/")
+            
+            # # print(mtlist)
+            # tens6_temp = [float(x) for x in mtlist]
+            # # print(tens6_temp)
+            # tens6_norm = [x / float(momentNm) for x in tens6_temp]
+            # # print(tens6_norm)
+            # tens6.append(tens6_norm)
             # tens6.append(tens6_temp)
 
         # Define the header lines
