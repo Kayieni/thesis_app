@@ -349,7 +349,7 @@ def createGeojson():
 def drawn_contain():
 
     drawn_polygon = request.get_json()
-    print(drawn_polygon)
+    # print(drawn_polygon)
     drawn_polygon = shape(drawn_polygon)
     # Define the event coordinates
     from app import mysql
@@ -370,7 +370,7 @@ def drawn_contain():
 
         else:
             continue
-    print("This polygon contains the following events:", events_contained)
+    # print("This polygon contains the following events:", events_contained)
     
     return jsonify(events_contained)
 

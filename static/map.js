@@ -32,10 +32,6 @@ L.control.layers(baseMaps).addTo(map);
 L.control.scale({ position: 'bottomright' }).addTo(map);
 
 
-// the group of points added to the map
-var drawnItems = new L.FeatureGroup();
-map.addLayer(drawnItems);
-
 // initiate the sidepanel
 L.Control.SidePanel = L.Control.extend({ includes: L.Evented.prototype, options: { panelPosition: "left", hasTabs: !0, tabsPosition: "top", darkMode: !1, pushControls: !1, startTab: 1 }, initialize: function (t, o) { this._panel = L.DomUtil.get(t), L.setOptions(this, o) }, addTo: function (t) { L.DomUtil.addClass(this._panel, "sidepanel-" + this.options.panelPosition), this.options.darkMode && L.DomUtil.addClass(this._panel, "sidepanel-dark"), L.DomEvent.disableScrollPropagation(this._panel), L.DomEvent.disableClickPropagation(this._panel), this.options.hasTabs && this.initTabs(t, this.options.tabsPosition) }, initTabs: function (t, o) { "string" == typeof o && L.DomUtil.addClass(this._panel, "tabs-" + o); let s = this._panel.querySelectorAll("a.sidebar-tab-link"), e = this._panel.querySelectorAll(".sidepanel-tab-content"); s.forEach(function (t, o) { let i, a; "number" == typeof this.options.startTab && this.options.startTab - 1 === o && (i = t, a = e[o - 1]), "string" == typeof this.options.startTab && this.options.startTab === t.dataset.tabLink && (i = t, a = this._panel.querySelector(`.sidepanel-tab-content[data-tab-content="${this.options.startTab}"]`)), void 0 === i || L.DomUtil.hasClass(i, "active") || (L.DomUtil.addClass(i, "active"), L.DomUtil.addClass(a, "active")), L.DomEvent.on(t, "click", function (o) { if (L.DomEvent.preventDefault(o), !L.DomUtil.hasClass(t, "active")) { for (let t = 0; t < s.length; t++) { let o = s[t]; L.DomUtil.hasClass(o, "active") && L.DomUtil.removeClass(o, "active") } L.DomUtil.addClass(t, "active"), e.forEach(function (o) { t.dataset.tabLink === o.dataset.tabContent ? L.DomUtil.addClass(o, "active") : L.DomUtil.removeClass(o, "active") }) } }, t) }.bind(this)), this._toggleButton(t) }, _toggleButton: function (t) { const o = this._panel.querySelector(".sidepanel-toggle-container"), s = o.querySelector(".sidepanel-toggle-button"); L.DomEvent.on(s, "click", function (o) { let s = !0, e = L.DomUtil.hasClass(this._panel, "opened"), i = L.DomUtil.hasClass(this._panel, "closed"); if (e || i ? !e && i ? (L.DomUtil.addClass(this._panel, "opened"), L.DomUtil.removeClass(this._panel, "closed")) : e && !i ? (s = !1, L.DomUtil.removeClass(this._panel, "opened"), L.DomUtil.addClass(this._panel, "closed")) : L.DomUtil.addClass(this._panel, "opened") : L.DomUtil.addClass(this._panel, "opened"), this.options.pushControls) { let o = t.getContainer().querySelector(".leaflet-control-container"); L.DomUtil.addClass(o, "leaflet-anim-control-container"), s ? (L.DomUtil.removeClass(o, this.options.panelPosition + "-closed"), L.DomUtil.addClass(o, this.options.panelPosition + "-opened")) : (L.DomUtil.removeClass(o, this.options.panelPosition + "-opened"), L.DomUtil.addClass(o, this.options.panelPosition + "-closed")) } }.bind(this), o) } }), L.control.sidepanel = function (t, o) { return new L.Control.SidePanel(t, o) };
 
@@ -275,47 +271,28 @@ function updateMap() {
                 // to create the content of the selected areas sidepanel
                 featureLayer.on('click', function () {
                     console.log(feature.properties.code);
-
+                    document.getElementById("averageMT").innerHTML="";
+                    
                     eventsperarea(feature.properties.code)
                         .then(response => {
                             console.log("yay");
                             // Create the content for the sidepanel
                             areaheader = '<h2>'+feature.properties.id + '. ' + feature.properties.name+'</h2><br>';
                             areaheader += '<h6>Area code: '+feature.properties.code+'</h6><hr>';
-                            // areaheader.innerHTML = feature.properties.code;
-                            var popup = '<div class="popup">';
-                            // popup += '<h4>' + feature.properties.id + ". " + feature.properties.name + '</h4>';
-                            // popup += '<h5>Code: ' + feature.properties.code + '</h4>';
-                            // popup += '<p>Coordinates:</p>';
-                            // popup += '<ul>';
-                            // for (var i = 0; i < feature.geometry.coordinates[0].length - 1; i++) {
-                            //     var coordinate = feature.geometry.coordinates[0][i];
-                            //     popup += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
-                            // }
-                            // popup += '</ul>';
-                            // Add the seismic events list
-                            // popup += '<h5>Seismic Events:</h5>';
-                            // popup += '<ol id="eventlist">';
+
                             if (response.length>0) {
                                 response.forEach((event, index) => {
-                                    // const eventNumber = index + 1;
-                                    // arealist += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.strike) + " | Dip: "  + String(event.dip) + " | Rake: "  + String(event.rake) + '<img src="./static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
                                     arealist += '<div><input type="checkbox" value="' + String(event.mtlist) + '" id="'+ String(event.id) + '" name="moment-tensors" checked/><label for="'+ String(event.id) + '"><a href="#"> Event ID: ' + String(event.id) + " <br/> Time: " + String(event.time) + " <br/> Mw: "  + String(event.Mw) + " <br/> D(km): "  + String(event.depth) + " <br/> Rake: "  + String(event.rake) + '<img src="./static/beachballs/beachball_'+ String(event.id) +'.png"/><br/></a></label></div>';
                                 });
                             } else {
                                 arealist += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
                             }
-                            // popup += '</ol>';
-                            // popup += '</div>';
 
                             this.setStyle({
                                 'fillColor': '#0000ff'
                             });
                             featureLayer.bindTooltip(feature.properties.code, { permanent: false, direction: "center", className: "my-labels" });
 
-
-                            // Change 'tab-1' to the appropriate tab ID
-                            // $('#tab-1').html(popup);
                             $('#areaheader').html(areaheader);
                             $('#arealist').html(arealist);
 
@@ -522,14 +499,12 @@ $(document).on('submit','#filterlistform',function(e) {
 
         success: function (result) {
             console.log(result)
-            console.log(String(result))
             var avMT = document.getElementById("averageMT")
-            avMT.innerHTML+='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
-            '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png"></a>' +
-            '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png"></a>' +
-            '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png"></a>'+
-            '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png"></a>'
-            console.log(result)
+            avMT.innerHTML+='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png?'+ (new Date()).getTime()+'" target="_blank"></a>' + 
+            '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png?'+ (new Date()).getTime()+'"></a>' +
+            '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png?'+ (new Date()).getTime()+'"></a>' +
+            '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png?'+ (new Date()).getTime()+'"></a>'+
+            '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png?'+ (new Date()).getTime()+'"></a>'
         },
         error: function(error) {
             console.error("Error:", error);
@@ -559,13 +534,7 @@ $(document).on('submit','#arealistform',function(e) {
     }
 
     console.log(ids)
-    // filter = {
-    //     starttime: $("#starttime").val(),
-    //     endtime: $("#endtime").val(),
-    //     magnitude: $("#magnitude").val(),
-    //     depth: $("#depth").val(),
-    //     rake: $("#rake").val()
-    // }
+
 
     $.ajax({
         type: 'POST',
@@ -577,11 +546,11 @@ $(document).on('submit','#arealistform',function(e) {
         success: function (result) {
             console.log(result)
             var avMT = document.getElementById("areasaverageMT")
-            avMT.innerHTML+='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png" target="_blank"></a>' + 
-            '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png"></a>' +
-            '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png"></a>' +
-            '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png"></a>'+
-            '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png"></a>'
+            avMT.innerHTML+='<a href="static/Figures/P_T_axes.png"><img style="width:100%" src="static/Figures/P_T_axes.png?'+ (new Date()).getTime()+'" target="_blank"></a>' + 
+            '<a href="static/Figures/Mohr_circles.png" target="_blank"><img style="width:100%" src="static/Figures/Mohr_circles.png?'+ (new Date()).getTime()+'"></a>' +
+            '<a href="static/Figures/shape_ratio.png" target="_blank"><img style="width:100%" src="static/Figures/shape_ratio.png?'+ (new Date()).getTime()+'"></a>' +
+            '<a href="static/Figures/stress_directions.png" target="_blank"><img style="width:100%" src="static/Figures/stress_directions.png?'+ (new Date()).getTime()+'"></a>'+
+            '<a href="static/Figures/red.png" target="_blank"><img style="width:100%" src="static/Figures/red.png?'+ (new Date()).getTime()+'"></a>'
 
         },
         error: function(error) {
@@ -592,10 +561,140 @@ $(document).on('submit','#arealistform',function(e) {
 
 
 
+// // The controler of drawing some areas
+// var drawControl = new L.Control.Draw({
+//     position: 'topright',
+//     draw: {
+//         polygon: {
+//             shapeOptions: {
+//                 color: 'purple' //polygons being drawn will be purple color
+//             },
+//             allowIntersection: true, // Will decide whether the line can intersect or not. If not an error message will be shown and drawing intersected lines will be prohibited
+//             drawError: {
+//                 color: 'orange',
+//                 timeout: 1000
+//             },
+//             showArea: true, //the area of the polygon will be displayed as it is drawn.
+//             metric: false,
+//             repeatMode: false //Prevents having to select the previously selected tool to draw another layer
+//         },
+//         polyline: false,
+//         circlemarker: false, //circlemarker type has been disabled.
+//         rect: {
+//             shapeOptions: {
+//                 color: 'green'
+//             },
+//         },
+//         circle: false,
+//     },
+//     edit: {
+//         featureGroup: drawnItems
+//     }
+// });
+
+// map.addControl(drawControl);
+
+// // When we want to draw a specific area
+// map.on('draw:created', function (e) {
+//     var layer = e.layer;
+//     console.log(layer.toGeoJSON())
+//     var json_shape = JSON.stringify(layer.toGeoJSON());
+
+//     // Create a new layer from the drawn GeoJSON shape for displaying coordinates
+//     drawnShape = L.geoJSON(JSON.parse(json_shape), {
+//         style: {
+//             color: 'red', // Customize the color of the drawn shape
+//         },
+//         onEachFeature: function (feature, featureLayer) {
+//             if (feature.geometry.type === 'Polygon') {
+//                 // collect feature geometry to send in backend, to query the database of events included
+//                 data_2sent = JSON.stringify(feature.geometry) 
+//                 console.log(data_2sent)
+//                 $.ajax({
+//                     type: "POST",
+//                     url: "drawnshape",
+//                     contentType: "application/json",
+//                     data: data_2sent,
+
+//                     success: function (result) {
+//                         console.log("Success:", result);
+
+//                         // popup the coordinates of the drawn shape
+//                         var popupContent = '<ul>';
+//                         for (var i = 0; i < feature.geometry.coordinates[0].length; i++) {
+//                             var coordinate = feature.geometry.coordinates[0][i];
+//                             var coordinate_prev = feature.geometry.coordinates[0][i-1];
+//                             if( i==0 || coordinate[1]!== coordinate_prev[1] || coordinate[0]!== coordinate_prev[0]) {
+//                                 popupContent += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
+//                             }
+//                         }
+//                         popupContent += '</ul>';
+//                         featureLayer.bindPopup(popupContent);
+
+//                         console.log("yay---2");
+
+//                         // Create the content for the sidepanel
+//                         var popup = '<div class="popup">';
+//                         popup += '<p>Coordinates:</p>';
+//                         popup += '<ul>';
+//                         for (var i = 0; i < feature.geometry.coordinates[0].length - 1; i++) {
+//                             var coordinate = feature.geometry.coordinates[0][i];
+//                             popup += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
+//                         }
+//                         popup += '</ul>';
+
+//                         // Add the seismic events list
+//                         popup += '<h5>Seismic Events:</h5>';
+//                         popup += '<ol id="eventlist">';
+//                         if (result.length>0) {
+//                             result.forEach((event, index) => {
+//                                 popup += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.strike) + " | Dip: "  + String(event.dip) + " | Rake: "  + String(event.rake) + '<img src="static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
+
+//                             });
+//                         } else {
+//                             popup += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
+//                         }
+//                         popup += '</ol>';
+//                         popup += '</div>';
+
+//                         // to create the content of the selected areas sidepanel
+//                         // featureLayer.on('click', function () {
+//                         // Change 'tab-1' to the appropriate tab ID
+//                         $('#tab-1').html(popup);
+//                         // Open the side panel
+//                         $("#panelID").addClass("opened");
+//                         // })
+    
+
+//                     },
+//                     error: function(error) {
+//                         console.error("Error:", error);
+//                     }
+//                 })
+                
+//             }
+//         },
+//     });
+
+//     drawnShape.addTo(drawnItems); // Add the drawn layer to the map
+// });
+
+
+
 // The controler of drawing some areas
+
+
+
+
+// the group of points added to the map
+
+var drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
 var drawControl = new L.Control.Draw({
     position: 'topright',
     draw: {
+        polyline: false,
         polygon: {
             shapeOptions: {
                 color: 'purple' //polygons being drawn will be purple color
@@ -609,38 +708,81 @@ var drawControl = new L.Control.Draw({
             metric: false,
             repeatMode: false //Prevents having to select the previously selected tool to draw another layer
         },
-        polyline: false,
-        circlemarker: false, //circlemarker type has been disabled.
         rect: {
             shapeOptions: {
                 color: 'green'
             },
         },
         circle: false,
+        marker: false,
+        circlemarker: false
     },
     edit: {
-        featureGroup: drawnItems
+        featureGroup: drawnItems,
+        remove: true,
+        // edit: true
     }
+
 });
 
 map.addControl(drawControl);
 
-// When we want to draw a specific area
+// // When we want to draw a specific area
 map.on('draw:created', function (e) {
     var layer = e.layer;
-    console.log(layer.toGeoJSON())
+    console.log(layer)
+    document.getElementById("arealist").innerHTML="";
+    document.getElementById("areasaverageMT").innerHTML="";
+    drawnItems.addLayer(layer);
+    handleShape(layer);
+});
+
+// // When we want to draw a specific area
+map.on('draw:edited', function (e) {
+    var layers = e.layers;
+    console.log(layers.toGeoJSON())
+    // document.getElementById("arealist").innerHTML="";
+    // document.getElementById("areasaverageMT").innerHTML="";
+    // drawnItems.addLayer(layer);
+    layers.eachLayer(function(layer){
+        handleShape(layer);
+    })
+});
+
+map.on('draw:deleted', function (e) {
+    var layers = e.layers;
+    layers.eachLayer(function(layer){
+        document.getElementById("arealist").innerHTML="";
+        document.getElementById("areasaverageMT").innerHTML="";
+    })
+})
+
+// Create the drawnShape GeoJSON layer once
+// var drawnShape = L.geoJSON().addTo(drawnItems); // Add it to the drawnItems group
+
+// Function to handle the logic for drawing and clicking
+function handleShape(layer) {
     var json_shape = JSON.stringify(layer.toGeoJSON());
 
+    
+    // Add the drawn or clicked layer to the drawnShape GeoJSON layer
+    // drawnShape.addData(layer.toGeoJSON());
+
+    // // Make sure the drawnShape layer is editable
+    // drawnShape.editing.enable(); // Enable editing for the drawnShape layer
+    
     // Create a new layer from the drawn GeoJSON shape for displaying coordinates
-    drawnShape = L.geoJSON(JSON.parse(json_shape), {
+    var drawnShape = L.geoJSON(JSON.parse(json_shape), {
         style: {
             color: 'red', // Customize the color of the drawn shape
         },
         onEachFeature: function (feature, featureLayer) {
             if (feature.geometry.type === 'Polygon') {
-                // collect feature geometry to send in backend, to query the database of events included
-                data_2sent = JSON.stringify(feature.geometry) 
-                console.log(data_2sent)
+                
+                
+                // Collect feature geometry to send to the backend for database query
+                data_2sent = JSON.stringify(feature.geometry);
+                console.log(data_2sent);
                 $.ajax({
                     type: "POST",
                     url: "drawnshape",
@@ -650,12 +792,12 @@ map.on('draw:created', function (e) {
                     success: function (result) {
                         console.log("Success:", result);
 
-                        // popup the coordinates of the drawn shape
+                        // Popup the coordinates of the drawn shape
                         var popupContent = '<ul>';
                         for (var i = 0; i < feature.geometry.coordinates[0].length; i++) {
                             var coordinate = feature.geometry.coordinates[0][i];
-                            var coordinate_prev = feature.geometry.coordinates[0][i-1];
-                            if( i==0 || coordinate[1]!== coordinate_prev[1] || coordinate[0]!== coordinate_prev[0]) {
+                            var coordinate_prev = feature.geometry.coordinates[0][i - 1];
+                            if (i == 0 || coordinate[1] !== coordinate_prev[1] || coordinate[0] !== coordinate_prev[0]) {
                                 popupContent += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
                             }
                         }
@@ -664,48 +806,56 @@ map.on('draw:created', function (e) {
 
                         console.log("yay---2");
 
-                        // Create the content for the sidepanel
+                        // Create the content for the side panel
                         var popup = '<div class="popup">';
-                        popup += '<p>Coordinates:</p>';
-                        popup += '<ul>';
-                        for (var i = 0; i < feature.geometry.coordinates[0].length - 1; i++) {
-                            var coordinate = feature.geometry.coordinates[0][i];
-                            popup += '<li>Lat: ' + coordinate[1] + ', Lon: ' + coordinate[0] + '</li>';
-                        }
-                        popup += '</ul>';
+
 
                         // Add the seismic events list
-                        popup += '<h5>Seismic Events:</h5>';
+                        popup += '<h5>Drawn Area\'s Events:</h5>';
                         popup += '<ol id="eventlist">';
-                        if (result.length>0) {
+                        if (result.length > 0) {
                             result.forEach((event, index) => {
-                                popup += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.strike) + " | Dip: "  + String(event.dip) + " | Rake: "  + String(event.rake) + '<img src="static/beachballs/beachball_'+ String(event.id) + '.png"/></a></li>';
-
+                                // popup += '<li><a href="#"> Event ID: ' + String(event.id) + " | Strike: " + String(event.strike) + " | Dip: " + String(event.dip) + " | Rake: " + String(event.rake) + '<img src="static/beachballs/beachball_' + String(event.id) + '.png"/></a></li>';
+                                popup += '<div><input type="checkbox" value="'+ String(event.mtlist) + '" id="'+ String(event.id) + '" name="moment-tensors" checked/><label for="'+ String(event.id) + '"><a href="#"> Event ID: ' + String(event.id) + " <br/> Time: " + String(event.time) + " <br/> Mw: "  + String(event.Mw) + " <br/> D(km): "  + String(event.depth) + " <br/> Rake: "  + String(event.rake) + '<img src="./static/beachballs/beachball_'+ String(event.id) +'.png"/><br/></a></label></div>';
                             });
                         } else {
                             popup += '<li style="list-style-type: None;"> No seismic events found in this area. </li>';
                         }
-                        popup += '</ol>';
-                        popup += '</div>';
-
-                        // to create the content of the selected areas sidepanel
-                        // featureLayer.on('click', function () {
-                        // Change 'tab-1' to the appropriate tab ID
-                        $('#tab-1').html(popup);
+                        // popup += '</ol>';
+                        // popup += '</div>';
+                        $('#arealist').html(popup);
                         // Open the side panel
                         $("#panelID").addClass("opened");
-                        // })
-    
+
+
+
+                        // Change 'tab-1' to the appropriate tab ID
+                        // openSidePanel(popup);
 
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.error("Error:", error);
                     }
                 })
-                
+
             }
         },
     });
 
-    drawnShape.addTo(drawnItems); // Add the drawn layer to the map
-});
+    // Add the drawn or clicked layer to the drawnShape GeoJSON layer
+    // drawnShape.addData(layer.toGeoJSON());
+
+    // Add the drawn or clicked layer to the map
+    // drawnShape.addTo(drawnItems);
+    // drawnItems.addLayer(drawnShape)
+
+}
+
+// Function to open the side panel with content
+function openSidePanel(content) {
+    // Change 'tab-1' to the appropriate tab ID
+    $('#tab-1').html(content);
+    // Open the side panel
+    $("#panelID").addClass("opened");
+}
+
