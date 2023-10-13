@@ -8,6 +8,8 @@
     <script src="../sidepanel_plugin/dist/leaflet-sidepanel.min.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <!-- bootstrap datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -26,14 +28,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.1/dist/MarkerCluster.Default.css"
         integrity="sha512-6ZCLMiYwTeli2rVh3XAPxy3YoR5fVxGdH/pz+KMCzRY2M65Emgkw00Yqmhh8qLGeYQ3LbVZGdmOX9KUjSKr0TA=="
         crossorigin="" />
-
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
-    <!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css"> -->
-  
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
+    
+    <!-- slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
 
 
+    
     <!-- colors css -->
     <style>
         img.red {
@@ -616,22 +616,21 @@
 				<nav class="sidepanel-tabs-wrapper" aria-label="sidepanel tab navigation">
 					<ul class="sidepanel-tabs">
 						<li class="sidepanel-tab">
+                            <!-- icons source: https://iconsvg.xyz -->
 							<a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-1">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-									<path fill-rule="evenodd"
-										d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+									<path
+										d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+									<path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
 								</svg>
 							</a>
 						</li>
 						<li class="sidepanel-tab">
 							<a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-2">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo" viewBox="0 0 16 16">
-									<path fill-rule="evenodd"
-										d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
-								</svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
 							</a>
 						</li>
-						<li class="sidepanel-tab">
+						<!-- <li class="sidepanel-tab">
 							<a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
 									<path
@@ -648,7 +647,7 @@
 									<path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
 								</svg>
 							</a>
-						</li>
+						</li> -->
 						<li class="sidepanel-tab">
 							<a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-5">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
@@ -660,116 +659,158 @@
 						</li>
 					</ul>
 				</nav>
-                    <div class="sidepanel-content-wrapper">
-                        <div class="sidepanel-content">
-                            <div id="tab-1" class="sidepanel-tab-content" data-tab-content="tab-1">
-                                <div id="areaheader">
-                                </div>
-                                <div id="area-wrap">
-                                    <h5>Area's Moment Tensors:</h5>
-                                    <form id="arealistform">
-                                        <div id="arealist">
+                <div class="sidepanel-content-wrapper">
+                    <div class="sidepanel-content">
+                        <!-- tab1 -->
+                        <div id="tab-1" class="sidepanel-tab-content" data-tab-content="tab-1">
+                            <div id="areaheader">
+                            </div>
+                            <div id="area-wrap">
+                                <h5>Draw an area of select a polygon</h5>
+                                <form id="arealistform">
+                                    <table class="table table-hover table-dark">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                                                </th>
+                                                <th>Time</th>
+                                                <th>Mw</th>
+                                                <th>Depth</th>
+                                                <th>Rake</th>
+                                                <th>Quality</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="arealist">
                                             <br/>
-                                        </div>
-                                        <div>
-                                            <br/>
-                                            <button type="submit">Calculate average MT</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div id="areasaverageMT">
-                                    <hr/>
-                                </div>
-                            </div>
-						<div id="tab-2" class="sidepanel-tab-content" data-tab-content="tab-2">
-                            <div class="show_events">
-                                <button type="button" class="btn btn-warning" value="showall" onclick="showallevents()">Show all Events</button>
-                            </div>
-                            <form id="filter"  method="POST">
-                                <!-- action="/filter_events" -->
-                                <!-- start date -->
-                                <label for="time">Filter by start time:</label><br />
-                                <input type="date" name="starttime" id="starttime"><br>
-                                <!-- end date -->
-                                <label for="time">Filter by end time:</label><br />
-                                <input type="date" name="endtime" id="endtime"><br>
-                                <!-- magnitude -->
-                                <label for="magnitude">Filter by max Magnitude:</label><br />
-                                <input type="range" class="slider" name="magnitude" id="magnitude" min="0" max="10" value="">
-                                <span class="slider_label"></span><br>
-                                <!-- depth -->
-                                <label for="depth">Filter by max Depth:</label><br />
-                                <input type="range" class="slider" name="depth" id="depth"min="0" max="100" value="">
-                                <span class="slider_label"></span><br>
-                                <!-- rake -->
-                                <label for="rake">Filter by max Rake:</label><br />
-                                <input type="range" class="slider" name="rake" id="rake" min="-200" max="200" value="">
-                                <span class="slider_label"></span><br>
-                                <!-- buttons -->
-                                <!-- <button type="reset" class="btn btn-outline-info" onclick=if(map.hasLayer(filter_markers)){map.removeLayer(filter_markers)}>Clear</button> -->
-                                <button type="reset" class="btn btn-outline-info" >Clear</button>
-                                <button type="submit" class="btn btn-info">Filter Events</button>
-                            </form>
-                            <!-- if no events found -->
-                            <div id="filter_errors">
-                                <hr/>
-                            </div>
-                            <div id="filter-wrap" hidden>
-                                <h5>Filtered Events:</h5>
-                                <form id="filterlistform">
-                                    <div id="filterlist">
-                                        <br/>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                     <div>
                                         <br/>
-                                        <button type="submit">Calculate average MT</button>
+                                        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#basicModal">Calculate Stress Inversion</button>
                                     </div>
                                 </form>
                             </div>
-                            <div id="averageMT">
+                            <div id="areasaverageMT">
                                 <hr/>
                             </div>
-
+                        </div>
+                        <!-- tab2 -->
+						<div id="tab-2" class="sidepanel-tab-content" data-tab-content="tab-2">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <form id="filter"  method="POST" class="row">
+                                        <!-- action="/filter_events" -->
+                                        <div class="col-md-6">
+                                            <div class="form-group date">
+                                                <!-- start date --> 
+                                                <label for="time">Start Time:</label><br />
+                                                <input type="date" name="starttime" id="starttime" placeholder="Start Time"><br>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group date">
+                                                <!-- end date -->
+                                                <label for="time">End Time:</label><br />
+                                                <input type="date" name="endtime" id="endtime" placeholder="End Time"><br>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <!-- magnitude -->
+                                        <div class="form-group col-md-4">
+                                            <label for="magnitude">Magnitude:</label><br />
+                                            <input type="text" class="magnitude_slider" name="magnitude" id="magnitude" min="0" max="10" value="">
+                                            <!-- <span class="slider_label"></span><br> -->
+                                            <!-- depth -->
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="depth">Depth:</label><br />
+                                            <input type="text" class="depth_slider" name="depth" id="depth" min="0" max="200" value="">
+                                            <!-- <span class="slider_label"></span><br> -->
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <!-- rake -->
+                                            <label for="rake">Rake:</label><br />
+                                            <input type="text" class="rake_slider" name="rake" id="rake" min="-200" max="200" value="">
+                                            <br>
+                                            <!-- <span class="slider_label"></span><br> -->
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="show_events col-md-6">
+                                                    <button type="button" class="btn btn-secondary" value="showall" onclick="showallevents()">Show all Events</button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="reset" class="btn btn-outline-danger">Clear</button>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-danger">Filter Events</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- if no events found -->
+                                <div class="row justify-content-center">
+                                    <div id="filter_errors">
+                                        <hr/>
+                                    </div>
+                                    <div id="filter-wrap" hidden>
+                                        <br><hr>
+                                        <h5>Filtered Events:</h5>
+                                        <form id="filterlistform">
+                                            <table id="dtBasicExample" class="table table-striped table-striped table-dark table-sm" cellspacing="0" width="80%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                                                        </th>
+                                                        <th>Time</th>
+                                                        <th>Mw</th>
+                                                        <th>Depth</th>
+                                                        <th>Rake</th>
+                                                        <th>Quality</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="filterlist">
+                                                    <br/>
+                                                </tbody>
+                                            </table>
+                                            <div>
+                                                <br/>
+                                                <button type="submit" class="btn btn-secondary"  data-toggle="modal" data-target="#basicModal">Calculate Stress Inversion</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="averageMT">
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
-						<div class="sidepanel-tab-content" data-tab-content="tab-3">
-							<h4>Content 3</h4>
-							<p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
-								diam.
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
-								massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
-								scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
-								massa,
-								in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
-								non
-								turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
-						</div>
-						<div class="sidepanel-tab-content" data-tab-content="tab-4">
-							<h4>Content 4</h4>
-							<p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
-								iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
-								ipsum
-								id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
-								mauris.
-								Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
-						</div>
+                        <!-- tab3 -->
 						<div class="sidepanel-tab-content" data-tab-content="tab-5">
-							<h4>Content 5</h4>
-							<p>Nam nec lacinia purus, in accumsan arcu. Aenean at maximus tortor, eget porttitor leo. Fusce justo lorem, dictum nec rutrum sed, mattis faucibus
-								diam.
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper ex sagittis lacus gravida interdum quis sit amet justo. Nunc posuere
-								massa et feugiat efficitur. Donec est magna, lobortis sit amet ligula ut, vehicula posuere diam. Suspendisse aliquet blandit velit, consectetur
-								scelerisque libero porttitor eu. Praesent faucibus dignissim maximus. Vestibulum porta eu tellus sit amet ultricies. Integer aliquet vestibulum
-								massa,
-								in interdum arcu commodo ac. Curabitur sit amet cursus ipsum. Donec ut diam orci. Fusce odio diam, laoreet non elit sed, suscipit mollis leo. Fusce
-								non
-								turpis faucibus, placerat sapien quis, varius ligula. Praesent ac magna id tortor ultricies ultricies quis nec quam.</p>
-							<p>Etiam varius in neque a tristique. Maecenas euismod pharetra scelerisque. Nam in pretium nulla, vel blandit risus. Duis posuere egestas nisi, vitae
-								iaculis tortor varius eget. Morbi molestie sem in varius vulputate. Cras enim sapien, malesuada id nisi eu, volutpat congue leo. Praesent aliquet
-								ipsum
-								id lectus consequat rutrum. In vitae dolor pellentesque dolor scelerisque condimentum eget at ligula. Integer vel turpis eros. Cras at hendrerit
-								mauris.
-								Aliquam erat volutpat. Quisque vehicula pharetra mauris, nec finibus augue posuere ut. Etiam condimentum lacus at purus luctus finibus.</p>
-						</div>
+							<h4>Configuration</h4>
+                            <h6>Select the threshold for the quality of events:</h6>
+                            <p><em>Default is B4</em></p>
+                            <form action="#" method="get">
+                                <select name="qualityChar" id="qualityChar">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                                <select name="qualityNum" id="qualityNum">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -779,13 +820,14 @@
 		</div>
     </div>
 
-    <!-- Modal -->
+
+    <!-- Uploading content Modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="questionModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Area sources selection</h5>
-                    <button type="button" id="modalclose" class="close" data-dismiss="modal" aria-label="Close" > &times;
+                    <button type="button" id="modalclose" class="close" data-bs-dismiss="modal" aria-label="Close" > &times;
                     </button>
                 </div>
                 <div class="modal-body">
@@ -811,44 +853,69 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="selectedArea_file"  value=""/>
-                    <button type="button" id="drawyourown" class="btn btn-outline-warning" data-toggle='modal' data-target="#uploadModal" data-dismiss="modal" onclick="updateMap()">Start drawing</button>
+                    <button type="button" id="drawyourown" class="btn btn-outline-warning" data-toggle='modal' data-target="#uploadModal" data-bs-dismiss="modal" onclick="updateMap()">Start drawing</button>
                     <button type="button" class="btn btn-warning" data-toggle='modal' data-target="#uploadModal" data-dismiss="modal" onclick="updateMap()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 
+    
+    <!-- average MT modal -->
+    <div class="modal fade" id="basicModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Stress Inversion of Moment Tensors</h4>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body" id="modal_MT_body">
+            <!-- <h3>Modal Body</h3> -->
+            </div>
+            <div class="modal-footer">
+            <span><h6 style="color:gray; font-size: small;" ><i>&copy; Created by software: <a href="https://www.ig.cas.cz/stress-inverse/"></a>STRESSINVERSE</i></h6></span>
+            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="exportButton" class="btn btn-danger" onclick="Export(this)">
+                Export
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+  
 
 
 
     <!-- leaflet -->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
-    <!-- leaflet draw plugin js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.5.1/dist/leaflet.markercluster.js"
-        integrity="sha512-+Zr0llcuE/Ho6wXRYtlWypMyWSEMxrWJxrYgeAMDRSf1FF46gQ3PAVOVp5RHdxdzikZXuHZ0soHpqRkkPkI3KA=="
-        crossorigin="">
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.1/dist/leaflet.markercluster.js" integrity="sha512-+Zr0llcuE/Ho6wXRYtlWypMyWSEMxrWJxrYgeAMDRSf1FF46gQ3PAVOVp5RHdxdzikZXuHZ0soHpqRkkPkI3KA==" crossorigin="">
     </script>
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+
 
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script> -->
 
 
     <!-- for the map initiation -->

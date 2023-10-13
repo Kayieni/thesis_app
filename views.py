@@ -37,7 +37,7 @@ def update_events():
     global script_thread_completed
     try:
         result = subprocess.run(['python', 'obs.py'], capture_output=True, text=True)
-        # print("Output1: ", result.stdout)
+        print("Output1: ", result.stdout)
 
     except subprocess.CalledProcessError as e:
         print("Error1: ", e)
@@ -351,6 +351,7 @@ def drawn_contain():
     drawn_polygon = request.get_json()
     # print(drawn_polygon)
     drawn_polygon = shape(drawn_polygon)
+    print(drawn_polygon)
     # Define the event coordinates
     from app import mysql
     cursor = mysql.connection.cursor()
@@ -362,7 +363,7 @@ def drawn_contain():
     events_contained = []
     for row in cursor.fetchall():
         print("\n\n", row)
-        point = Point(row[2],row[3])
+        point = Point(row[3],row[4])
         print(point)
         if drawn_polygon.contains(point):
             event_dict = dict(zip(columns, row))  # Create a dictionary for each row
@@ -461,9 +462,12 @@ def filter_events():
         # print(filter_values)
         starttime = request.form.get("starttime")
         endtime = request.form.get("endtime")
-        magnitude = request.form.get("magnitude")
-        depth = request.form.get("depth")
-        rake = request.form.get("rake")
+        magnitude_max = request.form.get("magnitude").split(";")[1]
+        magnitude_min = request.form.get("magnitude").split(";")[0]
+        depth_max = request.form.get("depth").split(";")[1]
+        depth_min = request.form.get("depth").split(";")[0]
+        rake_max = request.form.get("rake").split(";")[1]
+        rake_min = request.form.get("rake").split(";")[0]
 
         query= "SELECT * FROM events "
 
@@ -475,24 +479,24 @@ def filter_events():
         elif endtime:
             query+="WHERE time <= '" + endtime + "'"
 
-        if magnitude:
+        if magnitude_max:
             if starttime or endtime:
-                query+=" AND Mw <= " + magnitude
+                query+=" AND Mw between '"+ magnitude_min +"' and '"+ magnitude_max +"'"
             else:
-                query+="WHERE Mw <= " + magnitude
+                query+="WHERE Mw between '"+ magnitude_min +"' and '"+ magnitude_max +"'"
                 
         
-        if depth:
-            if starttime or endtime or magnitude:
-                query+=" AND depth <= " + depth
+        if depth_max:
+            if starttime or endtime or magnitude_max:
+                query+=" AND depth between '"+ depth_min +"' and '"+ depth_max +"'"
             else:
-                query+="WHERE depth <= " + depth
+                query+="WHERE depth between '"+ depth_min +"' and '"+ depth_max +"'"
 
-        if rake:
-            if starttime or endtime or magnitude or depth:
-                query+=" AND rake <= " + rake
+        if rake_max:
+            if starttime or endtime or magnitude_max or depth_max:
+                query+=" AND rake between '"+ rake_min +"' and '"+ rake_max +"'"
             else:
-                query+="WHERE rake <= " + rake
+                query+="WHERE rake between '"+ rake_min +"' and '"+ rake_max +"'"
 
         from app import mysql
 
@@ -609,8 +613,6 @@ def averageMT():
         else:
             return "Error"
 
-
-
     if request.method == "POST":
 
         print("post ok ")
@@ -690,7 +692,7 @@ def averageMT():
 
         # Define the header lines
         header_lines = [
-            "% West Bohemia mechanisms",
+            "% Selected mechanisms",
             "%  strike          dip             rake",
         ]
 
@@ -752,10 +754,6 @@ def averageMT():
         
         fig.savefig(filepath, transparent=True)
 
-
-
-
-
     # return filepath.lstrip('./')
     return redirect(url_for('views.stressinverse'))
     
@@ -786,12 +784,23 @@ def str_beachball():
             # Read the entire content of the file as a single string
             content = file.read()
             
-            # Split the content into individual values based on whitespace
-            elements = content.split()
+            # # Split the content into individual values based on whitespace
+            # elements = content.split()
             
-            # Convert the values to floats and add them to the list
+            # # Convert the values to floats and add them to the list
+            # for element in elements:
+            #     data.append(float(element))
+
+
+            elements = content.split("\n")
+            cnt = 0
             for element in elements:
-                data.append(float(element))
+                data_temp = []
+                elems = element.split()
+                for elem in elems:
+                    data_temp.append(float(elem))
+                data.append(data_temp)
+                cnt +=1
 
             print(data)
 
@@ -804,8 +813,9 @@ def str_beachball():
 
                 # Moment Tensor
                 try:
-                    nofill=True
-                    focal = beach(data, xy=(0.0,0.0), width=2*radius,axes=None,alpha=1, facecolor=color, zorder=1)
+                    # nofill=True
+                    # focal = beach(out, xy=(0.0,0.0), width=2*radius,axes=None,alpha=1, facecolor=color, zorder=1)
+                    focal = beach(out, xy=(0.0,0.0), width=2*radius,axes=None,alpha=1, facecolor=color, zorder=1)
                     ax.add_collection(focal)
                     ax.autoscale_view(tight=False, scalex=True, scaley=True)
 
@@ -822,10 +832,11 @@ def str_beachball():
                 print("created")
                 plt.show()
 
-            beachball(data,"red")
+            beachball(data[0],"red")
+            beachball(data[1],"blue")
             
             # beachball(out2,"blue")
 
             
         
-    return r'./static/Figures/P_T_axes.png'
+    return jsonify('./static/Figures/P_T_axes.png')
