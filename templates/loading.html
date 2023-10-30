@@ -3,12 +3,69 @@
 <html>
 <head>
     <title>Loading...</title>
+    <style>
+        body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        div {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0.5rem;
+        animation: loading 2.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+        0%,
+        100% {
+            transform: scale(0.2);
+            background-color: #0ddcf8;
+        }
+        42% {
+            background-color: #5d4da6;
+        }
+        50% {
+            transform: scale(1);
+            background-color: #42b58fb8;
+        }
+        }
+
+        div:nth-child(0) {
+        animation-delay: 0s;
+        }
+        div:nth-child(1) {
+        animation-delay: 0.2s;
+        }
+        div:nth-child(2) {
+        animation-delay: 0.4s;
+        }
+        div:nth-child(3) {
+        animation-delay: 0.6s;
+        }
+        div:nth-child(4) {
+        animation-delay: 0.8s;
+        }
+        div:nth-child(5) {
+        animation-delay: 1s;
+        }
+
+    </style>
 </head>
 <body>
-    <div style="text-align: center;">
-        <h1>Loading...</h1>
-        <img src="../static/images/loading.gif" alt="Loading Icon">
-    </div>
+    <!-- <div style="text-align: center;"> -->
+        <!-- <h1>Loading...</h1> -->
+    <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+    <div class="four"></div>
+    <div class="five"></div>
+        <!-- <img src="../static/images/loading.gif" alt="Loading Icon"> -->
+    <!-- </div> -->
 
     <script>
         // Function to check if the process is finished

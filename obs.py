@@ -61,8 +61,8 @@ def beachball(fm, id,mw, d):
         ax.add_collection(focal1)
 
     except:
-        # fall back to dc only with color
         nofill=False
+        
     # Planes
     focal2 = beach([fm.nodal_planes.nodal_plane_1.strike,\
     fm.nodal_planes.nodal_plane_1.dip,fm.nodal_planes.nodal_plane_1.rake], \
@@ -188,7 +188,6 @@ try:
                     print("cent mag ok")
                     
                     tensor = fm.moment_tensor.tensor
-                    mt = fm.moment_tensor
                     print("tensor ok")
 
                     moment_list = [tensor.m_rr, tensor.m_tt, tensor.m_pp,
@@ -211,6 +210,7 @@ try:
 
                     # source: https://github.com/nikosT/Gisola/blob/main/src/isola.py#L767C1-L767C122
                     # define quality value
+                    mt = fm.moment_tensor
                     if mt.variance >= 0.6 and mt.data_used[0].station_count > 4:
                         quality='A'
                     elif (mt.variance >= 0.4 and mt.variance < 0.6 and \
@@ -237,7 +237,6 @@ try:
                         quality+='4'
 
                     # accepted: a 1,2,3,4 / b 1,2,3,4
-                    # source: gisola -->
                     
                     if quality not in qualities:
                         print("bad quality: ", quality)
