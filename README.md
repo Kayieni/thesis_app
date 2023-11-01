@@ -3,4 +3,13 @@ A Web application to calculate the stress inversion for a group of moment tensor
 
 ![image](https://github.com/Kayieni/thesis_gisola_plugin/assets/44552188/7b67c96d-e88f-46a9-bedc-172c6beb3500)
 
+![image](https://github.com/Kayieni/thesis_app/assets/44552188/7136c764-ea1b-4e33-a924-01642e4f7e6c)
+
+![image](https://github.com/Kayieni/thesis_app/assets/44552188/038464cb-43d1-415b-888c-af9a64296858)
+
+![image](https://github.com/Kayieni/thesis_app/assets/44552188/3989ea5d-a1dc-42ba-8802-2bba94b31b1e)
+
+![image](https://github.com/Kayieni/thesis_app/assets/44552188/12cb545c-23f9-4b70-bb40-0f51b2266c09)
+
+
 
